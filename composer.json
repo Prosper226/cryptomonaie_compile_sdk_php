@@ -1,0 +1,17 @@
+{
+    "name": "user/coinbase",
+    "autoload": {
+        "psr-4": {
+            "Coinbase\\": "src/COINBASE"
+        }
+    },
+    "authors": [
+        {
+            "name": "Prosper226",
+            "email": "psedgo@gmail.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.5"
+    }
+}
