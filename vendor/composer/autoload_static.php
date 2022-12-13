@@ -14,9 +14,9 @@ class ComposerStaticInita843ecf4eb74d4c7513b3d4ce3f9d9c4
     );
 
     public static $prefixLengthsPsr4 = array (
-        'U' => 
+        'l' => 
         array (
-            'User\\Coinbase\\' => 14,
+            'lab\\' => 4,
         ),
         'P' => 
         array (
@@ -29,10 +29,14 @@ class ComposerStaticInita843ecf4eb74d4c7513b3d4ce3f9d9c4
             'GuzzleHttp\\Promise\\' => 19,
             'GuzzleHttp\\' => 11,
         ),
+        'C' => 
+        array (
+            'Coinbase\\' => 9,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'User\\Coinbase\\' => 
+        'lab\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),
@@ -56,6 +60,10 @@ class ComposerStaticInita843ecf4eb74d4c7513b3d4ce3f9d9c4
         'GuzzleHttp\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
+        ),
+        'Coinbase\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/COINBASE',
         ),
     );
 

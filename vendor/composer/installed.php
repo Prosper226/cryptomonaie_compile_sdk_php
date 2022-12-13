@@ -5,8 +5,8 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'a2467e8dd988417260f5b31d2a0282a9baef4cc7',
-        'name' => 'user/coinbase',
+        'reference' => 'c5f5e20a47b772b6f5a390a014e0b0aa56a0ac68',
+        'name' => 'user/crypto_compile_sdk_php',
         'dev' => true,
     ),
     'versions' => array(
@@ -100,13 +100,13 @@
             'reference' => '1ee04c65529dea5d8744774d474e7cbd2f1206d3',
             'dev_requirement' => false,
         ),
-        'user/coinbase' => array(
+        'user/crypto_compile_sdk_php' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'a2467e8dd988417260f5b31d2a0282a9baef4cc7',
+            'reference' => 'c5f5e20a47b772b6f5a390a014e0b0aa56a0ac68',
             'dev_requirement' => false,
         ),
     ),

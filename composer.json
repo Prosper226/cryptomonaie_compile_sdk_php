@@ -1,8 +1,9 @@
 {
-    "name": "user/coinbase",
+    "name": "user/crypto_compile_sdk_php",
     "autoload": {
         "psr-4": {
-            "Coinbase\\": "src/COINBASE"
+            "lab\\": "src/",
+            "Coinbase\\": "src/COINBASE/"
         }
     },
     "authors": [
