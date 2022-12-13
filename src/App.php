@@ -31,6 +31,7 @@ class App{
             throw new Exception($e->getMessage());
         }
     }
+    
 }
 
 ?>

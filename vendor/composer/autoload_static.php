@@ -23,6 +23,10 @@ class ComposerStaticInita843ecf4eb74d4c7513b3d4ce3f9d9c4
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Http\\Client\\' => 16,
         ),
+        'K' => 
+        array (
+            'Kraken\\' => 7,
+        ),
         'G' => 
         array (
             'GuzzleHttp\\Psr7\\' => 16,
@@ -48,6 +52,10 @@ class ComposerStaticInita843ecf4eb74d4c7513b3d4ce3f9d9c4
         'Psr\\Http\\Client\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/http-client/src',
+        ),
+        'Kraken\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/KRAKEN',
         ),
         'GuzzleHttp\\Psr7\\' => 
         array (

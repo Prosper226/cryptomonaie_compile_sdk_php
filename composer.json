@@ -3,7 +3,8 @@
     "autoload": {
         "psr-4": {
             "lab\\": "src/",
-            "Coinbase\\": "src/COINBASE/"
+            "Coinbase\\": "src/COINBASE/",
+            "Kraken\\": "src/KRAKEN/"
         }
     },
     "authors": [
