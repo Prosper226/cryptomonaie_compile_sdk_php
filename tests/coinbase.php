@@ -1,6 +1,6 @@
 <?php
 
-    use Coinbase\Coinbase;
+use Coinbase\Coinbase;
     require(__DIR__.'/vendor/autoload.php');
 
     echo '<pre>';

@@ -7,7 +7,7 @@ class App{
 
     private $lib = null;
 
-    public function __construct($lib){
+    public function __construct($lib = null){
         $this->lib = strtoupper($lib);
     }
 

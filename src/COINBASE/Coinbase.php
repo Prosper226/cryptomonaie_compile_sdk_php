@@ -48,18 +48,46 @@ class Coinbase {
         }
     }
 
-    public function get_account_id($code = null){
+    // public function get_account_id($code = null){
+    //     try{
+    //         if(!isset($code) || !$code) throw new Exception('code param is mandatory.');
+    //         $res = $this->manager->get_account_id($code);
+    //         return ["code" => 200, "data" => $res];
+    //     }catch(Exception $e){
+    //         return ["code" => 412, "error" => $e->getMessage()];
+    //     }
+    // }
+    
+    // public function show_an_account($code){
+    //     try{
+    //         if(!isset($code) || !$code) throw new Exception('code param is mandatory.');
+    //         $res = $this->manager->show_an_account($code);
+    //         return ["code" => 200, "data" => $res];
+    //     }catch(Exception $e){
+    //         return ["code" => 412, "error" => $e->getMessage()];
+    //     }
+    // }
+
+    // public function list_addresses($code){
+    //     try{
+    //         if(!isset($code) || !$code) throw new Exception('code param is mandatory.');
+    //         $res = $this->manager->list_addresses($code);
+    //         return ["code" => 200, "data" => $res];
+    //     }catch(Exception $e){
+    //         return ["code" => 412, "error" => $e->getMessage()];
+    //     }
+    // }
+
+    public function list_transactions($code){
         try{
             if(!isset($code) || !$code) throw new Exception('code param is mandatory.');
-            $res = $this->manager->get_account_id($code);
+            $res = $this->manager->list_transactions($code);
             return ["code" => 200, "data" => $res];
         }catch(Exception $e){
             return ["code" => 412, "error" => $e->getMessage()];
         }
     }
     
-
-
 }
 
 
