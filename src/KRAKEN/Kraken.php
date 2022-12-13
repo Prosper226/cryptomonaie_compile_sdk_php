@@ -28,6 +28,27 @@ class Kraken {
         }
     }
 
+    public function depositMethod($code){
+        try{
+            if(!isset($code) || !$code) throw new Exception('code param is mandatory.');
+            $res = $this->manager->depositMethod($code);
+            return ["code" => 200, "data" => $res];
+        }catch(Exception $e){
+            return ["code" => 412, "error" => $e->getMessage()];
+        }
+    }
+
+    public function newAddress($code, $method){
+        try{
+            if(!isset($code) || !$code) throw new Exception('code param is mandatory.');
+            if(!isset($method) || !$method) throw new Exception('method param is mandatory.');
+            $res = $this->manager->newAddress($code, $method);
+            return ["code" => 200, "data" => $res];
+        }catch(Exception $e){
+            return ["code" => 412, "error" => $e->getMessage()];
+        }
+    }
+
 }
 
 

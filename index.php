@@ -4,9 +4,18 @@
     require(__DIR__.'/vendor/autoload.php');
     // echo '<pre>';
     // KRAKEN
-    $kraken  = new Kraken('MYAPP');
-    $balance = $kraken->getBalance();
-    print_r($balance);
+    $kraken  = new Kraken('MYAPP2');
+    // $balance = $kraken->getBalance();
+    // print_r($balance);
+
+    // $depositMethod = $kraken->depositMethod('BNB');
+    // print_r($depositMethod);
+
+
+    $newAddress = $kraken->newAddress('XBT','Bitcoin');
+    print_r($newAddress);
+
+
 
 
         // your api credentials
