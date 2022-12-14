@@ -27,23 +27,33 @@ class Manager{
         }
     }
 
-    public function getBalance(){
+    private function errorFund($res){
         try{
-            $url = url_recode($this->config['endpoint']['balance']);
-            $res = $this->request->make('POST', [], $url);
-            return $res;
+            // ERROR_DOCS: https://support.kraken.com/hc/en-us/articles/360001491786-API-error-messages
+            if($res->error){ throw new Exception(implode("#", $res->error));}
         }catch(Exception $e){
             throw new Exception($e->getMessage());
         }
     }
 
+    public function getBalance(){
+        try{
+            $url = url_recode($this->config['endpoint']['balance']);
+            $res = $this->request->make('POST', [], $url);
+            $this->errorFund($res);
+            return $res->result;
+        }catch(Exception $e){
+            throw new Exception($e->getMessage());
+        }
+    }
 
     public function depositMethod($code){
         try{
             if(!isset($code) || !$code) throw new Exception('code param is mandatory.');
             $url = url_recode($this->config['endpoint']['depositMethod']);
             $res = $this->request->make('POST', ['asset' => $code], $url);
-            return $res;
+            $this->errorFund($res);
+            return $res->result;
         }catch(Exception $e){
             throw new Exception($e->getMessage());
         }
@@ -60,11 +70,83 @@ class Manager{
                 'new'    => 1
             ];
             $res = $this->request->make('POST', $body, $url);
-            return $res;
+            $this->errorFund($res);
+            return $res->result;
         }catch(Exception $e){
             throw new Exception($e->getMessage());
         }
     }
 
+    public function depositStatus($code, $method){
+        try{
+            if(!isset($code) || !$code) throw new Exception('code param is mandatory.');
+            if(!isset($method) || !$method) throw new Exception('method param is mandatory.');
+            $url = url_recode($this->config['endpoint']['depositStatus']);
+            $body = [
+                'asset'  => $code,
+                'method' => $method
+            ];
+            $res = $this->request->make('POST', $body, $url);
+            $this->errorFund($res);
+            return $res->result;;
+        }catch(Exception $e){
+            throw new Exception($e->getMessage()); 
+        }
+    }
+
+    public function withdrawInfo($code, $key, $amount){
+        try{
+            if(!isset($code) || !$code) throw new Exception('code param is mandatory.');
+            if(!isset($amount) || !$amount) throw new Exception('amount param is mandatory.');
+            if(!isset($key) || !$key) throw new Exception('key param is mandatory.');
+            $url = url_recode($this->config['endpoint']['withdrawInfo']);
+            $body = [
+                'asset'  => $code,
+                'key'    => $key,
+                'amount' => $amount
+            ];
+            $res = $this->request->make('POST', $body, $url);
+            $this->errorFund($res);
+            return $res->result;;
+        }catch(Exception $e){
+            throw new Exception($e->getMessage()); 
+        }
+    }
+    
+    public function withdrawFund($code, $key, $amount){
+        try{
+            if(!isset($code) || !$code) throw new Exception('code param is mandatory.');
+            if(!isset($amount) || !$amount) throw new Exception('amount param is mandatory.');
+            if(!isset($key) || !$key) throw new Exception('key param is mandatory.');
+            $url = url_recode($this->config['endpoint']['withdrawFund']);
+            $body = [
+                'asset'  => $code,
+                'key'    => $key,
+                'amount' => $amount
+            ];
+            $res = $this->request->make('POST', $body, $url);
+            $this->errorFund($res);
+            return $res->result;;
+        }catch(Exception $e){
+            throw new Exception($e->getMessage()); 
+        }
+    }
+
+    public function cancelation($asset, $refid){
+        try{
+            if(!isset($asset) || !$asset) throw new Exception('asset param is mandatory.');
+            if(!isset($refid) || !$refid) throw new Exception('refid param is mandatory.');
+            $url = url_recode($this->config['endpoint']['withdrawCancel']);
+            $body = [
+                'asset'  => $asset,
+                'refid'  => $refid
+            ];
+            $res = $this->request->make('POST', $body, $url);
+            $this->errorFund($res);
+            return $res->result;;
+        }catch(Exception $e){
+            throw new Exception($e->getMessage()); 
+        }
+    }
 }
 ?>
