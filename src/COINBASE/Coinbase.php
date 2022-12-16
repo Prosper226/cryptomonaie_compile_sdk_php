@@ -13,6 +13,7 @@ class Coinbase {
 
     public function __construct($business = null){
         try{
+            if(!isset($business) || !$business) throw new Exception('app name is mandatory.');
             $this->business  = $business;
             $this->manager   = new Manager($this->business);
         }catch(Exception $e){

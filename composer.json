@@ -4,7 +4,8 @@
         "psr-4": {
             "lab\\": "src/",
             "Coinbase\\": "src/COINBASE/",
-            "Kraken\\": "src/KRAKEN/"
+            "Kraken\\": "src/KRAKEN/",
+            "Binance\\": "src/BINANCE"
         }
     },
     "authors": [

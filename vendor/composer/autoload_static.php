@@ -37,6 +37,10 @@ class ComposerStaticInita843ecf4eb74d4c7513b3d4ce3f9d9c4
         array (
             'Coinbase\\' => 9,
         ),
+        'B' => 
+        array (
+            'Binance\\' => 8,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -72,6 +76,10 @@ class ComposerStaticInita843ecf4eb74d4c7513b3d4ce3f9d9c4
         'Coinbase\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src/COINBASE',
+        ),
+        'Binance\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/BINANCE',
         ),
     );
 

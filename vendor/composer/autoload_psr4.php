@@ -14,4 +14,5 @@ return array(
     'GuzzleHttp\\Promise\\' => array($vendorDir . '/guzzlehttp/promises/src'),
     'GuzzleHttp\\' => array($vendorDir . '/guzzlehttp/guzzle/src'),
     'Coinbase\\' => array($baseDir . '/src/COINBASE'),
+    'Binance\\' => array($baseDir . '/src/BINANCE'),
 );
