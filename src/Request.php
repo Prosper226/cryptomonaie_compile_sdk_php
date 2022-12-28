@@ -17,7 +17,6 @@ class Request{
         $this->prefix   = $prefix;
     }
 
-
     public function make($method = 'GET', $body = [], $endpoint = "", $headers = null, $decode = true){
         try{
             $maker = 'make'.$this->prefix;
@@ -27,9 +26,8 @@ class Request{
         }
     }
 
-
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
     /* ------   debut Bloc COINBASE ------- */
-
     private function makeCoinbase($method = 'GET', $body = [], $endpoint = "", $headers = null, $decode = true){
         try{
             $timestamp  = time();
@@ -54,17 +52,124 @@ class Request{
             throw new Exception($e->getMessage());
         }
     }
-
     private function signCoinbase($timestamp, $method, $request_path, $body){
         $body = ($body) ? json_encode($body) : "";
         $prehash = $timestamp.$method.$request_path.$body;
         return hash_hmac("sha256", $prehash, $this->apiAuth['apiSecret']);
     }
-
     /* ------   fin Bloc COINBASE ------- */
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+    /* ------   debut Bloc KRAKEN ------- */
+    private function makeKraken($method = 'GET', $body = [], $endpoint = "", $headers = null, $decode = true){
+        try{
 
+            if(!isset($body['nonce'])) {
+                $nonce = explode(' ', microtime());
+                $body['nonce'] = $nonce[1] . str_pad(substr($nonce[0], 2, 6), 6, '0');
+            }
 
+            $sign           = $this->signKraken($endpoint, $body);
+            $headers        = [
+                'API-Key'         =>  $this->apiAuth['apiKey'],
+                'API-Sign'        =>  $sign,
+                'Content-Type'    =>  'application/x-www-form-urlencoded'
+            ];
 
+            $client     = new Client([
+                'verify'    => true,
+                'base_uri'  => $this->baseUrl,
+                'headers'   => $headers
+            ]);
+            
+            $body = ($body) ? ["form_params" => $body] : [];
+            // print_r($this->apiAuth['privateKey']);
+            $response = $client->request($method, $endpoint, $body);
+            return ($decode) ? json_decode($response->getBody()->getContents()) : $response->getBody()->getContents();
+        }catch(Exception $e){
+            throw new Exception($e->getMessage());
+        }
+    }
+    private function signKraken($path, $request){
+        try{
+            $postdata = http_build_query($request, '', '&');
+            $sign = hash_hmac('sha512', $path . hash('sha256', $request['nonce'] . $postdata, true), base64_decode($this->apiAuth['privateKey']), true);
+            return base64_encode($sign);
+        }catch(Exception $e){
+            throw new Exception($e->getMessage());
+        }
+    }
+    /* ------   fin Bloc KRAKEN ------- */
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+    /* ------   debut Bloc BINANCE ------- */
+    private function makeBinance($method = 'GET', $body = [], $endpoint = "", $headers = null, $HMAC = true){
+        try{
+            if($HMAC){
+                $body['recvWindow'] =  50000;
+                $query_string = http_build_query($body);
+                $signature = $this->signBinance($query_string);
+                $endpoint .= "?$query_string&signature=$signature";
+            }else{
+                $query_string = http_build_query($body);
+                $endpoint .= "?$query_string";
+            }
+            $headers = [
+                'X-MBX-APIKEY'      => $this->apiAuth['apiKey'],
+                'Content-Length'    => '0'
+            ];
+            $client = new Client([
+                'base_uri'  => $this->baseUrl,
+                'headers'   => $headers,
+            ]);
+            $response = $client->request($method, $endpoint);
+            return $response->getBody()->getContents();
+        }catch(Exception $e){
+            throw new Exception($e->getMessage());
+        }
+    }
+    private function signBinance($query_string){
+        try{
+            return hash_hmac('sha256', $query_string, $this->apiAuth['apiSecret']);
+        }catch(Exception $e){
+            throw new Exception($e->getMessage());
+        }
+    }
+    /* ------   fin Bloc BINANCE ------- */
+     //////////////////////////////////////////////////////////////////////////////////////////////////////
+    /* ------   debut Bloc NOWPAYMENT ------- */
+    private function makeNowpayment($method = 'GET', $body = [], $endpoint = "", $headers = null, $decode = true){
+        try{
+            // return $this->tokenNowpayment();
+            $headers = [
+                'x-api-key'     =>  $this->apiAuth['apiKey'],
+                'Content-Type'  =>  'application/json'
+            ];
+            $client     = new Client([
+                'verify'    => true,
+                'base_uri'  => $this->baseUrl,
+            ]);
+            $body = ($body) ? ["json" => $body] : '';
+            // $client  = new Client();
+            // $request = new \GuzzleHttp\Psr7\Request('GET', $this->baseUrl.$endpoint, $headers, $body);
+            $request    = new \GuzzleHttp\Psr7\Request('GET', $endpoint, $headers, $body);
+            $response   = $client->sendAsync($request)->wait();
+            return ($decode) ? json_decode($response->getBody()->getContents()) : $response->getBody()->getContents();
+        }catch(Exception $e){
+            throw new Exception($e->getMessage());
+        }
+    }
+    private function tokenNowpayment(){
+        try{
+            $client     = new Client();
+            $body       = json_encode(["email" => $this->apiAuth['apiEmail'], "password" => $this->apiAuth['apiPass']]);
+            $request    = new \GuzzleHttp\Psr7\Request($this->apiAuth['auth']['method'], $this->apiAuth['auth']['link'], ['Content-Type'  =>  'application/json'], $body);
+            $response   = $client->sendAsync($request)->wait();
+            $response   = json_decode($response->getBody()->getContents());
+            return $response->token;
+        }catch(Exception $e){
+            throw new Exception($e->getMessage());
+        }
+    }
+    /* ------   fin Bloc NOWPAYMENT ------- */
 
 }
 

@@ -1,31 +1,16 @@
 <?php
-
-    use Coinbase\Coinbase;
     require(__DIR__.'/vendor/autoload.php');
-
-    echo '<pre>';
-    // COINBASE
-    // $coinbase = new Coinbase('MYAPP');
-
-    // $user = $coinbase->show_current_user();
-    // print_r($user);
-
-    // $accounts = $coinbase->list_accounts();
-    // print_r($accounts);
-
-    // $id = $coinbase->get_account_id('ada');
-    // print_r($id);
-
-    // $address = $coinbase->create_address('xrp');
-    // print_r($address);
-
-    // $account =  $coinbase->show_an_account('btc');
-    // print_r($account);
-
-    // $list_addresses = $coinbase->list_addresses('btc');
-    // print_r($list_addresses['data'][0]);
-
-    // $list_transactions = $coinbase->list_transactions('btc');
-    // print_r($list_transactions['data'][0]);
-
+    $nonce      = microtime();
+    $nonceExpl  = explode(' ', $nonce);
+    $substr     = substr($nonceExpl[0], 2, 6);
+    $str_pad    = str_pad($substr, 6, '0', STR_PAD_RIGHT);
+    $explain = [
+        "microtime" => $nonce,
+        "nonce"     => $nonceExpl,
+        "substr"    => $substr,
+        "str_pad"   => $str_pad,
+        "final"     => $nonceExpl[1].$str_pad,
+        "LEN"   => [strlen($nonceExpl[1]), strlen($nonceExpl[1].$str_pad)]
+    ];
+    print_r($explain);
 ?>
