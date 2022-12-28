@@ -134,6 +134,42 @@ class Request{
         }
     }
     /* ------   fin Bloc BINANCE ------- */
+     //////////////////////////////////////////////////////////////////////////////////////////////////////
+    /* ------   debut Bloc NOWPAYMENT ------- */
+    private function makeNowpayment($method = 'GET', $body = [], $endpoint = "", $headers = null, $decode = true){
+        try{
+            // return $this->tokenNowpayment();
+            $headers = [
+                'x-api-key'     =>  $this->apiAuth['apiKey'],
+                'Content-Type'  =>  'application/json'
+            ];
+            $client     = new Client([
+                'verify'    => true,
+                'base_uri'  => $this->baseUrl,
+            ]);
+            $body = ($body) ? ["json" => $body] : '';
+            // $client  = new Client();
+            // $request = new \GuzzleHttp\Psr7\Request('GET', $this->baseUrl.$endpoint, $headers, $body);
+            $request    = new \GuzzleHttp\Psr7\Request('GET', $endpoint, $headers, $body);
+            $response   = $client->sendAsync($request)->wait();
+            return ($decode) ? json_decode($response->getBody()->getContents()) : $response->getBody()->getContents();
+        }catch(Exception $e){
+            throw new Exception($e->getMessage());
+        }
+    }
+    private function tokenNowpayment(){
+        try{
+            $client     = new Client();
+            $body       = json_encode(["email" => $this->apiAuth['apiEmail'], "password" => $this->apiAuth['apiPass']]);
+            $request    = new \GuzzleHttp\Psr7\Request($this->apiAuth['auth']['method'], $this->apiAuth['auth']['link'], ['Content-Type'  =>  'application/json'], $body);
+            $response   = $client->sendAsync($request)->wait();
+            $response   = json_decode($response->getBody()->getContents());
+            return $response->token;
+        }catch(Exception $e){
+            throw new Exception($e->getMessage());
+        }
+    }
+    /* ------   fin Bloc NOWPAYMENT ------- */
 
 }
 

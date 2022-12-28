@@ -23,6 +23,10 @@ class ComposerStaticInita843ecf4eb74d4c7513b3d4ce3f9d9c4
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Http\\Client\\' => 16,
         ),
+        'N' => 
+        array (
+            'Nowpayment\\' => 11,
+        ),
         'K' => 
         array (
             'Kraken\\' => 7,
@@ -56,6 +60,10 @@ class ComposerStaticInita843ecf4eb74d4c7513b3d4ce3f9d9c4
         'Psr\\Http\\Client\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/http-client/src',
+        ),
+        'Nowpayment\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/NOWPAYMENT',
         ),
         'Kraken\\' => 
         array (
