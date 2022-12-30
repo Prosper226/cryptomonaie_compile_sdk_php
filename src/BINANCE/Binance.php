@@ -155,13 +155,16 @@ class Binance{
                 $informations = json_decode($all_accounts_information, true);
                 foreach($informations['balances'] as $information){
                     if($information['asset'] == strtoupper($coin)){
-                        return floatval($information['free']);
+                        // return floatval($information['free']);
+                        return ["code" => 200, "data" => floatval($information['free'])];
                     }
                 }
-                return json_encode(null);
+                // return json_encode(null);
+                return ["code" => 200, "data" => null];
             }
         }catch(Exception $e){
-            throw new Exception($e->getMessage());
+            // throw new Exception($e->getMessage());
+            return ["code" => 412, "error" => $e->getMessage()];
         }
     }
 
