@@ -46,9 +46,9 @@ class Nowpayment{
         }
     }
 
-    public function minPaymentAmount(){
+    public function minPaymentAmount($from, $to){
         try{
-            $res = $this->manager->minPaymentAmount();
+            $res = $this->manager->minPaymentAmount($from, $to);
             return ["code" => 200, "data" => $res];
         }catch(Exception $e){
             return ["code" => 412, "error" => $e->getMessage()];

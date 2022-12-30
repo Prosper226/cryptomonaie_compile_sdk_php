@@ -54,9 +54,9 @@ class Manager{
         }
     }
 
-    public function minPaymentAmount(){
+    public function minPaymentAmount($from, $to){
         try{
-            $url = url_recode($this->config['endpoint']['minPaymentAmount']);
+            $url = url_recode($this->config['endpoint']['minPaymentAmount'])."?currency_from=$from&currency_to=$to";
             $response    =  $this->request->make('GET', [], $url);
             return $response;
         }catch(Exception $e){
