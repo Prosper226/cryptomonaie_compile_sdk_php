@@ -18,12 +18,17 @@ class Binance{
         }
     }
 
+
+    ###########################################################################
+    #####################        MOST UNSED         ############################
+    ###########################################################################
+
     public function mstime(){
         try{
             $res = $this->manager->mstime();
-            return ["code" => 200, "data" => $res];
+            return json_encode(["code" => 200, "data" => json_decode($res)]);
         }catch(Exception $e){
-            return ["code" => 412, "error" => $e->getMessage()];
+            return json_encode(["code" => 412, "error" => $e->getMessage()]);
         }
     }
 
@@ -31,27 +36,27 @@ class Binance{
         try{
             if(!$symbol) throw new Exception('missing parameters (symbol)');
             $res = $this->manager->get_symbol_ticker($symbol);
-            return ["code" => 200, "data" => $res];
+            return json_encode(["code" => 200, "data" => json_decode($res)]);
         }catch(Exception $e){
-            return ["code" => 412, "error" => $e->getMessage()];
+            return json_encode(["code" => 412, "error" => $e->getMessage()]);
         }
     }
 
     public function system_status(){
         try{
             $res = $this->manager->system_status();
-            return ["code" => 200, "data" => $res];
+            return json_encode(["code" => 200, "data" => json_decode($res)]);
         }catch(Exception $e){
-            return ["code" => 412, "error" => $e->getMessage()];
+            return json_encode(["code" => 412, "error" => $e->getMessage()]);
         }
     }
 
     public function all_coins_information(){
         try{
             $res = $this->manager->all_coins_information();
-            return ["code" => 200, "data" => $res];
+            return json_encode(["code" => 200, "data" => json_decode($res)]);
         }catch(Exception $e){
-            return ["code" => 412, "error" => $e->getMessage()];
+            return json_encode(["code" => 412, "error" => $e->getMessage()]);
         }
     }
 
@@ -59,9 +64,9 @@ class Binance{
         try{
             if(!isset($coin) || !$coin) throw new Exception('param coin is required.');
             $res = $this->manager->deposit_address($coin, $network);
-            return ["code" => 200, "data" => $res];
+            return json_encode(["code" => 200, "data" => json_decode($res)]);
         }catch(Exception $e){
-            return ["code" => 412, "error" => $e->getMessage()];
+            return json_encode(["code" => 412, "error" => $e->getMessage()]);
         }
     }
 
@@ -69,16 +74,6 @@ class Binance{
         try{
             if(!$startTime || !$endTime || $startTime > $endTime ){throw new Exception('missing or invalid parameters');}
             $res = $this->manager->deposit_history($startTime, $endTime);
-            return json_encode(["code" => 200, "data" => json_decode($res)]);
-        }catch(Exception $e){
-            return json_encode(["code" => 412, "error" => $e->getMessage()]);
-        }
-    }
-
-    public function withdraw($coin, $address, $amount, $network = null, $addressTag = null, $withdrawOrderId = null){
-        try{
-            if(!isset($coin, $address, $amount) || !$coin || !$address || !$amount){throw new Exception('missing or invalid parameters');}
-            $res = $this->manager->withdraw($coin, $address, $amount, $network, $addressTag, $withdrawOrderId);
             return json_encode(["code" => 200, "data" => json_decode($res)]);
         }catch(Exception $e){
             return json_encode(["code" => 412, "error" => $e->getMessage()]);
@@ -95,6 +90,68 @@ class Binance{
         }
     }
 
+    public function all_accounts_information(){
+        try{
+            $res = $this->manager->all_accounts_information();
+            return ["code" => 200, "data" => $res];
+        }catch(Exception $e){
+            return ["code" => 412, "error" => $e->getMessage()];
+        }
+    }
+
+    public function coin_information($coin){
+        try{
+
+            // $informations = json_decode($this->all_coins_information(), true);
+            // foreach($informations as $information){
+            //     if($information['coin'] == strtoupper($coin)){
+            //         return json_encode($information);
+            //     }
+            // }
+            // return json_encode(null);
+
+        }catch(Exception $e){
+            throw new Exception($e->getMessage());
+        }
+    }
+
+    public function all_available_accounts_information(){
+        try{
+            // $body = array(
+            //     "recvWindow"        =>   50000,
+            //     "timestamp"         =>   $this->mstime()
+            // );
+            // $url = '/api/v3/account';
+            // $response    =   $this->BinanceRequest('GET', $url, $body, true);
+            
+            // $informations   = json_decode($response, true);
+            // $response = [];
+            // foreach($informations['balances'] as $information){
+            //     if(floatval($information['free'])){
+            //         $response[] = $information;
+            //     }
+            // }
+            // return json_encode($response);
+        }catch(Exception $e){
+            throw new Exception($e->getMessage());
+        }
+    }
+
+
+    ###########################################################################
+    #####################        MOST USED         ############################
+    ###########################################################################
+
+    public function withdraw($coin, $address, $amount, $network = null, $addressTag = null, $withdrawOrderId = null){
+        try{
+            if(!isset($coin, $address, $amount) || !$coin || !$address || !$amount){throw new Exception('missing or invalid parameters');}
+            $res = $this->manager->withdraw($coin, $address, $amount, $network, $addressTag, $withdrawOrderId);
+            return json_encode(["code" => 200, "data" => json_decode($res)]);
+        }catch(Exception $e){
+            return json_encode(["code" => 412, "error" => $e->getMessage()]);
+        }
+    }
+
     public function new_order($symbol = null, $side = null, $quantity = null){
         try{
             if(!$symbol || !$side || !$quantity){throw new Exception('missing parameters');}
@@ -105,18 +162,6 @@ class Binance{
         }
     }
 
-    public function all_accounts_information(){
-        try{
-            $res = $this->manager->all_accounts_information();
-            return ["code" => 200, "data" => $res];
-        }catch(Exception $e){
-            return ["code" => 412, "error" => $e->getMessage()];
-        }
-    }
-
-    #########################
-    #########################
-    #########################
     public function found_txid($txid, $startTime, $operation){
         try{
             $histories = [];
@@ -142,22 +187,6 @@ class Binance{
         }catch(Exception $e){
             // throw new Exception($e->getMessage());
             return json_encode(["code" => 412, "error" => $e->getMessage()]);
-        }
-    }
-
-    public function coin_information($coin){
-        try{
-
-            // $informations = json_decode($this->all_coins_information(), true);
-            // foreach($informations as $information){
-            //     if($information['coin'] == strtoupper($coin)){
-            //         return json_encode($information);
-            //     }
-            // }
-            // return json_encode(null);
-
-        }catch(Exception $e){
-            throw new Exception($e->getMessage());
         }
     }
 
@@ -233,32 +262,7 @@ class Binance{
             return json_encode(["code" => 412, "error" => $e->getMessage()]);
         }
     }
-    
 
-
-    public function all_available_accounts_information(){
-        try{
-            // $body = array(
-            //     "recvWindow"        =>   50000,
-            //     "timestamp"         =>   $this->mstime()
-            // );
-            // $url = '/api/v3/account';
-            // $response    =   $this->BinanceRequest('GET', $url, $body, true);
-            
-            // $informations   = json_decode($response, true);
-            // $response = [];
-            // foreach($informations['balances'] as $information){
-            //     if(floatval($information['free'])){
-            //         $response[] = $information;
-            //     }
-            // }
-            // return json_encode($response);
-        }catch(Exception $e){
-            throw new Exception($e->getMessage());
-        }
-    }
-
-    
 
 }
 
