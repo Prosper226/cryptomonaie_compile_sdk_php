@@ -112,11 +112,11 @@ class Binance{
             $histories = [];
             switch(strtolower($operation)){
                 case 'deposit' :   
-                    $deposit_history = $this->deposit_history($startTime, $this->mstime());
+                    $deposit_history = $this->manager->deposit_history($startTime, $this->manager->mstime());
                     $histories = json_decode($deposit_history, true);
                     break;
                 case 'withdraw':   
-                    $withdraw_history = $this->withdraw_history($startTime, $this->mstime());
+                    $withdraw_history = $this->withdraw_history($startTime, $this->manager->mstime());
                     $histories = json_decode($withdraw_history, true);
                     break;
                 default : throw new Exception("$operation not supported");
