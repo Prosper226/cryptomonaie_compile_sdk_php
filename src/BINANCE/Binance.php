@@ -226,10 +226,11 @@ class Binance{
                 // }
             }
             
-            return json_encode(['usdt' => $sum_usdt]);
+            $res = ['usdt' => $sum_usdt];
+            return json_encode(["code" => 200, "data" => $res]);
             
         }catch(Exception $e){
-            throw new Exception($e->getMessage());
+            return json_encode(["code" => 412, "error" => $e->getMessage()]);
         }
     }
     
