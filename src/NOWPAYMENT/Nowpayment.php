@@ -56,6 +56,59 @@ class Nowpayment{
     }
 
 
+    public function createPayment($data = ["price_amount" => null, "price_currency" => null, "pay_currency" => null, "order_id" => null]){
+        try{
+            $res = $this->manager->createPayment($data);
+            return ["code" => 200, "data" => $res];
+        }catch(Exception $e){
+            return ["code" => 412, "error" => $e->getMessage()];
+        }
+    }
+
+    public function paymentStatus($payment_id){
+        try{
+            $res = $this->manager->paymentStatus($payment_id);
+            return ["code" => 200, "data" => $res];
+        }catch(Exception $e){
+            return ["code" => 412, "error" => $e->getMessage()];
+        }
+    }
+
+    public function balance(){
+        try{
+            $res = $this->manager->balance();
+            return ["code" => 200, "data" => $res];
+        }catch(Exception $e){
+            return ["code" => 412, "error" => $e->getMessage()];
+        }
+    }
+
+    public function createPayout($data = ["address" => null, "currency" => null, "amount" => null]){
+        try{
+            $res = $this->manager->createPayout($data);
+            return ["code" => 200, "data" => $res];
+        }catch(Exception $e){
+            return ["code" => 412, "error" => $e->getMessage()];
+        }
+    }
+
+    public function createInvoicePayment($data =  ["price_amount" => null, "price_currency" => null, "pay_currency" => null, "order_id" => null]){
+        try{
+            $res = $this->manager->createInvoicePayment($data);
+            return ["code" => 200, "data" => $res];
+        }catch(Exception $e){
+            return ["code" => 412, "error" => $e->getMessage()];
+        }
+    }
+    
+    public function createInvoice($data = ["price_amount" => null, "price_currency" => null, "pay_currency" => null, "order_id" => null]){
+        try{
+            $res = $this->manager->createInvoice($data);
+            return ["code" => 200, "data" => $res];
+        }catch(Exception $e){
+            return ["code" => 412, "error" => $e->getMessage()];
+        }
+    }
 
 
 }
