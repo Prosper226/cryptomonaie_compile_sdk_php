@@ -79,9 +79,9 @@ class Binance{
         try{
             if(!isset($coin, $address, $amount) || !$coin || !$address || !$amount){throw new Exception('missing or invalid parameters');}
             $res = $this->manager->withdraw($coin, $address, $amount, $network, $addressTag, $withdrawOrderId);
-            return ["code" => 200, "data" => $res];
+            return json_encode(["code" => 200, "data" => $res]);
         }catch(Exception $e){
-            return ["code" => 412, "error" => $e->getMessage()];
+            return json_encode(["code" => 412, "error" => $e->getMessage()]);
         }
     }
 
