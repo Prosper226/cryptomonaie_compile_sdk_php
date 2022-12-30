@@ -20,7 +20,7 @@ $binance = new Binance('MYAPP');
 // print_r($binance->found_txid($txid, $startTime, 'deposit'));     // ok
 // print_r($binance->global_spot_balance());                        // ok
 
-// // print_r($binance->get_symbol_ticker('BTCUSDT'));
+print_r($binance->get_symbol_ticker('TRXUSDT'));
 // // print_r($binance->get_symbol_ticker('USDTBTC'));
 
 

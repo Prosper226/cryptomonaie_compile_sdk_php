@@ -99,9 +99,9 @@ class Binance{
         try{
             if(!$symbol || !$side || !$quantity){throw new Exception('missing parameters');}
             $res = $this->manager->new_order($symbol, $side, $quantity);
-            return ["code" => 200, "data" => $res];
+            return json_encode(["code" => 200, "data" => $res]);
         }catch(Exception $e){
-            return ["code" => 412, "error" => $e->getMessage()];
+            return json_encode(["code" => 412, "error" => $e->getMessage()]);
         }
     }
 
