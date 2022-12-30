@@ -156,7 +156,7 @@ class Binance{
                 foreach($informations['balances'] as $information){
                     if($information['asset'] == strtoupper($coin)){
                         // return floatval($information['free']);
-                        return ["code" => 200, "data" => floatval($information['free'])];
+                        return json_encode(["code" => 200, "data" => floatval($information['free'])]);
                     }
                 }
                 // return json_encode(null);
