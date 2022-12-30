@@ -13,4 +13,17 @@ $binance = new Binance('MYAPP');
 
 // print_r($binance->networkList());
 
+
+
+// $binance->new_order($symbol, "BUY",$roundedPrice);
+// $binance->withdraw($get, $address, ($totalToSend), $network, null,$txid);
+
+// $binance->new_order($symbol, "SELL",$tochangeAmount);
+
+
+print_r($binance->account_information('btc')); 
+print_r($binance->found_txid($txid, $startTime, 'deposit'));
+print_r($binance->global_spot_balance());
+
+
 ?>

@@ -95,7 +95,7 @@ class Binance{
         }
     }
 
-    public function all_accounts_information(){
+    private function all_accounts_information(){
         try{
             $res = $this->manager->all_accounts_information();
             return ["code" => 200, "data" => $res];
@@ -148,17 +148,18 @@ class Binance{
 
     public function account_information($coin = null){
         try{
-            // if(!$coin){
-            //     throw new Exception('missing parameters (coin)');
-            // }else{
-            //     $informations = json_decode($this->all_accounts_information(), true);
-            //     foreach($informations['balances'] as $information){
-            //         if($information['asset'] == strtoupper($coin)){
-            //             return floatval($information['free']);
-            //         }
-            //     }
-            //     return json_encode(null);
-            // }
+            if(!$coin){
+                throw new Exception('missing parameters (coin)');
+            }else{
+                $all_accounts_information = $this->manager->all_accounts_information();
+                $informations = json_decode($all_accounts_information, true);
+                foreach($informations['balances'] as $information){
+                    if($information['asset'] == strtoupper($coin)){
+                        return floatval($information['free']);
+                    }
+                }
+                return json_encode(null);
+            }
         }catch(Exception $e){
             throw new Exception($e->getMessage());
         }
