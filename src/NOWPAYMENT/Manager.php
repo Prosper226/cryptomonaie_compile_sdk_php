@@ -56,6 +56,7 @@ class Manager{
 
     public function minPaymentAmount($from, $to){
         try{
+            if(!isset($from ,$to)) {throw new Exception("invalid parameters entry");}
             $url = url_recode($this->config['endpoint']['minPaymentAmount'])."?currency_from=$from&currency_to=$to";
             $response    =  $this->request->make('GET', [], $url);
             return $response;

@@ -48,6 +48,7 @@ class Nowpayment{
 
     public function minPaymentAmount($from, $to){
         try{
+            if(!isset($from ,$to)) {throw new Exception("invalid parameters entry");}
             $res = $this->manager->minPaymentAmount($from, $to);
             return ["code" => 200, "data" => $res];
         }catch(Exception $e){

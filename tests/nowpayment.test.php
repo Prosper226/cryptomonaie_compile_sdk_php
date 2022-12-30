@@ -11,7 +11,7 @@ $nowpayment = new Nowpayment('MYAPP2');
 
 // print_r($nowpayment->estimetedPrice(3999.500 , 'usd', 'btc'));
 
-print_r($nowpayment->minPaymentAmount('btc', 'eth'));
+// print_r($nowpayment->minPaymentAmount('eth', 'eth'));
 
 // print_r($nowpayment->createPayment(["price_amount" => 5, "price_currency" => 'trx', "pay_currency" => 'trx', "order_id" => "1234_02"]));
 
