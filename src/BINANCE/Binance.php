@@ -59,9 +59,9 @@ class Binance{
         try{
             if(!$startTime || !$endTime || $startTime > $endTime ){throw new Exception('missing or invalid parameters');}
             $res = $this->manager->deposit_history($startTime, $endTime);
-            return ["code" => 200, "data" => $res];
+            return json_encode(["code" => 200, "data" => $res]);
         }catch(Exception $e){
-            return ["code" => 412, "error" => $e->getMessage()];
+            return json_encode(["code" => 412, "error" => $e->getMessage()]);
         }
     }
 
@@ -95,7 +95,7 @@ class Binance{
         }
     }
 
-    private function all_accounts_information(){
+    public function all_accounts_information(){
         try{
             $res = $this->manager->all_accounts_information();
             return ["code" => 200, "data" => $res];
@@ -109,24 +109,29 @@ class Binance{
     #########################
     public function found_txid($txid, $startTime, $operation){
         try{
-            // $histories = [];
-            // switch(strtolower($operation)){
-            //     case 'deposit' :    
-            //         $histories = json_decode($this->deposit_history($startTime, $this->mstime()), true);
-            //         break;
-            //     case 'withdraw':   
-            //         $histories = json_decode($this->withdraw_history($startTime, $this->mstime()), true);
-            //         break;
-            //     default : throw new Exception("$operation not supported");
-            // }
-            // foreach($histories as $history){
-            //     if($history['txId'] == $txid){
-            //         return json_encode($history);
-            //     }
-            // }
+            $histories = [];
+            switch(strtolower($operation)){
+                case 'deposit' :   
+                    $deposit_history = $this->manager->deposit_history($startTime, $this->mstime());
+                    $histories = json_decode($deposit_history, true);
+                    break;
+                case 'withdraw':   
+                    $withdraw_history = $this->manager->withdraw_history($startTime, $this->mstime());
+                    $histories = json_decode($withdraw_history, true);
+                    break;
+                default : throw new Exception("$operation not supported");
+            }
+            foreach($histories as $history){
+                if($history['txId'] == $txid){
+                    // return json_encode($history);
+                    return json_encode(["code" => 200, "data" => $history]);
+                }
+            }
             // return json_encode(null);
+            return json_encode(["code" => 200, "data" => null]);
         }catch(Exception $e){
-            throw new Exception($e->getMessage());
+            // throw new Exception($e->getMessage());
+            return json_encode(["code" => 412, "error" => $e->getMessage()]);
         }
     }
 
@@ -160,11 +165,11 @@ class Binance{
                     }
                 }
                 // return json_encode(null);
-                return ["code" => 200, "data" => null];
+                return json_encode(["code" => 200, "data" => null]);
             }
         }catch(Exception $e){
             // throw new Exception($e->getMessage());
-            return ["code" => 412, "error" => $e->getMessage()];
+            return json_encode(["code" => 412, "error" => $e->getMessage()]);
         }
     }
 
