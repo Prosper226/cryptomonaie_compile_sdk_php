@@ -59,7 +59,7 @@ class Binance{
         try{
             if(!$startTime || !$endTime || $startTime > $endTime ){throw new Exception('missing or invalid parameters');}
             $res = $this->manager->deposit_history($startTime, $endTime);
-            return json_encode(["code" => 200, "data" => $res]);
+            return json_encode(["code" => 200, "data" => json_decode($res)]);
         }catch(Exception $e){
             return json_encode(["code" => 412, "error" => $e->getMessage()]);
         }
@@ -79,7 +79,7 @@ class Binance{
         try{
             if(!$startTime || !$endTime || $startTime > $endTime){throw new Exception('missing or invalid parameters');}
             $res = $this->manager->withdraw_history($startTime, $endTime);
-            return ["code" => 200, "data" => $res];
+            return json_encode(["code" => 200, "data" => json_decode($res)]);
         }catch(Exception $e){
             return ["code" => 412, "error" => $e->getMessage()];
         }
@@ -112,11 +112,11 @@ class Binance{
             $histories = [];
             switch(strtolower($operation)){
                 case 'deposit' :   
-                    $deposit_history = $this->manager->deposit_history($startTime, $this->mstime());
+                    $deposit_history = $this->deposit_history($startTime, $this->mstime());
                     $histories = json_decode($deposit_history, true);
                     break;
                 case 'withdraw':   
-                    $withdraw_history = $this->manager->withdraw_history($startTime, $this->mstime());
+                    $withdraw_history = $this->withdraw_history($startTime, $this->mstime());
                     $histories = json_decode($withdraw_history, true);
                     break;
                 default : throw new Exception("$operation not supported");
