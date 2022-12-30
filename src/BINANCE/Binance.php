@@ -27,6 +27,16 @@ class Binance{
         }
     }
 
+    public function get_symbol_ticker($symbol = null){
+        try{
+            if(!$symbol) throw new Exception('missing parameters (symbol)');
+            $res = $this->manager->get_symbol_ticker($symbol);
+            return ["code" => 200, "data" => $res];
+        }catch(Exception $e){
+            return ["code" => 412, "error" => $e->getMessage()];
+        }
+    }
+
     public function system_status(){
         try{
             $res = $this->manager->system_status();
@@ -176,50 +186,54 @@ class Binance{
     public function global_spot_balance(){
         try{
             
-            // $sum_btc    = 0.0;
-            // $sum_usdt   = 0.0;
+            $sum_btc    = 0.0;
+            $sum_usdt   = 0.0;
             
-            // $balances   = json_decode($this->all_accounts_information(), true);
-            // $balances   = $balances['balances'];
+            $balances   = json_decode($this->manager->all_accounts_information(), true);
+            $balances   = $balances['balances'];
             
-            // foreach($balances as $_balance){
-            //     $asset      = $_balance['asset'];
-            //     $quantity   = floatval($_balance['free']);
-            //     if($quantity){
-            //         try{
-            //             switch($asset){
-            //                 case "BTC": 
-            //                     $btc_quantity   =   $quantity;
-            //                     $price          =   $this->get_symbol_ticker('BTCUSDT');
-            //                     $usdt_quantity  =   $quantity * $price;
-            //                     break;
-            //                 case "USDT":
-            //                     $usdt_quantity  =   $quantity;
-            //                     $price          =   floatval(1 / $this->get_symbol_ticker('USDTBTC'));
-            //                     $btc_quantity   =   $quantity * $price;
-            //                     break;
-            //                 default:
-            //                     $btc_price      =   $this->get_symbol_ticker($asset.'BTC');
-            //                     $usdt_price     =   $this->get_symbol_ticker($asset.'USDT');
-            //                     $btc_quantity   =   $quantity * $btc_price;
-            //                     $usdt_quantity  =   $quantity * $usdt_price;
-            //             }
-                        
-            //             $sum_btc    += $btc_quantity;
-            //             $sum_usdt   += $usdt_quantity;
-            //         }catch(Exception $e){
-            //             error_log('Binance_log: '.$e->getMessage());
-            //             continue;
-            //         }
-            //     }
-            // }
+            foreach($balances as $_balance){
+                $asset      = $_balance['asset'];
+                $quantity   = floatval($_balance['free']);
+                if($quantity){
+                    try{
+                        switch($asset){
+                            case "USDT":
+                                $usdt_quantity  =   $quantity;
+                                break;
+                            default:
+                                $usdt_price     =   $this->manager->get_symbol_ticker($asset.'USDT');
+                                $usdt_quantity  =   $quantity * $usdt_price;
+                        }
+                        $sum_usdt   += $usdt_quantity;
+                    }catch(Exception $e){
+                        // error_log('Binance_log: '.$e->getMessage()); 
+                        $symbol = explode('?symbol=',$e->getMessage())[1];
+                        $symbol = explode('` resulted', $symbol)[0];
+                        // error_log($symbol);
+                        $list = ['BNBUSDT', 'USDT', 'BUSDUSDT', 'BTCUSDT', 'ETHUSDT', 'TRXUSDT', 'LTCUSDT', 'BCHUSDT', 'XRPUSDT', 'XLMUSDT', 'SOLUSDT', 'XMRUSDT', 'SHIBUSDT', 'DOGEUSDT', 'BETHUSDT'];
+                        if(!in_array($symbol, $list)) continue;
+                        error_log('Binance_log: '.$e->getMessage());
+                        continue;
+                    }
+                }
+                
+                // if($sum_usdt){
+                //     $price_btc  =   floatval(1 / $this->get_symbol_ticker('BTCUSDT'));
+                //     $sum_btc    =   $sum_usdt * $price_btc;
+                // }else{
+                //     $sum_btc = 0;
+                // }
+            }
             
-            // return json_encode(['btc' => $sum_btc, 'usdt' => $sum_usdt]);
+            return json_encode(['usdt' => $sum_usdt]);
             
         }catch(Exception $e){
             throw new Exception($e->getMessage());
         }
     }
+    
+
 
     public function all_available_accounts_information(){
         try{
@@ -242,6 +256,8 @@ class Binance{
             throw new Exception($e->getMessage());
         }
     }
+
+    
 
 }
 

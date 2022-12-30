@@ -34,6 +34,20 @@ class Manager{
         }
     }
 
+    public function get_symbol_ticker($symbol = null){
+        try{
+            if(!$symbol) throw new Exception('missing parameters (symbol)');
+            $body       = array("symbol" => strtoupper($symbol));
+            $url        = url_recode($this->config['endpoint']['get_symbol_ticker']);
+            $response   = $this->request->make('GET', $body, $url, null, false);
+            $response   = json_decode($response, true);
+            if(!isset($response['price'])){throw new Exception($response['msg']);}
+            return floatval($response['price']);
+        }catch(Exception $e){
+            throw new Exception($e->getMessage());
+        }
+    }
+
     public function all_coins_information() {
         try{
             $body = array("timestamp"   =>  $this->mstime());
