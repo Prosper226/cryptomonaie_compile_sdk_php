@@ -198,6 +198,29 @@ class Request{
         }
     }
     /* ------   fin Bloc NOWPAYMENT ------- */
+     //////////////////////////////////////////////////////////////////////////////////////////////////////
+    /* ------   debut Bloc MOOVAFRICA ------- */
+    private function makeMoovafrica($method = 'GET', $body = [], $endpoint = "", $headers = null, $decode = true){
+        try{
+            $headers = [
+                'Content-Type'  =>  'application/json',
+                'command-id'    =>  $endpoint,
+                'auth'          => [$this->apiAuth['username'], $this->apiAuth['password']]
+            ];
+            $client     = new Client([
+                'verify'    => true,
+                'base_uri'  => $this->baseUrl,
+            ]);
+            $body = ($body) ? json_encode($body): '';
+            $request    = new \GuzzleHttp\Psr7\Request($method, $endpoint, $headers, $body);
+            $response   = $client->sendAsync($request)->wait();
+            return ($decode) ? json_decode($response->getBody()->getContents()) : $response->getBody()->getContents();
+            // return $body;
+        }catch(Exception $e){
+            throw new Exception($e->getMessage());
+        }
+    }
+    /* ------   fin Bloc MOOVAFRICA ------- */
 
 }
 

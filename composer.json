@@ -6,7 +6,8 @@
             "Coinbase\\": "src/COINBASE/",
             "Kraken\\": "src/KRAKEN/",
             "Binance\\": "src/BINANCE",
-            "Nowpayment\\": "src/NOWPAYMENT"
+            "Nowpayment\\": "src/NOWPAYMENT",
+            "MoovAfrica\\": "src/MOOVAFRICA"
         }
     },
     "authors": [

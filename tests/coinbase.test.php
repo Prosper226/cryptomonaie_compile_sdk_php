@@ -5,8 +5,8 @@ require(dirname(__DIR__, 1).'/vendor/autoload.php');
 
 $coinbase = new Coinbase('MYAPP');
 
-// $user = $coinbase->show_current_user();
-// print_r($user);
+$user = $coinbase->show_current_user();
+print_r($user);
 
 // $accounts = $coinbase->list_accounts();
 // print_r($accounts);
