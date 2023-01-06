@@ -30,6 +30,16 @@ class Moov {
         }
     }
 
+    public function payment($phone = null, $amount = 0){
+        try{
+            if(!isset($phone) || !$phone) throw new Exception('phonenumber param is mandatory.');
+            $res = $this->manager->payment($phone, $amount);
+            return ["code" => 200, "data" => $res];
+        }catch(Exception $e){
+            return ["code" => 412, "error" => $e->getMessage()];
+        }
+    }
+
 
 }
 

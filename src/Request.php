@@ -202,18 +202,19 @@ class Request{
     /* ------   debut Bloc MOOVAFRICA ------- */
     private function makeMoovafrica($method = 'GET', $body = [], $endpoint = "", $headers = null, $decode = true){
         try{
-            $headers = [
-                'Content-Type'  =>  'application/json',
-                'command-id'    =>  $endpoint,
-                'auth'          => [$this->apiAuth['username'], $this->apiAuth['password']]
+            $credentials = base64_encode($this->apiAuth['username'].':'.$this->apiAuth['password']);
+            $headers    = [
+                'Content-Type'      =>  'application/json',
+                'Authorization'     => 'Basic ' . $credentials,
+                'command-id'        =>  $endpoint,
             ];
-            $client     = new Client([
-                'verify'    => true,
+            $client = new Client([
+                'verify'    => false,
                 'base_uri'  => $this->baseUrl,
+                'headers'   => $headers
             ]);
-            $body = ($body) ? json_encode($body): '';
-            $request    = new \GuzzleHttp\Psr7\Request($method, $endpoint, $headers, $body);
-            $response   = $client->sendAsync($request)->wait();
+            $body = ($body) ? ["json" => $body] : [];
+            $response = $client->request($method, '', $body);
             return ($decode) ? json_decode($response->getBody()->getContents()) : $response->getBody()->getContents();
             // return $body;
         }catch(Exception $e){
