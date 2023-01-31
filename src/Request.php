@@ -222,6 +222,30 @@ class Request{
         }
     }
     /* ------   fin Bloc MOOVAFRICA ------- */
+     //////////////////////////////////////////////////////////////////////////////////////////////////////
+    /* ------   debut Bloc LIGDICASH ------- */
+    private function makeLigdicash($method = 'GET', $body = [], $endpoint = "", $headers = null, $decode = true){
+        try{
+            $headers    = [
+                'Content-Type'  => 'application/json',
+                'Authorization' => 'Bearer ' . $this->apiAuth['apiToken'],
+                'Apikey'        =>  $this->apiAuth['apiKey'],
+            ];
+            $client = new Client([
+                'verify'    => true,
+                'base_uri'  => $this->baseUrl,
+                'headers'   => $headers
+            ]);
+            $body = ($body) ? ["json" => $body] : [];
+            $response = $client->request($method, $endpoint, $body);
+            return ($decode) ? json_decode($response->getBody()->getContents()) : $response->getBody()->getContents();
+            // print_r(jsson_encode($body));
+            // return $endpoint;
+        }catch(Exception $e){
+            throw new Exception($e->getMessage());
+        }
+    }
+    /* ------   fin Bloc LIGDICASH ------- */
 
 }
 

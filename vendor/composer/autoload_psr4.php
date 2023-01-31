@@ -11,6 +11,7 @@ return array(
     'Psr\\Http\\Client\\' => array($vendorDir . '/psr/http-client/src'),
     'Nowpayment\\' => array($baseDir . '/src/NOWPAYMENT'),
     'MoovAfrica\\' => array($baseDir . '/src/MOOVAFRICA'),
+    'Ligdicash\\' => array($baseDir . '/src/LIGDICASH'),
     'Kraken\\' => array($baseDir . '/src/KRAKEN'),
     'GuzzleHttp\\Psr7\\' => array($vendorDir . '/guzzlehttp/psr7/src'),
     'GuzzleHttp\\Promise\\' => array($vendorDir . '/guzzlehttp/promises/src'),

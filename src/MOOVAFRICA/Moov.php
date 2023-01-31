@@ -40,6 +40,25 @@ class Moov {
         }
     }
 
+    public function transactionStatus($request_id = null){
+        try{
+            if(!isset($request_id) || !$request_id) throw new Exception('request_id param is mandatory.');
+            $res = $this->manager->transactionStatus($request_id);
+            return ["code" => 200, "data" => $res];
+        }catch(Exception $e){
+            return ["code" => 412, "error" => $e->getMessage()];
+        }
+    }
+
+    public function transfert($phone = null, $amount = 0){
+        try{
+            if(!isset($phone) || !$phone) throw new Exception('phonenumber param is mandatory.');
+            $res = $this->manager->transfert($phone, $amount);
+            return ["code" => 200, "data" => $res];
+        }catch(Exception $e){
+            return ["code" => 412, "error" => $e->getMessage()];
+        }
+    }
 
 }
 
