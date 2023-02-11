@@ -52,6 +52,7 @@ class ComposerStaticInita843ecf4eb74d4c7513b3d4ce3f9d9c4
         'B' => 
         array (
             'Binance\\' => 8,
+            'Bapi\\' => 5,
         ),
     );
 
@@ -104,6 +105,10 @@ class ComposerStaticInita843ecf4eb74d4c7513b3d4ce3f9d9c4
         'Binance\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src/BINANCE',
+        ),
+        'Bapi\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/BAPI',
         ),
     );
 
