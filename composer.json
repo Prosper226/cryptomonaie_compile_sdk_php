@@ -8,7 +8,8 @@
             "Binance\\": "src/BINANCE",
             "Nowpayment\\": "src/NOWPAYMENT",
             "MoovAfrica\\": "src/MOOVAFRICA",
-            "Ligdicash\\": "src/LIGDICASH"
+            "Ligdicash\\": "src/LIGDICASH",
+            "Bapi\\": "src/BAPI"
         }
     },
     "authors": [

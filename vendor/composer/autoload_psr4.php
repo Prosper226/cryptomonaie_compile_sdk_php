@@ -18,4 +18,5 @@ return array(
     'GuzzleHttp\\' => array($vendorDir . '/guzzlehttp/guzzle/src'),
     'Coinbase\\' => array($baseDir . '/src/COINBASE'),
     'Binance\\' => array($baseDir . '/src/BINANCE'),
+    'Bapi\\' => array($baseDir . '/src/BAPI'),
 );
