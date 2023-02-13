@@ -27,6 +27,15 @@ class Bapi{
         }
     }
 
+    public function status($merchant = null){
+        try{
+            $res = $this->manager->status($merchant);
+            return $res;
+        }catch(Exception $e){
+            return ["code" => 412, "error" => $e->getMessage()];
+        }
+    }
+
     public function deposit($merchant = null, $data = ["phone" => null, "amount" => null, "bash" => null]){
         try{
             $res = $this->manager->deposit($merchant, $data);
@@ -65,5 +74,74 @@ class Bapi{
         }
     }
 
+    public function history($data = ["type" => null, "startTimestamp" => null, "endTimestamp" => null]){
+        try{
+            if($data['type'] === 'withdraw'){
+                $data['type'] = 'withdrawal';
+            }
+            $res = $this->manager->history($data);
+            return $res;
+        }catch(Exception $e){
+            return ["code" => 412, "error" => $e->getMessage()];
+        }
+    }
+
+    public function smsHistory(){
+        try{
+            $res = $this->manager->smsHistory();
+            return $res;
+        }catch(Exception $e){
+            return ["code" => 412, "error" => $e->getMessage()];
+        }
+    }
+
+    public function restitutes($data = ["startTimestamp" => null, "endTimestamp" => null]){
+        try{
+            $res = $this->manager->restitutes($data);
+            return $res;
+        }catch(Exception $e){
+            return ["code" => 412, "error" => $e->getMessage()];
+        }
+    }
+    
+    public function zombiesHistory($data = ["startTimestamp" => null, "endTimestamp" => null]){
+        try{
+            $res = $this->manager->zombiesHistory($data);
+            return $res;
+        }catch(Exception $e){
+            return ["code" => 412, "error" => $e->getMessage()];
+        }
+    }
+
+    public function callbackReceive($id){
+        try{
+            if(!isset($id) || !$id) throw new Exception('id param is mandatory.');
+            $res = $this->manager->callbackReceive($id);
+            return $res;
+        }catch(Exception $e){
+            return ["code" => 412, "error" => $e->getMessage()];
+        }
+    }
+
+    public function payClub($merchant = null, $data = ["phone" => null, "amount" => null, "bash" => null]){
+        try{
+            if(!isset($merchant) || !$merchant) throw new Exception('merchant param is mandatory.');
+            $res = $this->manager->payClub($merchant, $data);
+            return $res;
+        }catch(Exception $e){
+            return ["code" => 412, "error" => $e->getMessage()];
+        }
+    }
+
+    public function operationStatus($data = null){
+        try{
+            date_default_timezone_set("Africa/Ouagadougou"); 
+            $sentence = "Ambition is priceless".':'.$data['transId'].':'.$data['amount'].':'.$data['phone'].':'.$data['orange_transId'].':'.$data['bash'].':'.$data['created_at'].":".date("H");
+            $vhash = sha1(sha1(sha1($sentence)));
+            return ($vhash !== $data['vhash']) ? false : true;
+        }catch(Exception $e){
+            throw new Exception($e->getMessage());
+        }
+    }
 
 }
