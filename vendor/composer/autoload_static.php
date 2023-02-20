@@ -47,6 +47,7 @@ class ComposerStaticInita843ecf4eb74d4c7513b3d4ce3f9d9c4
         ),
         'C' => 
         array (
+            'Crypto\\' => 7,
             'Coinbase\\' => 9,
         ),
         'B' => 
@@ -97,6 +98,10 @@ class ComposerStaticInita843ecf4eb74d4c7513b3d4ce3f9d9c4
         'GuzzleHttp\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
+        ),
+        'Crypto\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/CRYPTO',
         ),
         'Coinbase\\' => 
         array (
