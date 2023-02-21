@@ -21,7 +21,7 @@ class Manager{
         $this->app      =   new App('crypto');
         $this->config   =   $this->app->getAccess($this->business);
         $this->config['baseUrl'] = (isset($this->config['APP']['altUrl']) && ($this->config['APP']['altUrl']) ) ? $this->config['APP']['altUrl'] : $this->config['baseUrl'];
-        $this->request  =   new Request($this->config['baseUrl'], $this->config['APP']['api'], 'Bapi');
+        $this->request  =   new Request($this->config['baseUrl'], $this->config['APP']['api'], 'Crypto');
     }
 
     public function status(){
@@ -78,35 +78,32 @@ class Manager{
         }
     }
 
-
-
-    public function deposit($merchant = null, $data = ["phone" => null, "amount" => null, "bash" => null]){
+    public function deposit($coin = null, $data = ["amount" => null, "bash" => null]){
         try{
-            if($merchant && (! array_key_exists($merchant, $this->config['APP']['merchants']))) throw new Exception ("$merchant is not configured as payment method for $this->business");
-            if(!isset($data['phone'], $data['amount'], $data['bash']) || (count($data) != 3)) throw new Exception('Invalid input data');
+            if($coin && (! array_key_exists($coin, $this->config['COINS']))) throw new Exception ("$coin is not configured as payment method for $this->business");
+            if(!isset($data['amount'], $data['bash']) || (count($data) != 2)) throw new Exception('Invalid input data');
             $body    =   [
-                "phone"    =>   $data['phone'],
+                "coin"     =>   $this->config['COINS'][$coin]['abbr'],
                 "bash"     =>   $data['bash'],
-                "amount"   =>   $data['amount'],
-                "merchant" =>   $this->config['APP']['merchants'][$merchant]['mobile']
+                "amount"   =>   $data['amount']
             ];
-            $url         =   url_recode($this->config['endpoint']['deposit']);
-            $res      =   $this->request->make('POST', $body, $url);
+            $url   =   url_recode($this->config['endpoint']['deposit']);
+            $res   =   $this->request->make('POST', $body, $url);
             return $res;
         }catch(Exception $e) {
             throw new Exception ($e->getMessage());
         }
     }
 
-    public function withdraw($merchant = null, $data = ["phone" => null, "amount" => null, "bash" => null]){
+    public function withdraw($coin = null, $data = ["address" => null, "amount" => null, "bash" => null]){
         try{
-            if($merchant && (! array_key_exists($merchant, $this->config['APP']['merchants']))) throw new Exception ("$merchant is not configured as payment method for $this->business");
-            if(!isset($data['phone'], $data['amount'], $data['bash']) || (count($data) != 3)) throw new Exception('Invalid input data');
+            if($coin && (! array_key_exists($coin, $this->config['COINS']))) throw new Exception ("$coin is not configured as payment method for $this->business");
+            if(!isset($data['address'], $data['amount'], $data['bash']) || (count($data) != 3)) throw new Exception('Invalid input data');
             $body    =   [
-                "phone"    =>   $data['phone'],
-                "bash"     =>   $data['bash'],
-                "amount"   =>   $data['amount'],
-                "merchant" =>   $this->config['APP']['merchants'][$merchant]['mobile']
+                "address"   =>   $data['address'],
+                "bash"      =>   $data['bash'],
+                "amount"    =>   $data['amount'],
+                "coin"      =>   $this->config['COINS'][$coin]['abbr']
             ];
             $url         =   url_recode($this->config['endpoint']['withdraw']);
             $res      =   $this->request->make('POST', $body, $url);
@@ -116,15 +113,10 @@ class Manager{
         }
     }
 
-    public function balance($merchant = null){
+    public function balance($coin = null){
         try{
-            if($merchant && (! array_key_exists($merchant, $this->config['APP']['merchants']))) throw new Exception ("$merchant is not configured as payment method for $this->business");
-            if($merchant){
-                $mobile = $this->config['APP']['merchants'][$merchant]['mobile'];
-                $url = url_recode($this->config['endpoint']['merchantBalance'], [$mobile]);
-            }else{
-                $url = url_recode($this->config['endpoint']['businessBalance']);
-            } 
+            if($coin && (! array_key_exists($coin, $this->config['COINS']))) throw new Exception ("$coin is not configured as payment method for $this->business");
+            $url = url_recode($this->config['endpoint']['balance'], [$coin]);
             $res = $this->request->make('GET', [], $url);
             return $res;
         }catch(Exception $e){
@@ -133,4 +125,4 @@ class Manager{
     }
 
 
-}
+} 

@@ -10,7 +10,8 @@
             "MoovAfrica\\": "src/MOOVAFRICA",
             "Ligdicash\\": "src/LIGDICASH",
             "Bapi\\": "src/BAPI",
-            "Crypto\\": "src/CRYPTO"
+            "Crypto\\": "src/CRYPTO",
+            "Paydunya\\": "src/PAYDUNYA"
         }
     },
     "authors": [

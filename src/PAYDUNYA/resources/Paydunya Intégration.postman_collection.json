@@ -1,0 +1,689 @@
+{
+	"info": {
+		"_postman_id": "650bdeb0-d3d2-4e9d-9876-433ce4629855",
+		"name": "Paydunya Intégration",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "API HTTP/JSON",
+			"item": [
+				{
+					"name": "GET CHECKOUT INVOICE",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "PAYDUNYA-MASTER-KEY",
+								"value": "{{master_key}}",
+								"type": "default"
+							},
+							{
+								"key": "PAYDUNYA-PRIVATE-KEY",
+								"value": "{{private_key}}",
+								"type": "default"
+							},
+							{
+								"key": "PAYDUNYA-TOKEN",
+								"value": "{{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"invoice\":{\r\n     \"total_amount\": 200000, \"description\": \"Black pen\"\r\n}\r\n    ,\r\n\"store\":{\"name\": \"My Enterprise\"}\r\n,\r\n\"actions\": {\r\n        \"cancel_url\": \"\",\r\n        \"callback_url\": \"https://webhook.site/10c69d53-7556-447f-b538-b8ac089e7c4a\",\r\n        \"return_url\": \"\"\r\n    }\r\n\r\n\r\n}\r\n"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/checkout-invoice/create",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"checkout-invoice",
+								"create"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "API DMP",
+			"item": [
+				{
+					"name": "DMP",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "PAYDUNYA-MASTER-KEY",
+								"value": "{{master_key}}",
+								"type": "default"
+							},
+							{
+								"key": "PAYDUNYA-PRIVATE-KEY",
+								"value": "{{private_key}}",
+								"type": "default"
+							},
+							{
+								"key": "PAYDUNYA-TOKEN",
+								"value": "{{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n    \r\n    \"recipient_phone\":\"775842306\",\r\n    \"amount\": 200,\r\n    \"support_fees\": 1, \r\n    \"send_notification\":1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/dmp-api",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"dmp-api"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "API PUSH",
+			"item": [
+				{
+					"name": "PUSH OM SN",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "PAYDUNYA-MASTER-KEY",
+								"value": "{{master_key}}",
+								"type": "default"
+							},
+							{
+								"key": "PAYDUNYA-PRIVATE-KEY",
+								"value": "{{private_key}}",
+								"type": "default"
+							},
+							{
+								"key": "PAYDUNYA-TOKEN",
+								"value": "{{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"account_alias\" : \"775842306\", \r\n     \"amount\" :200, \r\n     \"withdraw_mode\" : \"orange-money-senegal\" \r\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/disburse/get-invoice",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"disburse",
+								"get-invoice"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUSH OM CI",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "PAYDUNYA-MASTER-KEY",
+								"value": "{{master_key}}",
+								"type": "default"
+							},
+							{
+								"key": "PAYDUNYA-PRIVATE-KEY",
+								"value": "{{private_key}}",
+								"type": "default"
+							},
+							{
+								"key": "PAYDUNYA-TOKEN",
+								"value": "{{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"account_alias\" : \"0707497788\", \r\n     \"amount\" :200, \r\n     \"withdraw_mode\" : \"orange-money-ci\" \r\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/disburse/get-invoice",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"disburse",
+								"get-invoice"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUSH FREE MONEY",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "PAYDUNYA-MASTER-KEY",
+								"value": "{{master_key}}",
+								"type": "default"
+							},
+							{
+								"key": "PAYDUNYA-PRIVATE-KEY",
+								"value": "{{private_key}}",
+								"type": "default"
+							},
+							{
+								"key": "PAYDUNYA-TOKEN",
+								"value": "{{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"account_alias\" : \"764725878\", \r\n     \"amount\" :500, \r\n     \"withdraw_mode\" : \"free-money-senegal\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/disburse/get-invoice",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"disburse",
+								"get-invoice"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUSH Expresso Senegal",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "PAYDUNYA-MASTER-KEY",
+								"value": "{{master_key}}",
+								"type": "default"
+							},
+							{
+								"key": "PAYDUNYA-PRIVATE-KEY",
+								"value": "{{private_key}}",
+								"type": "default"
+							},
+							{
+								"key": "PAYDUNYA-TOKEN",
+								"value": "{{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"account_alias\" : \"\", \r\n     \"amount\" :200, \r\n     \"withdraw_mode\" : \"expresso-senegal\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/disburse/get-invoice",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"disburse",
+								"get-invoice"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUSH MTN BENIN",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "PAYDUNYA-MASTER-KEY",
+								"value": "{{master_key}}",
+								"type": "default"
+							},
+							{
+								"key": "PAYDUNYA-PRIVATE-KEY",
+								"value": "{{private_key}}",
+								"type": "default"
+							},
+							{
+								"key": "PAYDUNYA-TOKEN",
+								"value": "{{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"account_alias\" : \"66414231\", \r\n     \"amount\" :200, \r\n     \"withdraw_mode\" : \"mtn-benin\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/disburse/get-invoice",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"disburse",
+								"get-invoice"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUSH MTN CI",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "PAYDUNYA-MASTER-KEY",
+								"value": "{{master_key}}",
+								"type": "default"
+							},
+							{
+								"key": "PAYDUNYA-PRIVATE-KEY",
+								"value": "{{private_key}}",
+								"type": "default"
+							},
+							{
+								"key": "PAYDUNYA-TOKEN",
+								"value": "{{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"account_alias\" : \"0545354763\", \r\n     \"amount\" :200, \r\n     \"withdraw_mode\" : \"mtn-ci\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/disburse/get-invoice",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"disburse",
+								"get-invoice"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUSH MOOV CI",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "PAYDUNYA-MASTER-KEY",
+								"value": "{{master_key}}",
+								"type": "default"
+							},
+							{
+								"key": "PAYDUNYA-PRIVATE-KEY",
+								"value": "{{private_key}}",
+								"type": "default"
+							},
+							{
+								"key": "PAYDUNYA-TOKEN",
+								"value": "{{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"account_alias\" : \"0102191928\", \r\n     \"amount\" :200, \r\n     \"withdraw_mode\" : \"moov-ci\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/disburse/get-invoice",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"disburse",
+								"get-invoice"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUSH T-MONEY TOGO",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "PAYDUNYA-MASTER-KEY",
+								"value": "{{master_key}}",
+								"type": "default"
+							},
+							{
+								"key": "PAYDUNYA-PRIVATE-KEY",
+								"value": "{{private_key}}",
+								"type": "default"
+							},
+							{
+								"key": "PAYDUNYA-TOKEN",
+								"value": "{{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"account_alias\" : \"90239415\", \r\n     \"amount\" :200, \r\n     \"withdraw_mode\" : \"t-money-togo\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/disburse/get-invoice",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"disburse",
+								"get-invoice"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SUBMIT",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "PAYDUNYA-MASTER-KEY",
+								"value": "{{master_key}}",
+								"type": "default"
+							},
+							{
+								"key": "PAYDUNYA-PRIVATE-KEY",
+								"value": "{{private_key}}",
+								"type": "default"
+							},
+							{
+								"key": "PAYDUNYA-TOKEN",
+								"value": "{{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"disburse_invoice\": \"9nBoggucefdeoasmLBnK\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/disburse/submit-invoice",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"disburse",
+								"submit-invoice"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "API CRM",
+			"item": [
+				{
+					"name": "Access Token",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Accept",
+								"value": "application/vnd.apisms.v1+json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_key\":\"{{user_key}}\",\r\n    \"secret_key\":\"{{secret_key}}\"\r\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sender SMS",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Accept",
+								"value": "application/vnd.apisms.v1+json",
+								"type": "default"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer TOKEN",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"send_sms_request\":{\r\n        \"type\": \"application\",\r\n        \"app_key\": \"{{app_key}}\",\r\n        \"sms\": [\r\n            {\r\n                \"from\": \"SENDER-ID\",\r\n                \"to\":\"+221776665544\",\r\n                \"text\": \"Un sms de test.\"\r\n            }\r\n        ]\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/sms/send?",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"sms",
+								"send"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

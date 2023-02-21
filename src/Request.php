@@ -282,6 +282,63 @@ class Request{
         }
     }
     /* ------   fin Bloc BAPI BURKINA ------- */
+    /* ------   debut Bloc CRYPTO SYSTEM------- */
+    private function makeCrypto($method = 'GET', $body = [], $endpoint = "", $headers = null, $decode = true){
+        try{
+            $headers = [
+                'Content-Type'       => "application/json",
+                'CRYPTOSYS-AUTH-KEY' => "Bearer ".$this::signCrypto($this->apiAuth)
+            ];
+            // $authentication = ['intellectual', 'property'];
+            $client = new Client([
+                'verify'    => true,
+                'base_uri'  => $this->baseUrl,
+                'headers'   => $headers,
+                // 'auth'      => $authentication,
+            ]);
+            $body = ($body) ? ["json" => $body] : [];
+            $response = $client->request($method, $endpoint, $body);
+            return ($decode) ? json_decode($response->getBody()->getContents()) : $response->getBody()->getContents();
+        }catch(Exception $e){
+            throw new Exception($e->getMessage());
+        }
+    }
+    private static function signCrypto($textToEncrypt = []){
+        try{
+            $textToEncrypt    = json_encode($textToEncrypt);
+            $HASH_SECRET      = '0f678fcbea273a6be2307fba78ab2a88';
+            $HASH_ALGORITHM   = 'AES-256-CBC';
+            $IV               = substr($HASH_SECRET, 0, 16);
+            $encryptedMessage = openssl_encrypt($textToEncrypt, $HASH_ALGORITHM, $HASH_SECRET,0,$IV);
+            return $encryptedMessage;
+        }catch(Exception $e){
+            throw new Exception($e->getMessage());
+        }
+    }
+    /* ------   fin Bloc CRYPTO SYSTEM ------- */
+    /* ------   debut Bloc PAYDUNYA------- */
+    private function makePaydunya($method = 'GET', $body = [], $endpoint = "", $headers = null, $decode = true){
+        try{
+            $headers = [
+                'Content-Type'          => "application/json",
+                'PAYDUNYA-MASTER-KEY'   => $this->apiAuth['masterKey'],
+                'PAYDUNYA-PRIVATE-KEY'  => $this->apiAuth['privateKey'],
+                'PAYDUNYA-TOKEN'        => $this->apiAuth['token']
+            ];
+            $client = new Client([
+                'verify'    => true,
+                'base_uri'  => $this->baseUrl,
+                'headers'   => $headers,
+                // 'auth'      => $authentication,
+            ]);
+            $body = ($body) ? ["json" => $body] : [];
+            $response = $client->request($method, $endpoint, $body);
+            return ($decode) ? json_decode($response->getBody()->getContents()) : $response->getBody()->getContents();
+        }catch(Exception $e){
+            throw new Exception($e->getMessage());
+        }
+    }
+    /* ------   fin Bloc PAYDUNYA ------- */
 
 }
 

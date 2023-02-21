@@ -78,32 +78,36 @@ class Bapi{
     }
 
 
-    public function deposit($merchant = null, $data = ["phone" => null, "amount" => null, "bash" => null]){
+    public function deposit($coin = null, $data = ["phone" => null, "amount" => null, "bash" => null]){
         try{
-            $res = $this->manager->deposit($merchant, $data);
+            $res = $this->manager->deposit($coin, $data);
             return $res;
         }catch(Exception $e){
             return ["code" => 412, "error" => $e->getMessage()];
         }
     }
 
-    public function withdraw($merchant = null, $data = ["phone" => null, "amount" => null, "bash" => null]){
+    public function withdraw($coin = null, $data = ["phone" => null, "amount" => null, "bash" => null]){
         try{
-            $res = $this->manager->withdraw($merchant, $data);
+            $res = $this->manager->withdraw($coin, $data);
             return $res;
         }catch(Exception $e){
             return ["code" => 412, "error" => $e->getMessage()];
         }
     }
 
-    public function balance($merchant = null){
+    public function balance($coin = null){
         try{
-            $res = $this->manager->balance($merchant);
+            if(!isset($coin) || !$coin) throw new Exception('coin param is mandatory.');
+            $res = $this->manager->balance($coin);
             return $res;
         }catch(Exception $e){
             return ["code" => 412, "error" => $e->getMessage()];
         }
     }
+
+
+
 
 
 }
