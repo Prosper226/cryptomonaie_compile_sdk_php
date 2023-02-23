@@ -119,7 +119,7 @@ class Manager{
             $url = url_recode($this->config['endpoint']['balance'], [$coin]);
             $res = $this->request->make('GET', [], $url);
             return $res;
-        }catch(Exception $e){
+        }catch(Exception $e){ 
             throw new Exception($e->getMessage());
         }
     }

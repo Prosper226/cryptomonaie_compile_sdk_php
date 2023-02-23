@@ -3,7 +3,7 @@ namespace Crypto;
 
 use Exception;
 
-class Bapi{
+class Crypto{
 
     private $business = null;
     private $manager  = null; 

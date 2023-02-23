@@ -236,11 +236,54 @@ class Request{
                 'base_uri'  => $this->baseUrl,
                 'headers'   => $headers
             ]);
+            return $headers;
             $body = ($body) ? ["json" => $body] : [];
             $response = $client->request($method, $endpoint, $body);
             return ($decode) ? json_decode($response->getBody()->getContents()) : $response->getBody()->getContents();
-            // print_r(jsson_encode($body));
+            // print_r(json_encode($body));
             // return $endpoint;
+
+
+
+            
+            // $client     = new Client([
+            //     'verify'    => true,
+            //     'base_uri'  => $this->baseUrl,
+            // ]);
+            // // $body = ($body) ? json_encode($body): '';
+            // if(isset($body['withdrawals']) && $body['withdrawals']){
+            //     // $body = [
+            //     //     "withdrawals" => json_encode($body['withdrawals'])
+            //     // ];
+            //     // $body = $body;
+            //     $address    = $body['withdrawals']['address'];
+            //     $currency   = $body['withdrawals']['currency'];
+            //     $amount     = $body['withdrawals']['amount'];
+            //     // $body = 
+            //     //     "{
+            //     //         withdrawals : [
+            //     //             {
+            //     //                 'address': $address,
+            //     //                 'currency': $currency,
+            //     //                 'amount': $amount,
+            //     //             }
+            //     //         ]
+            //     //     }
+            //     // ";
+
+            //     $body = 
+            //     "{'withdrawals' : [".json_encode($body['withdrawals'])."]}";
+
+            // }else{
+            //     $body = json_encode($body);
+            // }
+            // // // $client  = new Client();
+            // // // $request = new \GuzzleHttp\Psr7\Request('GET', $this->baseUrl.$endpoint, $headers, $body);
+            // $request    = new \GuzzleHttp\Psr7\Request($method, $endpoint, $headers, $body);
+            // $response   = $client->sendAsync($request)->wait();
+            // return ($decode) ? json_decode($response->getBody()->getContents()) : $response->getBody()->getContents();
+            // return $body;
+
         }catch(Exception $e){
             throw new Exception($e->getMessage());
         }
@@ -296,6 +339,7 @@ class Request{
                 'headers'   => $headers,
                 // 'auth'      => $authentication,
             ]);
+            // return $headers;
             $body = ($body) ? ["json" => $body] : [];
             $response = $client->request($method, $endpoint, $body);
             return ($decode) ? json_decode($response->getBody()->getContents()) : $response->getBody()->getContents();

@@ -45,6 +45,10 @@ class ComposerStaticInita843ecf4eb74d4c7513b3d4ce3f9d9c4
             'GuzzleHttp\\Promise\\' => 19,
             'GuzzleHttp\\' => 11,
         ),
+        'D' => 
+        array (
+            'Dunya\\' => 6,
+        ),
         'C' => 
         array (
             'Crypto\\' => 7,
@@ -98,6 +102,10 @@ class ComposerStaticInita843ecf4eb74d4c7513b3d4ce3f9d9c4
         'GuzzleHttp\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
+        ),
+        'Dunya\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/PAYDUNYA',
         ),
         'Crypto\\' => 
         array (

@@ -20,6 +20,7 @@ class Ligdicash {
     }
 
     public function payment($data = ['phone' => null, 'amount' => null, 'bash' => null, 'otp' => '']){
+    // public function payment($data = ['bash' => null, 'phone' => null, 'amount' => null, 'otp' => '']){
         try{
             $res = $this->manager->payment($data);
             // $res = [

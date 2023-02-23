@@ -11,7 +11,7 @@
             "Ligdicash\\": "src/LIGDICASH",
             "Bapi\\": "src/BAPI",
             "Crypto\\": "src/CRYPTO",
-            "Paydunya\\": "src/PAYDUNYA"
+            "Dunya\\": "src/PAYDUNYA"
         }
     },
     "authors": [
