@@ -5,99 +5,28 @@ require(dirname(__DIR__, 1).'/vendor/autoload.php');
 
 $ligdicash  = new Ligdicash('MYAPP');
 
-$payment = $ligdicash->payment(['phone' => 22657474578, 'amount' => 100, 'bash' => '202306I008', 'otp' => 393558 ]);
-// $payment = $ligdicash->payment([ 'bash' => '202306I009', 'phone' => 22677456266, 'amount' => 100, 'otp' => 379900 ]);
-// $transaction_id,$customer,$amount,$otp=''
-header('Content-Type: application/json');
-echo json_encode($payment);
-// print_r($payment);
-// $token1 = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZF9pbnZvaWNlIjoiMTM3MTc0MjAiLCJzdGFydF9kYXRlIjoiMjAyMy0wMS0wNiAxNTowNTo1NyIsImV4cGlyeV9kYXRlIjoxNjczMTAwMzU3fQ.Nv1cj-OnMjXAr-UNlu96hagdPB_9hKlyfYp4fsa-oA8";
-
-// $payment = $ligdicash->payment(['phone' => 22657474578, 'amount' => 500, 'bash' => '202306I002', 'otp' => 727445 ]);
-// print_r($payment);
-// $token2 = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZF9pbnZvaWNlIjoiMTM3MTg3MTYiLCJzdGFydF9kYXRlIjoiMjAyMy0wMS0wNiAxNToxNjozNiIsImV4cGlyeV9kYXRlIjoxNjczMTAwOTk2fQ.Sar8XMT2ht64V-bxOX2H-p_j9vfFU8mWZfwrwNHehIc";
-
-
-// $payment = $ligdicash->payment(['phone' => 22660565103, 'amount' => 500, 'bash' => '202306I002' ]);
+// $payment = $ligdicash->deposit(['phone' => 22657474578, 'amount' => 500, 'bash' => '20230223I01921', 'otp' => 304141 ]);
+// $payment = $ligdicash->deposit(['phone' => 22662773863, 'amount' => 200, 'bash' => '20230223I01557']);
 // print_r($payment);
 
-// $token3 = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZF9pbnZvaWNlIjoiMTM3MjI0OTYiLCJzdGFydF9kYXRlIjoiMjAyMy0wMS0wNiAxNTo1MToxOCIsImV4cGlyeV9kYXRlIjoxNjczMTAzMDc4fQ.tFOxhkzq7wohS7al-zEzXWWjVXeIRXXuAQPvoCe3laY";
-// $statusPayment = $ligdicash->paymentStatus($token3);
+// $token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZF9pbnZvaWNlIjoiMTU0OTMzMjAiLCJzdGFydF9kYXRlIjoiMjAyMy0wMi0yNCAxMjo1NDo0NSIsImV4cGlyeV9kYXRlIjoxNjc3MzI2MDg1fQ.DHZ3CxIEOYvx9i-2NzoLL_MzepyfBnIHRy72tRcsqXs"; // completed
+// $token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZF9pbnZvaWNlIjoiMTU0OTUxMDUiLCJzdGFydF9kYXRlIjoiMjAyMy0wMi0yNCAxMzo0MjowNCIsImV4cGlyeV9kYXRlIjoxNjc3MzI4OTI0fQ.k9N-PhyQ6n5LXCdB-kf7R4iAur3IXEs0kc9b5iBh4LI"; // pending
+// $token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZF9pbnZvaWNlIjoiMTU0OTk3NTEiLCJzdGFydF9kYXRlIjoiMjAyMy0wMi0yNCAxNToyOTozNyIsImV4cGlyeV9kYXRlIjoxNjc3MzM1Mzc3fQ.vxABx9vs1qBrQJUXmsjyASlHpcdLWUz_P5c2hiBEFCQ";
+// $token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZF9pbnZvaWNlIjoiMTU1MDA5MzEiLCJzdGFydF9kYXRlIjoiMjAyMy0wMi0yNCAxNTo1ODoyOCIsImV4cGlyeV9kYXRlIjoxNjc3MzM3MTA4fQ.n7uWzaHBhLVM5sGpXauqhuX1ZpNL-0-oM-vPn5E5bGM";
+// $statusPayment = $ligdicash->depositStatus($token);
 // print_r($statusPayment); 
 
 
-// {
-//     "commande":{
-//         "invoice":
-//         {
-//             "items":[
-//                 {
-//                     "name":"Nom du produit ou Service",
-//                     "description":" Description du produit ou Service ",
-//                     "quantity":1,
-//                     "unit_price":"100",
-//                     "total_price":"100"
-//                 }
-//             ],
-//             "total_amount":"100",
-//             "devise":"XOF",
-//             "description":" Description du contenu de la facture(Achat de jus de fruits)"
-//             ,"customer":"22657474578",
-//             "customer_firstname":"Nom du client",
-//             "customer_lastname":"Prenon du client",
-//             "customer_email":"email du client exemple tester@gligdicash.com",
-//             "external_id":"",
-//             "otp":"393558"
-//         },
-//         "store":{
-//             "name":"Nom de votre site ou de votre boutique",
-//             "website_url":"url de votre site ou de votre boutique"
-//         },
-//         "actions":{
-//             "cancel_url":"https:\/\/www.pmuflash-dev.brklb.space\/sample_ligdicash",
-//             "return_url":"https:\/\/www.pmuflash-dev.brklb.space\/sample_ligdicash",
-//             "callback_url":"https:\/\/www.pmuflash-dev.brklb.space\/sample_ligdicash"
-//         },
-//         "custom_data":{
-//             "transaction_id":"202306I008"
-//         }
-//     }
-// }
+// $transfert = $ligdicash->withdraw(['phone' => 22657474578, 'amount' => 100, 'bash' => 'D20230224I01452' ]);
+// $transfert = $ligdicash->withdraw(['phone' => 22662773863, 'amount' => 100, 'bash' => 'W20230224I01454' ]);
+// print_r($transfert);
 
-// {
-//     "commande":{
-//         "invoice":{
-//             "items":[
-//                 {"
-//                     name":"Nom du produit ou Service",
-//                     "description":" Description du produit ou Service ",
-//                     "quantity":1,
-//                     "unit_price":"100",
-//                     "total_price":"100"
-//                 }
-//             ],
-//             "total_amount":"100",
-//             "devise":"XOF",
-//             "description":" Description du contenu de la facture(Achat de jus de fruits)",
-//             "customer":"22657474578",
-//             "customer_firstname":"Nom du client",
-//             "customer_lastname":"Prenon du client",
-//             "customer_email":"tester@gligdicash.com",
-//             "external_id":"",
-//             "otp":"393558"
-//         },
-//         "store":{
-//             "name":"Nom de votre site ou de votre boutique",
-//             "website_url":"https:\/\/www.pmuflash.com"
-//         },
-//         "actions":{
-//             "cancel_url":"https:\/\/www.pmuflash-dev.brklb.space\/sample_ligdicash",
-//             "return_url":"https:\/\/www.pmuflash-dev.brklb.space\/sample_ligdicash",
-//             "callback_url":"https:\/\/www.pmuflash-dev.brklb.space\/sample_ligdicash"
-//         },
-//         "custom_data":{
-//             "transaction_id":"202306I008"
-//         }
-//     }
-// }
+// $token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZF9maW5hbmNlIjoiMjE3NDA3ODUiLCJzdGFydF9kYXRlIjoiMjAyMy0wMi0yNCAxNDo1MjoyNiIsImV4cGlyeV9kYXRlIjoxNjc3MzMzMTQ2fQ.Y1P4zEsk8Opl96lbXp7AFP8Gmr3xJoe1smsHf3s2vZQ";
+// $token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZF9maW5hbmNlIjoiMjE3NDM2OTEiLCJzdGFydF9kYXRlIjoiMjAyMy0wMi0yNCAxNTozMjowOSIsImV4cGlyeV9kYXRlIjoxNjc3MzM1NTI5fQ.8TxosS2Y1C6IlZUVaFVZYm2F--FaL0MhMK1h0kpSlCE";
+// $token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZF9maW5hbmNlIjoiMjE3NDU4MjEiLCJzdGFydF9kYXRlIjoiMjAyMy0wMi0yNCAxNjowMjoxMCIsImV4cGlyeV9kYXRlIjoxNjc3MzM3MzMwfQ.hjk0d29NS6DVzq0COftntCEq3W823jkajACWf2d9QQg";
+// $statusTransfert = $ligdicash->withdrawStatus($token);
+// print_r($statusTransfert); 
+
+
+
 ?>
