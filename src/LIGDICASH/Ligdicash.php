@@ -33,7 +33,7 @@ class Ligdicash {
         }
     }
 
-    public function depositStatus($token = null){
+    private function depositStatus($token = null){
         try{
             if(!isset($token) || !$token) throw new Exception('token param is mandatory.');
             $res = $this->manager->paymentStatus($token);
@@ -48,7 +48,8 @@ class Ligdicash {
             $code = ($res['status'] === "completed") ? 200 : 300;
             return  ["code" => $code, "data" => $res];
         }catch(Exception $e){
-            return ["code" => 412, "error" => $e->getMessage()];
+            // return ["code" => 412, "error" => $e->getMessage()];
+            throw new Exception($e->getMessage());
         }
     }
 
@@ -66,7 +67,7 @@ class Ligdicash {
         }
     }
 
-    public function withdrawStatus($token = null){
+    private function withdrawStatus($token = null){
         try{
             if(!isset($token) || !$token) throw new Exception('token param is mandatory.');
             $res = $this->manager->transfertStatus($token);
@@ -79,27 +80,24 @@ class Ligdicash {
             $code = ($res['status'] === "completed") ? 200 : 300;
             return  ["code" => $code, "data" => $res];
         }catch(Exception $e){
-            return ["code" => 412, "error" => $e->getMessage()];
+            // return ["code" => 412, "error" => $e->getMessage()];
+            throw new Exception($e->getMessage());
         }
     }
 
-    // public function operationStatus($token = null, $type){
-    //     try{
-    //         if(!isset($token) || !$token) throw new Exception('token param is mandatory.');
-    //         if(!isset($type) || !$type) throw new Exception('type param is mandatory.');
-    //         $res = $this->manager->transfertStatus($token);
-    //         $res = [
-    //             "token"         => $res->token,
-    //             "status"        => $res->status,        // completed || pending || nocompleted
-    //             "operator_id"   => $res->operator_id,
-    //             "operator_name" => $res->operator_name
-    //         ];
-    //         $code = ($res['status'] === "completed") ? 200 : 300;
-    //         return  ["code" => $code, "data" => $res];
-    //     }catch(Exception $e){
-    //         return ["code" => 412, "error" => $e->getMessage()];
-    //     }
-    // }
+    public function operationStatus($token = null, $type = 'deposit' | 'withdraw'){
+        try{
+            if(!isset($token) || !$token) throw new Exception('token param is mandatory.');
+            if(!isset($type) || !$type) throw new Exception('type param is mandatory.');
+            switch($type){
+                case 'deposit'  : return $this->depositStatus($token);
+                case 'withdraw' : return $this->withdrawStatus($token);
+                default: throw new Exception ('invalid type value');
+            }
+        }catch(Exception $e){
+            return ["code" => 412, "error" => $e->getMessage()];
+        }
+    }
 
 
 
