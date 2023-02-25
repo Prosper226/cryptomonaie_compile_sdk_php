@@ -1,0 +1,124 @@
+#PAYIN OR PAYEMENT error code:
+------------------
+"wiki": [
+        {
+            "code": "00",
+            "description": "No error"
+        },
+        {
+            "code": "01",
+            "description": "There is an error",
+            "subcodes": [
+                {
+                    "code": "Echec (Code00)",
+                    "description": "Authentification failure"
+                },
+                {
+                    "code": "Echec (Code01)",
+                    "description": "Merchant Payin not activated"
+                },
+                {
+                    "code": "Echec (Code02)",
+                    "description": "Wrong amount. (The amount must be between 100 and 1000000)"
+                },
+                {
+                    "code": "Echec (Code03)",
+                    "description": "IP Denied"
+                },
+                {
+                    "code": "Echec (Code04)",
+                    "description": "An error occured while processing request"
+                },
+                {
+                    "code": "Echec (Code05)",
+                    "description": "An error occured while sending request"
+                },
+                {
+                    "code": "Echec (Code06)",
+                    "description": "An error occured while sending request"
+                },
+                {
+                    "code": "Echec (Code07)",
+                    "description": "No network access configured"
+                },
+                {
+                    "code": "Echec (Code08)",
+                    "description": "Data Input error"
+                },
+                {
+                    "code": "Echec (Code09)",
+                    "description": "Api error"
+                }
+            ]
+        }
+    ]
+}
+
+PAYOUT OR withdrawal error code		
+------------------
+  {
+    "wiki": [
+        {
+            "code": "00",
+            "description": "No error"
+        },
+        {
+            "code": "01",
+            "description": "There is an error",
+            "subcodes": [
+                [
+                    {
+                        "code": "Echec (Code00)",
+                        "description": "Authentification failure"
+                    },
+                    {
+                        "code": "Echec (Code01)",
+                        "description": "Merchant Payout not activated"
+                    },
+                    {
+                        "code": "Echec (Code02)",
+                        "description": "Customer not registered on the platform"
+                    },
+                    {
+                        "code": "Echec (Code03)",
+                        "description": "No merchant account on the specified network"
+                    },
+                    {
+                        "code": "Echec (Code03a)",
+                        "description": "Pending/Processed payout within the last 24hours"
+                    },
+                    {
+                        "code": "Echec (Code03b)",
+                        "description": "No deposit withing the last 3 months"
+                    },
+                    {
+                        "code": "Echec (Code04)",
+                        "description": "Merchant balance Low"
+                    },
+                    {
+                        "code": "Echec (Code05)",
+                        "description": "Request amount out of range [100;1000000]"
+                    },
+                    {
+                        "code": "Echec (Code06)",
+                        "description": "IP denied"
+                    },
+                    {
+                        "code": "Echec (Code07)",
+                        "description": "Transaction_id already exists"
+                    },
+                    {
+                        "code": "Echec (Code08)",
+                        "description": "An error occured while processing"
+                    },
+                    {
+                        "code": "Echec (Code09)",
+                        "description": "Data Input error"
+                    }
+                ]
+            ]
+        }
+    ]
+}
+
+

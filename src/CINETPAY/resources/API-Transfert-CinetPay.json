@@ -1,0 +1,182 @@
+{
+	"info": {
+		"_postman_id": "63b219cd-1987-4a7a-a815-840e1da8ea07",
+		"name": "API Transfert CinetPay",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "apikey",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://client.cinetpay.com/v1/auth/login",
+					"protocol": "https",
+					"host": [
+						"client",
+						"cinetpay",
+						"com"
+					],
+					"path": [
+						"v1",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ajout de contact",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "data",
+							"value": "[{ \"prefix\": \"221\", \"phone\": \"777396921\", \"name\": \"Cédric\", \"surname\": \"S\", \"email\": \"email@example.com\" }]",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://client.cinetpay.com/v1/transfer/contact?token=edee",
+					"protocol": "https",
+					"host": [
+						"client",
+						"cinetpay",
+						"com"
+					],
+					"path": [
+						"v1",
+						"transfer",
+						"contact"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "edee"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Envoyer de l'argent",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "data",
+							"value": "[{\"amount\":\"500\",\"phone\":\"69844969\",\"prefix\":\"223\",\"notify_url\":\"https://cinetpay.com\"}]",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://client.cinetpay.com/v1/transfer/money/send/contact?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjExNjE0LCJpc3MiOiJodHRwczovL2NsaWVudC5jaW5ldHBheS5jb20vdjEvYXV0aC9sb2dpbiIsImlhdCI6MTU5MTk5MTE0MywiZXhwIjoxNTkxOTkyMTAzLCJuYmYiOjE1OTE5OTExNDMsImp0aSI6InVNUXVGeDc1YkFSS3BBTU8ifQ.WeTXKwHvBycCUMAFmkjMHI8PzLETxF2P2084lBmeIks&transaction_id=X0988",
+					"protocol": "https",
+					"host": [
+						"client",
+						"cinetpay",
+						"com"
+					],
+					"path": [
+						"v1",
+						"transfer",
+						"money",
+						"send",
+						"contact"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjExNjE0LCJpc3MiOiJodHRwczovL2NsaWVudC5jaW5ldHBheS5jb20vdjEvYXV0aC9sb2dpbiIsImlhdCI6MTU5MTk5MTE0MywiZXhwIjoxNTkxOTkyMTAzLCJuYmYiOjE1OTE5OTExNDMsImp0aSI6InVNUXVGeDc1YkFSS3BBTU8ifQ.WeTXKwHvBycCUMAFmkjMHI8PzLETxF2P2084lBmeIks"
+						},
+						{
+							"key": "transaction_id",
+							"value": "X0988"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Vérifier statut transfert",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://client.cinetpay.com/v1/transfer/check/money?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjExNjE0LCJpc3MiOiJodHRwczovL2NsaWVudC5jaW5ldHBheS5jb20vdjEvYXV0aC9sb2dpbiIsImlhdCI6MTU4ODI0MjY0MiwiZXhwIjoxNTg4MjQzNjAyLCJuYmYiOjE1ODgyNDI2NDIsImp0aSI6IjZGWU82TFNROVJJVTV2UWoifQ.LY7KFTyQaKmKKbYlS0m5oxRTYM5-yUicXfMLZZweZKY&transaction_id=X0988",
+					"protocol": "https",
+					"host": [
+						"client",
+						"cinetpay",
+						"com"
+					],
+					"path": [
+						"v1",
+						"transfer",
+						"check",
+						"money"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjExNjE0LCJpc3MiOiJodHRwczovL2NsaWVudC5jaW5ldHBheS5jb20vdjEvYXV0aC9sb2dpbiIsImlhdCI6MTU4ODI0MjY0MiwiZXhwIjoxNTg4MjQzNjAyLCJuYmYiOjE1ODgyNDI2NDIsImp0aSI6IjZGWU82TFNROVJJVTV2UWoifQ.LY7KFTyQaKmKKbYlS0m5oxRTYM5-yUicXfMLZZweZKY"
+						},
+						{
+							"key": "transaction_id",
+							"value": "X0988"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

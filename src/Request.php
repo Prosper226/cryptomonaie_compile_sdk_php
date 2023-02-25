@@ -236,7 +236,7 @@ class Request{
                 'base_uri'  => $this->baseUrl,
                 'headers'   => $headers
             ]);
-            return $headers;
+            // return $headers;
             $body = ($body) ? ["json" => $body] : [];
             $response = $client->request($method, $endpoint, $body);
             return ($decode) ? json_decode($response->getBody()->getContents()) : $response->getBody()->getContents();
