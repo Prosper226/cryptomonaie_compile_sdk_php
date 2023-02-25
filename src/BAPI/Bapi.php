@@ -144,4 +144,14 @@ class Bapi{
         }
     }
 
+    public function askCallback($bash = null){
+        try{
+            if(!isset($bash) || !$bash) throw new Exception('bash param is mandatory.');
+            $res = $this->manager->askCallback($bash);
+            return $res;
+        }catch(Exception $e){
+            return ["code" => 412, "error" => $e->getMessage()];
+        }
+    }
+
 }

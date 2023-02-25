@@ -21,7 +21,9 @@ $bapi = new Bapi('MYAPP');
 // print_r($bapi->cancel("test_depot_003"));
 
 /** checked */
-// print_r($bapi->check("test_depot_003"));
+// print_r($bapi->check("CI221027.1322.C33173"));
+
+// print_r($bapi->askCallback('DM271022_1'));
 
 /** historique transactions */
 // print_r($bapi->history(["type" => 'deposit', "startTimestamp" => 1658243219, "endTimestamp" => 1676282460]));
@@ -43,7 +45,7 @@ $bapi = new Bapi('MYAPP');
 // print_r($bapi->payClub('MOOV', ["phone" => 22657474578, "amount" => 500, "bash" => "WM171022_5"]));
 
 /** server status */
-print_r($bapi->status());
+// print_r($bapi->status());
 // print_r($bapi->status('ORANGE'));
 
 

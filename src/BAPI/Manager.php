@@ -187,5 +187,15 @@ class Manager{
         }
     }
 
+    public function askCallback($bash = null){
+        try{
+            if(!isset($bash) || !$bash) throw new Exception('bash param is mandatory.');
+            $url      =   url_recode($this->config['endpoint']['askCallback'], [$bash]);
+            $res      =   $this->request->make('GET', [], $url);
+            return $res;
+        }catch(Exception $e) {
+            throw new Exception ($e->getMessage());
+        }
+    }
 
 }
