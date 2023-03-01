@@ -328,7 +328,7 @@ class Manager{
             }
 
             $id_account = $this->get_account_id(strtoupper($code));
-            $url        = url_recode($this->config['endpoint']['check_transaction'], [$id_account]);
+            $url        = url_recode($this->config['endpoint']['check_transaction'], [$id_account, $address]);
             $result     = $this->request->make('GET', [], $url);
             $payment = 0;
             if(isset($result->errors[0]->id)){
