@@ -21,7 +21,7 @@ $bapi = new Bapi('MYAPP');
 // print_r($bapi->cancel("test_depot_003"));
 
 /** checked */
-// print_r($bapi->check("CI221027.1322.C33173"));
+// print_r($bapi->check("1234"));
 
 // print_r($bapi->askCallback('DM271022_1'));
 

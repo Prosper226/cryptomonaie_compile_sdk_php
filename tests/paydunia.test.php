@@ -11,8 +11,8 @@
          * 
          */
         // Burkina 
-        $deposit = $Dunya->deposit('BF', 'ORANGE', ["phone" => 57474578, "amount" => 200, "bash" => "D001", "otp" => 997419]);
-        // $deposit = $Dunya->deposit('BF', 'MOOV', ["phone" => 60565103, "amount" => 200, "bash" => "D002"]);
+        // $deposit = $Dunya->deposit('BF', 'ORANGE', ["phone" => 57474578, "amount" => 200, "bash" => "D001", "otp" => 997419]);
+        $deposit = $Dunya->deposit('BF', 'MOOV', ["phone" => 60565103, "amount" => 200, "bash" => "D002"]);
         
         // Benin *
         // $deposit = $Dunya->deposit('BN', 'MTN', ["phone" => 57474578, "amount" => 200, "bash" => "D031"]);   // approuved

@@ -88,6 +88,17 @@ class Coinbase {
             return ["code" => 412, "error" => $e->getMessage()];
         }
     }
+
+    public function check_transaction($code, $address, $amount){
+        try{
+            // if(!isset($code) || !$code) throw new Exception('code param is mandatory.');
+            $res = $this->manager->check_transaction($code, $address, $amount);
+            return ["code" => 200, "data" => $res];
+        }catch(Exception $e){
+            return ["code" => 412, "error" => $e->getMessage()];
+        }
+    }
+
     
 }
 
