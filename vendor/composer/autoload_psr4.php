@@ -19,6 +19,7 @@ return array(
     'Dunya\\' => array($baseDir . '/src/PAYDUNYA'),
     'Crypto\\' => array($baseDir . '/src/CRYPTO'),
     'Coinbase\\' => array($baseDir . '/src/COINBASE'),
+    'CinetPay\\' => array($baseDir . '/src/CINETPAY'),
     'Binance\\' => array($baseDir . '/src/BINANCE'),
     'Bapi\\' => array($baseDir . '/src/BAPI'),
 );

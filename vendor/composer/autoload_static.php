@@ -53,6 +53,7 @@ class ComposerStaticInita843ecf4eb74d4c7513b3d4ce3f9d9c4
         array (
             'Crypto\\' => 7,
             'Coinbase\\' => 9,
+            'CinetPay\\' => 9,
         ),
         'B' => 
         array (
@@ -114,6 +115,10 @@ class ComposerStaticInita843ecf4eb74d4c7513b3d4ce3f9d9c4
         'Coinbase\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src/COINBASE',
+        ),
+        'CinetPay\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/CINETPAY',
         ),
         'Binance\\' => 
         array (
