@@ -29,7 +29,7 @@ class Moov {
             return ["code" => 412, "error" => $e->getMessage()];
         }
     }
-
+    
     public function payment($phone = null, $amount = 0){
         try{
             if(!isset($phone) || !$phone) throw new Exception('phonenumber param is mandatory.');
@@ -39,7 +39,7 @@ class Moov {
             return ["code" => 412, "error" => $e->getMessage()];
         }
     }
-
+    
     public function transactionStatus($request_id = null){
         try{
             if(!isset($request_id) || !$request_id) throw new Exception('request_id param is mandatory.');
@@ -49,7 +49,7 @@ class Moov {
             return ["code" => 412, "error" => $e->getMessage()];
         }
     }
-
+    
     public function transfert($phone = null, $amount = 0){
         try{
             if(!isset($phone) || !$phone) throw new Exception('phonenumber param is mandatory.');
@@ -59,6 +59,7 @@ class Moov {
             return ["code" => 412, "error" => $e->getMessage()];
         }
     }
+
 
 }
 
