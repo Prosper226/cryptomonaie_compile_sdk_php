@@ -11,7 +11,8 @@
             "Ligdicash\\": "src/LIGDICASH",
             "Bapi\\": "src/BAPI",
             "Crypto\\": "src/CRYPTO",
-            "Dunya\\": "src/PAYDUNYA"
+            "Dunya\\": "src/PAYDUNYA",
+            "CinetPay\\": "src/CINETPAY"
         }
     },
     "authors": [
