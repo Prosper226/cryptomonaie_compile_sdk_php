@@ -47,19 +47,21 @@ class Manager{
         }
     }
     
-    public function payment($phone = null, $amount = 0){
+    public function payment($phone = null, $amount = 0, $bash = null){
         try{
             if(!isset($phone) || !$phone) throw new Exception('phonenumber param is mandatory.');
+            if(!isset($amount) || !$amount) throw new Exception('amount param is mandatory.');
             $command = url_recode($this->config['command-id']['payment']);
+            $request_id = ($bash) ? $bash : "payment_$phone".'_'.time().'_'.$amount;
             $body = array (
-                "request-id" => "payment_$phone".'_'.time().'_'.$amount,
-                'destination' => $phone, 
-                'amount'    => $amount,
-                "remarks"   => $phone.'_'.time(),
-                "message" => "PAYMENT OF 600 TO ABC PLEASE CONFIRM WITH PIN",
+                "request-id"    => $request_id,
+                "destination"   => $phone, 
+                "amount"        => $amount,
+                "remarks"       => $phone.'_'.time(),
+                "message"       => "PAYMENT OF 600 TO ABC PLEASE CONFIRM WITH PIN",
                 "extended-data" => [
-                    "ext2" => "CUSTOM STRING",
-                    "custommessge" => "Payment for XXXX"
+                    "ext2"          => "CUSTOM STRING",
+                    "custommessge"  => "Payment for XXXX"
                 ]
             );
             $result = $this->request->make('POST', $body, $command);
@@ -83,19 +85,21 @@ class Manager{
         }
     }
     
-    public function transfert($phone = null, $amount = 0){
+    public function transfert($phone = null, $amount = 0, $bash = null){
         try{
             if(!isset($phone) || !$phone) throw new Exception('phonenumber param is mandatory.');
+            if(!isset($amount) || !$amount) throw new Exception('amount param is mandatory.');
             $command = url_recode($this->config['command-id']['transfert']);
+            $request_id = ($bash) ? $bash : "transfert_$phone".'_'.time().'_'.$amount;
             $body = array (
-                "request-id" => "transfert_$phone".'_'.time().'_'.$amount,
-                'destination' => $phone, 
-                'amount'    => $amount,
-                "remarks"   => $phone.'_'.time(),
-                "message" => "TRANSFERT OF 600 TO ABC PLEASE CONFIRM WITH PIN",
+                "request-id"    => $request_id,
+                "destination"   => $phone, 
+                "amount"        => $amount,
+                "remarks"       => $phone.'_'.time(),
+                "message"       => "TRANSFERT OF 600 TO ABC PLEASE CONFIRM WITH PIN",
                 "extended-data" => [
-                    "ext2" => "CUSTOM STRING",
-                    "custommessge" => "Transfert for XXXX"
+                    "ext2"          => "CUSTOM STRING",
+                    "custommessge"  => "Transfert for XXXX"
                 ]
             );
             $result = $this->request->make('POST', $body, $command);

@@ -30,10 +30,11 @@ class Moov {
         }
     }
     
-    public function payment($phone = null, $amount = 0){
+    public function payment($phone = null, $amount = 0, $bash = null){
         try{
             if(!isset($phone) || !$phone) throw new Exception('phonenumber param is mandatory.');
-            $res = $this->manager->payment($phone, $amount);
+            if(!isset($amount) || !$amount) throw new Exception('amount param is mandatory.');
+            $res = $this->manager->payment($phone, $amount, $bash);
             return ["code" => 200, "data" => $res];
         }catch(Exception $e){
             return ["code" => 412, "error" => $e->getMessage()];
@@ -50,10 +51,11 @@ class Moov {
         }
     }
     
-    public function transfert($phone = null, $amount = 0){
+    public function transfert($phone = null, $amount = 0, $bash = null){
         try{
             if(!isset($phone) || !$phone) throw new Exception('phonenumber param is mandatory.');
-            $res = $this->manager->transfert($phone, $amount);
+            if(!isset($amount) || !$amount) throw new Exception('amount param is mandatory.');
+            $res = $this->manager->transfert($phone, $amount, $bash);
             return ["code" => 200, "data" => $res];
         }catch(Exception $e){
             return ["code" => 412, "error" => $e->getMessage()];
