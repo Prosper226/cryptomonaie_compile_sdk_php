@@ -20,6 +20,7 @@ class Manager{
         $this->business =   $business;
         $this->app      =   new App('moovafrica');
         $this->config   =   $this->app->getAccess($this->business);
+        $this->config['baseUrl'] = (isset($this->config['APP']['altUrl']) && ($this->config['APP']['altUrl']) ) ? $this->config['APP']['altUrl'] : $this->config['baseUrl'];
         $this->request  =   new Request($this->config['baseUrl'], $this->config['APP']['api'], 'Moovafrica');
     }
 
