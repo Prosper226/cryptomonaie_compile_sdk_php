@@ -22,7 +22,7 @@ class Manager{
         $this->config   =   $this->app->getAccess($this->business);
         $this->request  =   new Request($this->config['baseUrl'], $this->config['APP']['api'], 'Moovafrica');
     }
-    
+
     private function errorFund($res){
         try{ 
             if($res->status != "0"){
@@ -32,13 +32,14 @@ class Manager{
             throw new Exception($e->getMessage());
         }
     }
-
+    
     public function checkSubscriber($phone = null){
         try{
             if(!isset($phone) || !$phone) throw new Exception('phonenumber param is mandatory.');
             $command = url_recode($this->config['command-id']['checkSubscriber']);
             $body = array ('destination' => $phone, "request-id" => "check_$phone".'_'.time());
             $result = $this->request->make('POST', $body, $command);
+            $this->errorFund($result);
             return $result;
         }catch(Exception $e){
             throw new Exception($e->getMessage());
@@ -80,7 +81,7 @@ class Manager{
             throw new Exception($e->getMessage());
         }
     }
-
+    
     public function transfert($phone = null, $amount = 0){
         try{
             if(!isset($phone) || !$phone) throw new Exception('phonenumber param is mandatory.');
@@ -103,7 +104,7 @@ class Manager{
             throw new Exception($e->getMessage());
         }
     }
-
+    
 
 }
 
