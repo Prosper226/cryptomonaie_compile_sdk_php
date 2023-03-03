@@ -265,7 +265,7 @@ class Manager{
         }
     }
 
-    private function get_account_balance($code){
+    public function get_account_balance($code){
         try{
             $account = $this->show_an_account($code);
             return $account->data->balance->amount;
@@ -292,10 +292,13 @@ class Manager{
     /**
      * PUBLIC GROUPS
      */
-    public function create_address($code){
+    public function create_address($code, $network = null){
         try{
             $id_account = $this->get_account_id($code);
             $body    = array ('name' => "New received $code address");
+            if($network){ 
+                $body['network'] = $network; 
+            }
             $url     = url_recode($this->config['endpoint']['create_address'], [$id_account]);
             $result = $this->request->make('POST', $body, $url);
             switch($code){
