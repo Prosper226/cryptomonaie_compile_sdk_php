@@ -154,4 +154,24 @@ class Bapi{
         }
     }
 
+    public function restoreSms($merchant = null, $debut = null, $fin = null){
+        try{
+            if(!isset($debut, $fin, $merchant) || !$debut || !$fin || !$merchant) throw new Exception('invalid param is mandatory.');
+            $res = $this->manager->restoreSms($merchant, $debut, $fin);
+            return $res; 
+        }catch(Exception $e){
+            return ["code" => 412, "error" => $e->getMessage()];
+        }
+    }
+
+    public function batteryLevel($merchant = null){
+        try{
+            if(!isset($merchant) || !$merchant) throw new Exception('invalid param is mandatory.');
+            $res = $this->manager->batteryLevel($merchant);
+            return $res; 
+        }catch(Exception $e){
+            return ["code" => 412, "error" => $e->getMessage()];
+        }
+    }
+
 }
