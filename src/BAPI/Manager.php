@@ -198,4 +198,29 @@ class Manager{
         }
     }
 
+    public function restoreSms($merchant = null, $debut = null, $fin = null){
+        try{
+            if(!isset($debut, $fin, $merchant) || !$debut || !$fin || !$merchant) throw new Exception('invalid param is mandatory.');
+            if($merchant && (! array_key_exists($merchant, $this->config['APP']['merchants']))) throw new Exception ("$merchant is not configured as payment method for $this->business");
+            $merchant_mobile =   $this->config['APP']['merchants'][$merchant]['mobile'];
+            $url      =   url_recode($this->config['endpoint']['restoreSms'], [ $merchant_mobile, $debut, $fin]);
+            $res      =   $this->request->make('GET', [], $url);
+            return $res;
+        }catch(Exception $e){
+            throw new Exception($e->getMessage());
+        }
+    }
+
+    public function batteryLevel($merchant = null){
+        try{
+            if(!isset($merchant) || !$merchant) throw new Exception('invalid param is mandatory.');
+            if($merchant && (! array_key_exists($merchant, $this->config['APP']['merchants']))) throw new Exception ("$merchant is not configured as payment method for $this->business");
+            $merchant_mobile =   $this->config['APP']['merchants'][$merchant]['mobile'];
+            $url      =   url_recode($this->config['endpoint']['batteryLevel'], [ $merchant_mobile]);
+            $res      =   $this->request->make('GET', [], $url);
+            return $res;
+        }catch(Exception $e){
+            throw new Exception($e->getMessage());
+        }
+    }
 }

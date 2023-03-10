@@ -39,6 +39,10 @@ class ComposerStaticInita843ecf4eb74d4c7513b3d4ce3f9d9c4
         array (
             'Kraken\\' => 7,
         ),
+        'I' => 
+        array (
+            'Intouch\\' => 8,
+        ),
         'G' => 
         array (
             'GuzzleHttp\\Psr7\\' => 16,
@@ -91,6 +95,10 @@ class ComposerStaticInita843ecf4eb74d4c7513b3d4ce3f9d9c4
         'Kraken\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src/KRAKEN',
+        ),
+        'Intouch\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/INTOUCH',
         ),
         'GuzzleHttp\\Psr7\\' => 
         array (

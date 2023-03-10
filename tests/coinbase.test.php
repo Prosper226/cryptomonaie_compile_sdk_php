@@ -29,5 +29,12 @@ print_r($user);
 // $check = $coinbase->check_transaction();
 // print_r($check);
 
+// case 'BEP2'     :   $final_network   =   'BNB';break;
+// case 'BEP20'    :   $final_network   =   'BSC';break;
+// case 'TRC20'    :   $final_network   =   'TRX';break;
+// case 'ERC20'    :   $final_network   =   'ETH';break;
+
+// $finder = $coinbase->findById('btc', 'my_withdraw_transaction_id);
+// print_r($finder);
 
 ?>

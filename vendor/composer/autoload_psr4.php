@@ -13,6 +13,7 @@ return array(
     'MoovAfrica\\' => array($baseDir . '/src/MOOVAFRICA'),
     'Ligdicash\\' => array($baseDir . '/src/LIGDICASH'),
     'Kraken\\' => array($baseDir . '/src/KRAKEN'),
+    'Intouch\\' => array($baseDir . '/src/INTOUCH'),
     'GuzzleHttp\\Psr7\\' => array($vendorDir . '/guzzlehttp/psr7/src'),
     'GuzzleHttp\\Promise\\' => array($vendorDir . '/guzzlehttp/promises/src'),
     'GuzzleHttp\\' => array($vendorDir . '/guzzlehttp/guzzle/src'),

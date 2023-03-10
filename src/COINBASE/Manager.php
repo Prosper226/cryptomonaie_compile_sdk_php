@@ -362,9 +362,9 @@ class Manager{
         try{
             $idem = (!$idem) ? $idem : time();
             $current_account_balance = $this->get_account_balance($code);
-            if($current_account_balance < 1){ throw new Exception('empty balance');} 
+            if($current_account_balance == 0){ throw new Exception('empty balance');} 
             if($current_account_balance < $amount) {throw new Exception('Insufficient balance');}
-            if($this->preg_address($code, $recepteur)) {throw new Exception('invalid address');}
+            if(!$this->preg_address($code, $recepteur)) {throw new Exception('invalid address');}
             $memo = htmlspecialchars($memo);
             $body = array (
                 "type" => "send",
@@ -386,6 +386,21 @@ class Manager{
         }
     }
     
+    public function findById($code = null, $id_transaction = null){
+        try{
+            $code = strtoupper($code);
+            $id_account = $this->get_account_id($code);    
+            $url     = url_recode($this->config['endpoint']['check_sending_transaction'], [$id_account, $id_transaction]);
+            $result  = $this->request->make('GET', [], $url);
+            // $status  = $result->data->status;
+            // $status_bin = ($status == 'completed') ? 1 : 0; 
+            // $confirmations = $result->data->network->confirmations;
+            // return array('tx_id' => $id_transaction, 'statut' => $status_bin, 'confirmations' => $confirmations);
+            return $result;
+        }catch(Exception $e){
+            throw new Exception ($e->getMessage());
+        }
+    }
 
     /*
 

@@ -298,12 +298,12 @@ class Request{
                 'Content-Type'  => "application/json",
                 'BAPI-AUTH-KEY' => "Bearer ".$this::signBapi($this->apiAuth)
             ];
-            // $authentication = ['haemasu', 'toolbelt'];
+            $authentication = ['haemasu', 'toolbelt'];
             $client = new Client([
                 'verify'    => true,
                 'base_uri'  => $this->baseUrl,
                 'headers'   => $headers,
-                // 'auth'      => $authentication,
+                'auth'      => $authentication,
             ]);
             $body = ($body) ? ["json" => $body] : [];
             $response = $client->request($method, $endpoint, $body);
@@ -325,6 +325,7 @@ class Request{
         }
     }
     /* ------   fin Bloc BAPI BURKINA ------- */
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
     /* ------   debut Bloc CRYPTO SYSTEM------- */
     private function makeCrypto($method = 'GET', $body = [], $endpoint = "", $headers = null, $decode = true){
         try{
@@ -360,6 +361,7 @@ class Request{
         }
     }
     /* ------   fin Bloc CRYPTO SYSTEM ------- */
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
     /* ------   debut Bloc PAYDUNYA------- */
     private function makePaydunya($method = 'GET', $body = [], $endpoint = "", $headers = null, $decode = true){
         try{
@@ -383,6 +385,72 @@ class Request{
         }
     }
     /* ------   fin Bloc PAYDUNYA ------- */
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+    /* ------   debut Bloc INTOUCH------- */
+    private function makeIntouch($method = 'GET', $body = [], $endpoint = "", $headers = null, $decode = true){
+        try{
+            $body['partner_id']     = $this->apiAuth['partner_id'];
+            $body['login_api']      = $this->apiAuth['login_api'];
+            $body['password_api']   = $this->apiAuth['password_api'];
+            $endpoint = $this->baseUrl.$endpoint;
+            $response = $this->curlIntouch($endpoint, json_encode($body), $method);
+            return $response;
+        }catch(Exception $e){
+            throw new Exception($e->getMessage());
+        }
+    }
+    private function curlIntouch($endpoint, $payLoads, $method){
+        try{
+            // Initialisation
+            $curl_handle=curl_init();
+            curl_setopt($curl_handle,CURLOPT_URL,$endpoint);
+            curl_setopt($curl_handle,CURLOPT_CONNECTTIMEOUT,2);
+            curl_setopt($curl_handle,CURLOPT_RETURNTRANSFER,1);
+            
+            
+            curl_setopt($curl_handle, CURLOPT_CUSTOMREQUEST, $method);
+            
+            // Setting headers
+            curl_setopt($curl_handle,CURLOPT_HEADER,1);
+            curl_setopt($curl_handle, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+            
+            // Digest authentifiaction specifying if the method is "PUT". Otherwise, authentification remains basic
+            if($method == "PUT") curl_setopt($curl_handle, CURLOPT_HTTPAUTH, CURLAUTH_DIGEST);
+
+            curl_setopt($curl_handle, CURLOPT_USERPWD, $this->apiAuth['username'] . ":" . $this->apiAuth['password']);
+            
+            // Setting Payloads
+            curl_setopt($curl_handle, CURLOPT_POST, 1);
+            curl_setopt($curl_handle, CURLOPT_POSTFIELDS, $payLoads);
+            
+            // error_log(print_r(["curlClient" => [json_decode($payLoads, true), $endpoint, $method]], true));
+            
+            // Running curl
+            $buffer = curl_exec($curl_handle);
+            curl_close($curl_handle);
+            
+            // error_log("Buffer is: ".json_encode($buffer));
+            // Catching response
+            if (empty($buffer)){
+                
+                // Notify in error_log when nothing returns from URL
+                // error_log("Nothing returned from url.");
+            }
+            else {
+                $resArray = explode("{",$buffer);
+                if(count($resArray) < 2) {
+                    // error_log($buffer);
+                    throw new Exception ('failure from intouch server.');
+                }
+                // Return response as object
+                $res = json_decode("{".$resArray[1],true);
+                return $res;
+            }
+        }catch(Exception $e){
+            throw new Exception ($e->getMessage());
+        }
+    }
+    /* ------   fin Bloc INTOUCH ------- */
 
 }
 
