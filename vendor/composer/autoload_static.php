@@ -29,6 +29,7 @@ class ComposerStaticInita843ecf4eb74d4c7513b3d4ce3f9d9c4
         ),
         'M' => 
         array (
+            'MoovCentral\\' => 12,
             'MoovAfrica\\' => 11,
         ),
         'L' => 
@@ -83,6 +84,10 @@ class ComposerStaticInita843ecf4eb74d4c7513b3d4ce3f9d9c4
         'Nowpayment\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src/NOWPAYMENT',
+        ),
+        'MoovCentral\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/MOOVCENTRAL',
         ),
         'MoovAfrica\\' => 
         array (

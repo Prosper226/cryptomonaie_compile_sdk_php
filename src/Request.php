@@ -451,6 +451,28 @@ class Request{
         }
     }
     /* ------   fin Bloc INTOUCH ------- */
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+    /* ------   debut Bloc MOOV CENNTRAL------- */
+    private function makeMoovcentral($method = 'GET', $body = [], $endpoint = "", $headers = null, $decode = true){
+        try{
+            $body['business']  = $this->apiAuth['business'];
+            $headers = [
+                'Content-Type' => "application/json"
+            ];
+            $client = new Client([
+                'base_uri'  => $this->baseUrl,
+                'headers'   => $headers
+            ]);
+            // return $body;
+            $body = ($body) ? ["json" => $body] : [];
+            $response = $client->request($method, $endpoint, $body);
+            return ($decode) ? json_decode($response->getBody()->getContents()) : $response->getBody()->getContents();
+        }catch(Exception $e){
+            throw new Exception($e->getMessage());
+        }
+    }
+    /* ------   fin Bloc MOOV CENTRAL ------- */
+
 
 }
 

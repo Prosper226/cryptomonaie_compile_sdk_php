@@ -10,6 +10,7 @@ return array(
     'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-factory/src', $vendorDir . '/psr/http-message/src'),
     'Psr\\Http\\Client\\' => array($vendorDir . '/psr/http-client/src'),
     'Nowpayment\\' => array($baseDir . '/src/NOWPAYMENT'),
+    'MoovCentral\\' => array($baseDir . '/src/MOOVCENTRAL'),
     'MoovAfrica\\' => array($baseDir . '/src/MOOVAFRICA'),
     'Ligdicash\\' => array($baseDir . '/src/LIGDICASH'),
     'Kraken\\' => array($baseDir . '/src/KRAKEN'),
