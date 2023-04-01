@@ -460,6 +460,7 @@ function url_recode($str, $vars = []){
         if(!isset($str) || !$str) throw new Exception('url non fournit.');
         $array = explode('/', $str);
         $j = -1;
+        if(!count($vars)){return $str;}
         foreach($array as $value){
             if (strpos($value, ':') !== false) {
                 $str = str_replace($value, $vars[++$j], $str);
