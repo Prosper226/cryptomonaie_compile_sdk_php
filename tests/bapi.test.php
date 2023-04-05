@@ -12,16 +12,16 @@ $bapi = new Bapi('MYAPP2');
 // print_r($bapi->balance('ORANGE'));
 
 /** deposits */
-// print_r($bapi->deposit('ORANGE', ["phone" => 22657474578, "amount" => 500, "bash" => "test_d_001"]));
+print_r($bapi->deposit('ORANGE', ["phone" => 22676615699, "amount" => 100, "bash" => "depot_230310_002"]));
 
 /** withdraw */
-// print_r($bapi->withdraw('ORANGE', ["phone" => 22657474578, "amount" => 100, "bash" => "test_retrait_001"]));
+// print_r($bapi->withdraw('ORANGE', ["phone" => 22657474578, "amount" => 10, "bash" => "test_retrait_100301"]));
 
 /** canceled  */
-// print_r($bapi->cancel("test_depot_003"));
+// print_r($bapi->cancel("test_d_001"));
 
 /** checked */
-// print_r($bapi->check("PRO-7185-728068-8189"));
+// print_r($bapi->check("PAY-7185-633376-3276"));
 
 // print_r($bapi->askCallback('DM271022_1'));
 
