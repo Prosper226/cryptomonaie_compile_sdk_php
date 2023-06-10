@@ -174,4 +174,25 @@ class Bapi{
         }
     }
 
+
+
+    public function smsHistory_v2($limit = 50){
+        try{
+            $res = $this->manager->smsHistory_v2($limit);
+            return $res;
+        }catch(Exception $e){
+            return ["code" => 412, "error" => $e->getMessage()];
+        }
+    }
+
+    public function phoneTransact($phone){
+        try{
+            $res = $this->manager->phoneTransact($phone);
+            return $res;
+        }catch(Exception $e){
+            return ["code" => 412, "error" => $e->getMessage()];
+        }
+    }
+    
+
 }

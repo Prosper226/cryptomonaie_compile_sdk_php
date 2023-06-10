@@ -293,7 +293,10 @@ class Request{
     /* ------   debut Bloc BAPI BURKINA------- */
     private function makeBapi($method = 'GET', $body = [], $endpoint = "", $headers = null, $decode = true){
         try{
-            ( isset($body['merchant']) && $body['merchant'] ) ?? $this->apiAuth['merchant'] = $body['merchant'];
+            // ( isset($body['merchant']) && $body['merchant'] ) ?? $this->apiAuth['merchant'] = $body['merchant'];
+
+            $this->apiAuth['merchant'] = isset($body['merchant']) ? $body['merchant'] : NULL;
+
             $headers = [
                 'Content-Type'  => "application/json",
                 'BAPI-AUTH-KEY' => "Bearer ".$this::signBapi($this->apiAuth)
@@ -306,6 +309,7 @@ class Request{
                 'auth'      => $authentication,
             ]);
             $body = ($body) ? ["json" => $body] : [];
+            // return $body;
             $response = $client->request($method, $endpoint, $body);
             return ($decode) ? json_decode($response->getBody()->getContents()) : $response->getBody()->getContents();
         }catch(Exception $e){
