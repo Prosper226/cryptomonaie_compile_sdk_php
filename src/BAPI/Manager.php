@@ -223,4 +223,25 @@ class Manager{
             throw new Exception($e->getMessage());
         }
     }
+
+
+    public function smsHistory_v2($limit = 50){
+        try{
+            $url = url_recode($this->config['endpoint']['smsHistory_v2'], [$limit]);
+            $res = $this->request->make('GET', [], $url);
+            return $res;
+        }catch(Exception $e){
+            throw new Exception($e->getMessage());
+        }
+    }
+
+    public function phoneTransact($phone){
+        try{
+            $url = url_recode($this->config['endpoint']['phoneTransact'], [$phone]);
+            $res = $this->request->make('GET', [], $url);
+            return $res;
+        }catch(Exception $e){
+            throw new Exception($e->getMessage());
+        }
+    }
 }
