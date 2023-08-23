@@ -198,6 +198,285 @@ class Request{
         }
     }
     /* ------   fin Bloc NOWPAYMENT ------- */
+     //////////////////////////////////////////////////////////////////////////////////////////////////////
+    /* ------   debut Bloc MOOVAFRICA ------- */
+    private function makeMoovafrica($method = 'GET', $body = [], $endpoint = "", $headers = null, $decode = true){
+        try{
+            $credentials = base64_encode($this->apiAuth['username'].':'.$this->apiAuth['password']);
+            $headers    = [
+                'Content-Type'      =>  'application/json',
+                'Authorization'     => 'Basic ' . $credentials,
+                'command-id'        =>  $endpoint,
+            ];
+            $client = new Client([
+                'verify'    => false,
+                'base_uri'  => $this->baseUrl,
+                'headers'   => $headers
+            ]);
+            $body = ($body) ? ["json" => $body] : [];
+            $response = $client->request($method, '', $body);
+            return ($decode) ? json_decode($response->getBody()->getContents()) : $response->getBody()->getContents();
+            // return $body;
+        }catch(Exception $e){
+            throw new Exception($e->getMessage());
+        }
+    }
+    /* ------   fin Bloc MOOVAFRICA ------- */
+     //////////////////////////////////////////////////////////////////////////////////////////////////////
+    /* ------   debut Bloc LIGDICASH ------- */
+    private function makeLigdicash($method = 'GET', $body = [], $endpoint = "", $headers = null, $decode = true){
+        try{
+            $headers    = [
+                'Content-Type'  => 'application/json',
+                'Authorization' => 'Bearer ' . $this->apiAuth['apiToken'],
+                'Apikey'        =>  $this->apiAuth['apiKey'],
+            ];
+            $client = new Client([
+                'verify'    => true,
+                'base_uri'  => $this->baseUrl,
+                'headers'   => $headers
+            ]);
+            // return $headers;
+            $body = ($body) ? ["json" => $body] : [];
+            $response = $client->request($method, $endpoint, $body);
+            return ($decode) ? json_decode($response->getBody()->getContents()) : $response->getBody()->getContents();
+            // print_r(json_encode($body));
+            // return $endpoint;
+
+
+
+            
+            // $client     = new Client([
+            //     'verify'    => true,
+            //     'base_uri'  => $this->baseUrl,
+            // ]);
+            // // $body = ($body) ? json_encode($body): '';
+            // if(isset($body['withdrawals']) && $body['withdrawals']){
+            //     // $body = [
+            //     //     "withdrawals" => json_encode($body['withdrawals'])
+            //     // ];
+            //     // $body = $body;
+            //     $address    = $body['withdrawals']['address'];
+            //     $currency   = $body['withdrawals']['currency'];
+            //     $amount     = $body['withdrawals']['amount'];
+            //     // $body = 
+            //     //     "{
+            //     //         withdrawals : [
+            //     //             {
+            //     //                 'address': $address,
+            //     //                 'currency': $currency,
+            //     //                 'amount': $amount,
+            //     //             }
+            //     //         ]
+            //     //     }
+            //     // ";
+
+            //     $body = 
+            //     "{'withdrawals' : [".json_encode($body['withdrawals'])."]}";
+
+            // }else{
+            //     $body = json_encode($body);
+            // }
+            // // // $client  = new Client();
+            // // // $request = new \GuzzleHttp\Psr7\Request('GET', $this->baseUrl.$endpoint, $headers, $body);
+            // $request    = new \GuzzleHttp\Psr7\Request($method, $endpoint, $headers, $body);
+            // $response   = $client->sendAsync($request)->wait();
+            // return ($decode) ? json_decode($response->getBody()->getContents()) : $response->getBody()->getContents();
+            // return $body;
+
+        }catch(Exception $e){
+            throw new Exception($e->getMessage());
+        }
+    }
+    /* ------   fin Bloc LIGDICASH ------- */
+     //////////////////////////////////////////////////////////////////////////////////////////////////////
+    /* ------   debut Bloc BAPI BURKINA------- */
+    private function makeBapi($method = 'GET', $body = [], $endpoint = "", $headers = null, $decode = true){
+        try{
+            // ( isset($body['merchant']) && $body['merchant'] ) ?? $this->apiAuth['merchant'] = $body['merchant'];
+
+            $this->apiAuth['merchant'] = isset($body['merchant']) ? $body['merchant'] : NULL;
+
+            $headers = [
+                'Content-Type'  => "application/json",
+                'BAPI-AUTH-KEY' => "Bearer ".$this::signBapi($this->apiAuth)
+            ];
+            $authentication = ['haemasu', 'toolbelt'];
+            $client = new Client([
+                'verify'    => true,
+                'base_uri'  => $this->baseUrl,
+                'headers'   => $headers,
+                'auth'      => $authentication,
+            ]);
+            $body = ($body) ? ["json" => $body] : [];
+            // return $body;
+            $response = $client->request($method, $endpoint, $body);
+            return ($decode) ? json_decode($response->getBody()->getContents()) : $response->getBody()->getContents();
+        }catch(Exception $e){
+            throw new Exception($e->getMessage());
+        }
+    }
+    private static function signBapi($textToEncrypt = []){
+        try{
+            $textToEncrypt    = json_encode($textToEncrypt);
+            $HASH_SECRET      = '0f678fcbea273a6be2307fba78ab2a88';
+            $HASH_ALGORITHM   = 'AES-256-CBC';
+            $IV               = substr($HASH_SECRET, 0, 16);
+            $encryptedMessage = openssl_encrypt($textToEncrypt, $HASH_ALGORITHM, $HASH_SECRET,0,$IV);
+            return $encryptedMessage;
+        }catch(Exception $e){
+            throw new Exception($e->getMessage());
+        }
+    }
+    /* ------   fin Bloc BAPI BURKINA ------- */
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+    /* ------   debut Bloc CRYPTO SYSTEM------- */
+    private function makeCrypto($method = 'GET', $body = [], $endpoint = "", $headers = null, $decode = true){
+        try{
+            $headers = [
+                'Content-Type'       => "application/json",
+                'CRYPTOSYS-AUTH-KEY' => "Bearer ".$this::signCrypto($this->apiAuth)
+            ];
+            // $authentication = ['intellectual', 'property'];
+            $client = new Client([
+                'verify'    => true,
+                'base_uri'  => $this->baseUrl,
+                'headers'   => $headers,
+                // 'auth'      => $authentication,
+            ]);
+            // return $headers;
+            $body = ($body) ? ["json" => $body] : [];
+            $response = $client->request($method, $endpoint, $body);
+            return ($decode) ? json_decode($response->getBody()->getContents()) : $response->getBody()->getContents();
+        }catch(Exception $e){
+            throw new Exception($e->getMessage());
+        }
+    }
+    private static function signCrypto($textToEncrypt = []){
+        try{
+            $textToEncrypt    = json_encode($textToEncrypt);
+            $HASH_SECRET      = '0f678fcbea273a6be2307fba78ab2a88';
+            $HASH_ALGORITHM   = 'AES-256-CBC';
+            $IV               = substr($HASH_SECRET, 0, 16);
+            $encryptedMessage = openssl_encrypt($textToEncrypt, $HASH_ALGORITHM, $HASH_SECRET,0,$IV);
+            return $encryptedMessage;
+        }catch(Exception $e){
+            throw new Exception($e->getMessage());
+        }
+    }
+    /* ------   fin Bloc CRYPTO SYSTEM ------- */
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+    /* ------   debut Bloc PAYDUNYA------- */
+    private function makePaydunya($method = 'GET', $body = [], $endpoint = "", $headers = null, $decode = true){
+        try{
+            $headers = [
+                'Content-Type'          => "application/json",
+                'PAYDUNYA-MASTER-KEY'   => $this->apiAuth['masterKey'],
+                'PAYDUNYA-PRIVATE-KEY'  => $this->apiAuth['privateKey'],
+                'PAYDUNYA-TOKEN'        => $this->apiAuth['token']
+            ];
+            $client = new Client([
+                'verify'    => true,
+                'base_uri'  => $this->baseUrl,
+                'headers'   => $headers,
+                // 'auth'      => $authentication,
+            ]);
+            $body = ($body) ? ["json" => $body] : [];
+            $response = $client->request($method, $endpoint, $body);
+            return ($decode) ? json_decode($response->getBody()->getContents()) : $response->getBody()->getContents();
+        }catch(Exception $e){
+            throw new Exception($e->getMessage());
+        }
+    }
+    /* ------   fin Bloc PAYDUNYA ------- */
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+    /* ------   debut Bloc INTOUCH------- */
+    private function makeIntouch($method = 'GET', $body = [], $endpoint = "", $headers = null, $decode = true){
+        try{
+            $body['partner_id']     = $this->apiAuth['partner_id'];
+            $body['login_api']      = $this->apiAuth['login_api'];
+            $body['password_api']   = $this->apiAuth['password_api'];
+            $endpoint = $this->baseUrl.$endpoint;
+            $response = $this->curlIntouch($endpoint, json_encode($body), $method);
+            return $response;
+        }catch(Exception $e){
+            throw new Exception($e->getMessage());
+        }
+    }
+    private function curlIntouch($endpoint, $payLoads, $method){
+        try{
+            // Initialisation
+            $curl_handle=curl_init();
+            curl_setopt($curl_handle,CURLOPT_URL,$endpoint);
+            curl_setopt($curl_handle,CURLOPT_CONNECTTIMEOUT,2);
+            curl_setopt($curl_handle,CURLOPT_RETURNTRANSFER,1);
+            
+            
+            curl_setopt($curl_handle, CURLOPT_CUSTOMREQUEST, $method);
+            
+            // Setting headers
+            curl_setopt($curl_handle,CURLOPT_HEADER,1);
+            curl_setopt($curl_handle, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+            
+            // Digest authentifiaction specifying if the method is "PUT". Otherwise, authentification remains basic
+            if($method == "PUT") curl_setopt($curl_handle, CURLOPT_HTTPAUTH, CURLAUTH_DIGEST);
+
+            curl_setopt($curl_handle, CURLOPT_USERPWD, $this->apiAuth['username'] . ":" . $this->apiAuth['password']);
+            
+            // Setting Payloads
+            curl_setopt($curl_handle, CURLOPT_POST, 1);
+            curl_setopt($curl_handle, CURLOPT_POSTFIELDS, $payLoads);
+            
+            // error_log(print_r(["curlClient" => [json_decode($payLoads, true), $endpoint, $method]], true));
+            
+            // Running curl
+            $buffer = curl_exec($curl_handle);
+            curl_close($curl_handle);
+            
+            // error_log("Buffer is: ".json_encode($buffer));
+            // Catching response
+            if (empty($buffer)){
+                
+                // Notify in error_log when nothing returns from URL
+                // error_log("Nothing returned from url.");
+            }
+            else {
+                $resArray = explode("{",$buffer);
+                if(count($resArray) < 2) {
+                    // error_log($buffer);
+                    throw new Exception ('failure from intouch server.');
+                }
+                // Return response as object
+                $res = json_decode("{".$resArray[1],true);
+                return $res;
+            }
+        }catch(Exception $e){
+            throw new Exception ($e->getMessage());
+        }
+    }
+    /* ------   fin Bloc INTOUCH ------- */
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+    /* ------   debut Bloc MOOV CENNTRAL------- */
+    private function makeMoovcentral($method = 'GET', $body = [], $endpoint = "", $headers = null, $decode = true){
+        try{
+            $body['business']  = $this->apiAuth['business'];
+            $headers = [
+                'Content-Type' => "application/json"
+            ];
+            $client = new Client([
+                'base_uri'  => $this->baseUrl,
+                'headers'   => $headers
+            ]);
+            // return $body;
+            $body = ($body) ? ["json" => $body] : [];
+            $response = $client->request($method, $endpoint, $body);
+            return ($decode) ? json_decode($response->getBody()->getContents()) : $response->getBody()->getContents();
+        }catch(Exception $e){
+            throw new Exception($e->getMessage());
+        }
+    }
+    /* ------   fin Bloc MOOV CENTRAL ------- */
+
 
 }
 
@@ -207,6 +486,7 @@ function url_recode($str, $vars = []){
         if(!isset($str) || !$str) throw new Exception('url non fournit.');
         $array = explode('/', $str);
         $j = -1;
+        if(!count($vars)){return $str;}
         foreach($array as $value){
             if (strpos($value, ':') !== false) {
                 $str = str_replace($value, $vars[++$j], $str);

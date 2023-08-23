@@ -6,7 +6,15 @@
             "Coinbase\\": "src/COINBASE/",
             "Kraken\\": "src/KRAKEN/",
             "Binance\\": "src/BINANCE",
-            "Nowpayment\\": "src/NOWPAYMENT"
+            "Nowpayment\\": "src/NOWPAYMENT",
+            "MoovAfrica\\": "src/MOOVAFRICA",
+            "Ligdicash\\": "src/LIGDICASH",
+            "Bapi\\": "src/BAPI",
+            "Crypto\\": "src/CRYPTO",
+            "Dunya\\": "src/PAYDUNYA",
+            "CinetPay\\": "src/CINETPAY",
+            "Intouch\\": "src/INTOUCH",
+            "MoovCentral\\": "src/MOOVCENTRAL"
         }
     },
     "authors": [

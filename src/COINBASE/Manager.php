@@ -265,7 +265,7 @@ class Manager{
         }
     }
 
-    private function get_account_balance($code){
+    public function get_account_balance($code){
         try{
             $account = $this->show_an_account($code);
             return $account->data->balance->amount;
@@ -292,10 +292,13 @@ class Manager{
     /**
      * PUBLIC GROUPS
      */
-    public function create_address($code){
+    public function create_address($code, $network = null){
         try{
             $id_account = $this->get_account_id($code);
             $body    = array ('name' => "New received $code address");
+            if($network){ 
+                $body['network'] = $network; 
+            }
             $url     = url_recode($this->config['endpoint']['create_address'], [$id_account]);
             $result = $this->request->make('POST', $body, $url);
             switch($code){
@@ -328,7 +331,7 @@ class Manager{
             }
 
             $id_account = $this->get_account_id(strtoupper($code));
-            $url        = url_recode($this->config['endpoint']['check_transaction'], [$id_account]);
+            $url        = url_recode($this->config['endpoint']['check_transaction'], [$id_account, $address]);
             $result     = $this->request->make('GET', [], $url);
             $payment = 0;
             if(isset($result->errors[0]->id)){
@@ -359,9 +362,9 @@ class Manager{
         try{
             $idem = (!$idem) ? $idem : time();
             $current_account_balance = $this->get_account_balance($code);
-            if($current_account_balance < 1){ throw new Exception('empty balance');} 
+            if($current_account_balance == 0){ throw new Exception('empty balance');} 
             if($current_account_balance < $amount) {throw new Exception('Insufficient balance');}
-            if($this->preg_address($code, $recepteur)) {throw new Exception('invalid address');}
+            if(!$this->preg_address($code, $recepteur)) {throw new Exception('invalid address');}
             $memo = htmlspecialchars($memo);
             $body = array (
                 "type" => "send",
@@ -383,6 +386,21 @@ class Manager{
         }
     }
     
+    public function findById($code = null, $id_transaction = null){
+        try{
+            $code = strtoupper($code);
+            $id_account = $this->get_account_id($code);    
+            $url     = url_recode($this->config['endpoint']['check_sending_transaction'], [$id_account, $id_transaction]);
+            $result  = $this->request->make('GET', [], $url);
+            // $status  = $result->data->status;
+            // $status_bin = ($status == 'completed') ? 1 : 0; 
+            // $confirmations = $result->data->network->confirmations;
+            // return array('tx_id' => $id_transaction, 'statut' => $status_bin, 'confirmations' => $confirmations);
+            return $result;
+        }catch(Exception $e){
+            throw new Exception ($e->getMessage());
+        }
+    }
 
     /*
 

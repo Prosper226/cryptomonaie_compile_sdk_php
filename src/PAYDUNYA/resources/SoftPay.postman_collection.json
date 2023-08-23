@@ -1,0 +1,593 @@
+{
+	"info": {
+		"_postman_id": "37c0663d-414b-4a31-b299-020bd20e6a8b",
+		"name": "SoftPay",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Live Env",
+			"item": [
+				{
+					"name": "Sénégal",
+					"item": [
+						{
+							"name": "Wizall",
+							"item": [
+								{
+									"name": "Wizall_ussd_payment",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"customer_name\": \"Camille\",\r\n    \"customer_email\": \"camillemilly7@gmail.com\",\r\n    \"phone_number\": \"770843218\",\r\n    \"invoice_token\": \"YGm4T9bvb4ANbwnYyb1E\"\r\n}"
+										},
+										"url": {
+											"raw": "{{base_url}}/api/v1/softpay/wizall-money-senegal",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"softpay",
+												"wizall-money-senegal"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Wizall_confirm_payment",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n\"authorization_code\": \"461050\",\r\n\"phone_number\": \"770843218\",\r\n\"transaction_id\": \"141484784\"\r\n}"
+										},
+										"url": {
+											"raw": "{{base_url}}/api/v1/softpay/wizall-money-senegal/confirm",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"softpay",
+												"wizall-money-senegal",
+												"confirm"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "OM_ussd_payment",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "default"
+									},
+									{
+										"key": "PAYDUNYA-MASTER-KEY",
+										"value": "{{master_key}}",
+										"type": "default"
+									},
+									{
+										"key": "PAYDUNYA-PRIVATE-KEY",
+										"value": "{{private_key}}",
+										"type": "default"
+									},
+									{
+										"key": "PAYDUNYA-TOKEN",
+										"value": "{{token}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"customer_name\": \"John Doe\",\r\n  \"customer_email\": \"test@gmail.com\",\r\n  \"phone_number\": \"775842306\",\r\n  \"authorization_code\": \"397286\",\r\n  \"invoice_token\": \"tTxoBL1F1Gay8ypiItUk\"\r\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/softpay/orange-money-senegal",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"softpay",
+										"orange-money-senegal"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Free_money_payment",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"customer_fullname\": \"Camille\",\r\n\"customer_email\": \"camillemilly7@gmail.com\",\r\n\"phone_number\": \"764725878\",\r\n\"payment_token\": \"ZsqRmkT4zl11YYBEZk5W\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/softpay/free-money-senegal",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"softpay",
+										"free-money-senegal"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Expresso_senegal_payment",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"expresso_sn_fullName\": \"Camille\",\r\n\"expresso_sn_email\": \"camillemilly7@gmail.com\",\r\n\"expresso_sn_phone\": \"705189525\",\r\n\"payment_token\": \"UBOAyVL9x76ss8Tw77Ao\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/softpay/expresso-senegal",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"softpay",
+										"expresso-senegal"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Wave_senegal_payment",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"wave_senegal_fullName\": \"Camille\",\r\n\"wave_senegal_email\": \"camillemilly7@gmail.com\",\r\n\"wave_senegal_phone\": \"774599837\",\r\n\"wave_senegal_payment_token\": \"OnW1IkMIQDTiJnQ9S3Ix\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/softpay/wave-senegal",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"softpay",
+										"wave-senegal"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "International",
+					"item": [
+						{
+							"name": "Orabank_payment",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"bank_account_customer_full_name\": \"Fallou\",\r\n\"bank_account_credit_card\": \"4111111111111111\",\r\n\"bank_account_expired_date_year\": \"2025\",\r\n\"bank_account_expired_date_month\": \"04\",\r\n\"bank_account_cvv\": \"123\",\r\n\"invoice_token\": \"YzaDQ551IBD4ZLrTIGub\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/softpay/orabank",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"softpay",
+										"orabank"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Paydunya_payment",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"customer_name\": \"Fallou\",\r\n\"customer_email\": \"fallou.tall@paydunya.com\",\r\n\"phone_phone\": \"774599837\",\r\n\"password\": \"12345678\",\r\n\"invoice_token\": \"jTl2o3bUiC0UGhSM7uOp\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/softpay/paydunya",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"softpay",
+										"paydunya"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Bénin",
+					"item": [
+						{
+							"name": "Moov-Bénin",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"moov_benin_customer_fullname\": \"Camille\",\r\n\"moov_benin_email\": \"camillemilly7@gmail.com\",\r\n\"moov_benin_phone_number\": \"0140253725\",\r\n\"payment_token\": \"UBOAyVL9x76ss8Tw77Ao\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/softpay/moov-benin",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"softpay",
+										"moov-benin"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Mtn-Bénin",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"mtn_benin_customer_fullname\": \"Camille\",\r\n\"mtn_benin_email\": \"camillemilly7@gmail.com\",\r\n\"mtn_benin_phone_number\": \"66414231\",\r\n\"mtn_benin_wallet_provider\": \"MTNBENIN\",\r\n\"payment_token\": \"QT4fTpoXRftNVHmsoiPj\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/softpay/mtn-benin",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"softpay",
+										"mtn-benin"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Cote d'ivoire",
+					"item": [
+						{
+							"name": "OM-ci",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"orange_money_ci_customer_fullname\": \"John Doe\",\r\n\"orange_money_ci_email\": \"test@gmail.com\",\r\n\"orange_money_ci_phone_number\": \"0707497788\",\r\n\"orange_money_ci_otp\": \"\",\r\n\"payment_token\": \"\"\r\n}\r\n\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/softpay/orange-money-ci",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"softpay",
+										"orange-money-ci"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Moov-Ci",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"moov_ci_customer_fullname\": \"Camille\",\r\n\"moov_ci_email\": \"camillemilly7@gmail.com\",\r\n\"moov_ci_phone_number\": \"0102191928\",\r\n\"payment_token\": \"VkVlRVSu0Y7bxvTd0oSI\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/softpay/moov-ci",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"softpay",
+										"moov-ci"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Mtn-ci",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "PAYDUNYA-MASTER-KEY",
+										"value": "{{master_key}}",
+										"type": "default"
+									},
+									{
+										"key": "PAYDUNYA-PRIVATE-KEY",
+										"value": "{{private_key}}",
+										"type": "default"
+									},
+									{
+										"key": "PAYDUNYA-TOKEN",
+										"value": "{{token}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"mtn_ci_customer_fullname\": \"Camille\",\r\n\"mtn_ci_email\": \"camillemilly7@gmail.com\",\r\n\"mtn_ci_phone_number\": \"0545354763\",\r\n\"mtn_ci_wallet_provider\": \"MTNCI\",\r\n\"payment_token\": \"JXD0hmh7J27WexLOKPkG\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/softpay/mtn-ci",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"softpay",
+										"mtn-ci"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Burkina Fasa",
+					"item": [
+						{
+							"name": "OM-BF",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name_bf\": \"Fallou\",\r\n  \"email_bf\": \"test@gmail.com\",\r\n  \"phone_bf\": \"76950976\",\r\n  \"otp_code\": \"89525\",\r\n  \"payment_token\": \"lLTs7h0tor82tchzvSec\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/softpay/orange-money-burkina",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"softpay",
+										"orange-money-burkina"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Moov-BF Copy",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"moov_burkina_faso_fullName\": \"Camille\",\r\n\"moov_burkina_faso_email\": \"camillemilly7@gmail.com\",\r\n\"moov_burkina_faso_phone_number\": \"51765664\",\r\n\"moov_burkina_faso_payment_token\": \"ierKRQFOzcLjG1KjkvRB\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/softpay/moov-burfina",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"softpay",
+										"moov-burfina"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "TOGO",
+					"item": [
+						{
+							"name": "T-MONEY",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name_t_money\": \"Camille\",\r\n  \"email_t_money\": \"exemple@paydunya.com\",\r\n  \"phone_t_money\": \"90239415\",\r\n  \"payment_token\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/softpay/t-money-togo",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"softpay",
+										"t-money-togo"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Checkout invoice",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "PAYDUNYA-MASTER-KEY",
+								"value": "{{master_key}}",
+								"type": "default"
+							},
+							{
+								"key": "PAYDUNYA-PRIVATE-KEY",
+								"value": "{{private_key}}",
+								"type": "default"
+							},
+							{
+								"key": "PAYDUNYA-TOKEN",
+								"value": "{{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"invoice\":{\r\n     \"total_amount\": 200, \"description\": \"Black pen\"\r\n}\r\n    ,\r\n\"store\":{\"name\": \"My Enterprise\"},\r\n\"actions\":{\r\n    \"callback_url\":\"https://webhook.site/942c4344-fc20-4987-9fdf-560dab7671e2\"\r\n}\r\n\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/checkout-invoice/create",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"checkout-invoice",
+								"create"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

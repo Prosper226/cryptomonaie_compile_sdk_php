@@ -5,7 +5,11 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
+<<<<<<< HEAD
         'reference' => '7c1ba4b9e723965b3917f0cea711f55317cc0d8b',
+=======
+        'reference' => '89a0248997e53075614476bcefa305aedebd3923',
+>>>>>>> c1179b749bb08d6d26a1e98f908a42d3961b0d76
         'name' => 'user/crypto_compile_sdk_php',
         'dev' => true,
     ),
@@ -29,12 +33,12 @@
             'dev_requirement' => false,
         ),
         'guzzlehttp/psr7' => array(
-            'pretty_version' => '2.4.3',
-            'version' => '2.4.3.0',
+            'pretty_version' => '2.4.4',
+            'version' => '2.4.4.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../guzzlehttp/psr7',
             'aliases' => array(),
-            'reference' => '67c26b443f348a51926030c83481b85718457d3d',
+            'reference' => '3cf1b6d4f0c820a2cf8bcaec39fc698f3443b5cf',
             'dev_requirement' => false,
         ),
         'psr/http-client' => array(
@@ -92,12 +96,12 @@
             'dev_requirement' => false,
         ),
         'symfony/deprecation-contracts' => array(
-            'pretty_version' => 'v3.2.0',
-            'version' => '3.2.0.0',
+            'pretty_version' => 'v3.2.1',
+            'version' => '3.2.1.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/deprecation-contracts',
             'aliases' => array(),
-            'reference' => '1ee04c65529dea5d8744774d474e7cbd2f1206d3',
+            'reference' => 'e2d1534420bd723d0ef5aec58a22c5fe60ce6f5e',
             'dev_requirement' => false,
         ),
         'user/crypto_compile_sdk_php' => array(
@@ -106,7 +110,11 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
+<<<<<<< HEAD
             'reference' => '7c1ba4b9e723965b3917f0cea711f55317cc0d8b',
+=======
+            'reference' => '89a0248997e53075614476bcefa305aedebd3923',
+>>>>>>> c1179b749bb08d6d26a1e98f908a42d3961b0d76
             'dev_requirement' => false,
         ),
     ),

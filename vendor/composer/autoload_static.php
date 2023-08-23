@@ -27,9 +27,22 @@ class ComposerStaticInita843ecf4eb74d4c7513b3d4ce3f9d9c4
         array (
             'Nowpayment\\' => 11,
         ),
+        'M' => 
+        array (
+            'MoovCentral\\' => 12,
+            'MoovAfrica\\' => 11,
+        ),
+        'L' => 
+        array (
+            'Ligdicash\\' => 10,
+        ),
         'K' => 
         array (
             'Kraken\\' => 7,
+        ),
+        'I' => 
+        array (
+            'Intouch\\' => 8,
         ),
         'G' => 
         array (
@@ -37,13 +50,20 @@ class ComposerStaticInita843ecf4eb74d4c7513b3d4ce3f9d9c4
             'GuzzleHttp\\Promise\\' => 19,
             'GuzzleHttp\\' => 11,
         ),
+        'D' => 
+        array (
+            'Dunya\\' => 6,
+        ),
         'C' => 
         array (
+            'Crypto\\' => 7,
             'Coinbase\\' => 9,
+            'CinetPay\\' => 9,
         ),
         'B' => 
         array (
             'Binance\\' => 8,
+            'Bapi\\' => 5,
         ),
     );
 
@@ -65,9 +85,25 @@ class ComposerStaticInita843ecf4eb74d4c7513b3d4ce3f9d9c4
         array (
             0 => __DIR__ . '/../..' . '/src/NOWPAYMENT',
         ),
+        'MoovCentral\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/MOOVCENTRAL',
+        ),
+        'MoovAfrica\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/MOOVAFRICA',
+        ),
+        'Ligdicash\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/LIGDICASH',
+        ),
         'Kraken\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src/KRAKEN',
+        ),
+        'Intouch\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/INTOUCH',
         ),
         'GuzzleHttp\\Psr7\\' => 
         array (
@@ -81,13 +117,29 @@ class ComposerStaticInita843ecf4eb74d4c7513b3d4ce3f9d9c4
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
         ),
+        'Dunya\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/PAYDUNYA',
+        ),
+        'Crypto\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/CRYPTO',
+        ),
         'Coinbase\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src/COINBASE',
         ),
+        'CinetPay\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/CINETPAY',
+        ),
         'Binance\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src/BINANCE',
+        ),
+        'Bapi\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/BAPI',
         ),
     );
 
