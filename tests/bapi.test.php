@@ -3,7 +3,7 @@
 use Bapi\Bapi;
 require(dirname(__DIR__, 1).'/vendor/autoload.php');
 
-$bapi = new Bapi('MYAPP');
+$bapi = new Bapi('MYAPP3');
 
 // print_r($bapi);
 
@@ -11,17 +11,16 @@ $bapi = new Bapi('MYAPP');
 // print_r($bapi->balance());
 // print_r($bapi->balance('ORANGE'));
 
-/** deposits */
-// print_r($bapi->deposit('ORANGE', ["phone" => 22676615699, "amount" => 100, "bash" => "depot_230310_003"]));
+// /** deposits */  22654720528
+// print_r($bapi->deposit('ORANGE', ["phone" => 22657474578, "amount" => 100, "bash" => "test_depot_300223-02"]));
 
 /** withdraw */
-// print_r($bapi->withdraw('ORANGE', ["phone" => 22657474578, "amount" => 500, "bash" => "test_retrait_2701"]));
-
+// print_r($bapi->withdraw('ORANGE', ["phone" => 22657474578, "amount" => 100, "bash" => "test_retrait_300223-01"]));
 /** canceled  */
-// print_r($bapi->cancel("test_d_001"));
+// print_r($bapi->cancel("test_retrait_300223-01"));
 
 /** checked */
-// print_r($bapi->check("PAY-7185-633376-3276"));
+// print_r($bapi->check("test_depot_300223-01"));
 
 // print_r($bapi->askCallback('DM271022_1'));
 

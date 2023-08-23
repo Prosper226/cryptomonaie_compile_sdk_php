@@ -294,7 +294,7 @@ class Request{
     private function makeBapi($method = 'GET', $body = [], $endpoint = "", $headers = null, $decode = true){
         try{
             // ( isset($body['merchant']) && $body['merchant'] ) ?? $this->apiAuth['merchant'] = $body['merchant'];
-
+            
             $this->apiAuth['merchant'] = isset($body['merchant']) ? $body['merchant'] : NULL;
 
             $headers = [

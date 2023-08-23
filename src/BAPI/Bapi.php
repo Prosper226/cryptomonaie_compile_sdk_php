@@ -21,7 +21,10 @@ class Bapi{
     public function balance($merchant = null){
         try{
             $res = $this->manager->balance($merchant);
-            return $res;
+
+            // $result = (array) $res;
+            // $result['message'] = (array) $result['message'];
+            // return $result;
         }catch(Exception $e){
             return ["code" => 412, "error" => $e->getMessage()];
         }
@@ -30,7 +33,7 @@ class Bapi{
     public function status($merchant = null){
         try{
             $res = $this->manager->status($merchant);
-            return $res;
+            return (array) $res;
         }catch(Exception $e){
             return ["code" => 412, "error" => $e->getMessage()];
         }
@@ -39,7 +42,10 @@ class Bapi{
     public function deposit($merchant = null, $data = ["phone" => null, "amount" => null, "bash" => null]){
         try{
             $res = $this->manager->deposit($merchant, $data);
-            return $res;
+            // return (array) $res;
+            $result = (array) $res;
+            $result['message'] = (array) $result['message'];
+            return $result;
         }catch(Exception $e){
             return ["code" => 412, "error" => $e->getMessage()];
         }
@@ -48,7 +54,10 @@ class Bapi{
     public function withdraw($merchant = null, $data = ["phone" => null, "amount" => null, "bash" => null]){
         try{
             $res = $this->manager->withdraw($merchant, $data);
-            return $res;
+            // return (array) $res;
+            $result = (array) $res;
+            $result['message'] = (array) $result['message'];
+            return $result;
         }catch(Exception $e){
             return ["code" => 412, "error" => $e->getMessage()];
         }
@@ -58,7 +67,7 @@ class Bapi{
         try{
             if(!isset($bash) || !$bash) throw new Exception('bash param is mandatory.');
             $res = $this->manager->cancel($bash);
-            return $res;
+            return (array) $res;
         }catch(Exception $e){
             return ["code" => 412, "error" => $e->getMessage()];
         }
@@ -68,7 +77,10 @@ class Bapi{
         try{
             if(!isset($bash) || !$bash) throw new Exception('bash param is mandatory.');
             $res = $this->manager->check($bash);
-            return $res;
+            // return (array) $res;
+            $result = (array) $res;
+            $result['transaction'] = (array) $result['transaction'];
+            return $result;
         }catch(Exception $e){
             return ["code" => 412, "error" => $e->getMessage()];
         }
@@ -80,7 +92,7 @@ class Bapi{
                 $data['type'] = 'withdrawal';
             }
             $res = $this->manager->history($data);
-            return $res;
+            return (array) $res;
         }catch(Exception $e){
             return ["code" => 412, "error" => $e->getMessage()];
         }
@@ -89,7 +101,7 @@ class Bapi{
     public function smsHistory(){
         try{
             $res = $this->manager->smsHistory();
-            return $res;
+            return (array) $res;
         }catch(Exception $e){
             return ["code" => 412, "error" => $e->getMessage()];
         }
@@ -98,7 +110,7 @@ class Bapi{
     public function restitutes($data = ["startTimestamp" => null, "endTimestamp" => null]){
         try{
             $res = $this->manager->restitutes($data);
-            return $res;
+            return (array) $res;
         }catch(Exception $e){
             return ["code" => 412, "error" => $e->getMessage()];
         }
@@ -107,7 +119,7 @@ class Bapi{
     public function zombiesHistory($data = ["startTimestamp" => null, "endTimestamp" => null]){
         try{
             $res = $this->manager->zombiesHistory($data);
-            return $res;
+            return (array) $res;
         }catch(Exception $e){
             return ["code" => 412, "error" => $e->getMessage()];
         }
@@ -117,7 +129,7 @@ class Bapi{
         try{
             if(!isset($id) || !$id) throw new Exception('id param is mandatory.');
             $res = $this->manager->callbackReceive($id);
-            return $res;
+            return (array) $res;
         }catch(Exception $e){
             return ["code" => 412, "error" => $e->getMessage()];
         }
@@ -127,7 +139,7 @@ class Bapi{
         try{
             if(!isset($merchant) || !$merchant) throw new Exception('merchant param is mandatory.');
             $res = $this->manager->payClub($merchant, $data);
-            return $res;
+            return (array) $res;
         }catch(Exception $e){
             return ["code" => 412, "error" => $e->getMessage()];
         }
@@ -148,7 +160,7 @@ class Bapi{
         try{
             if(!isset($bash) || !$bash) throw new Exception('bash param is mandatory.');
             $res = $this->manager->askCallback($bash);
-            return $res;
+            return (array) $res;
         }catch(Exception $e){
             return ["code" => 412, "error" => $e->getMessage()];
         }
@@ -158,7 +170,7 @@ class Bapi{
         try{
             if(!isset($debut, $fin, $merchant) || !$debut || !$fin || !$merchant) throw new Exception('invalid param is mandatory.');
             $res = $this->manager->restoreSms($merchant, $debut, $fin);
-            return $res; 
+            return (array) $res; 
         }catch(Exception $e){
             return ["code" => 412, "error" => $e->getMessage()];
         }
@@ -168,7 +180,7 @@ class Bapi{
         try{
             if(!isset($merchant) || !$merchant) throw new Exception('invalid param is mandatory.');
             $res = $this->manager->batteryLevel($merchant);
-            return $res; 
+            return (array) $res; 
         }catch(Exception $e){
             return ["code" => 412, "error" => $e->getMessage()];
         }
@@ -179,7 +191,7 @@ class Bapi{
     public function smsHistory_v2($limit = 50){
         try{
             $res = $this->manager->smsHistory_v2($limit);
-            return $res;
+            return (array) $res;
         }catch(Exception $e){
             return ["code" => 412, "error" => $e->getMessage()];
         }
@@ -188,7 +200,7 @@ class Bapi{
     public function phoneTransact($phone){
         try{
             $res = $this->manager->phoneTransact($phone);
-            return $res;
+            return (array) $res;
         }catch(Exception $e){
             return ["code" => 412, "error" => $e->getMessage()];
         }

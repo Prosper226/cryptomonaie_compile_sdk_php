@@ -19,7 +19,7 @@
         // $deposit = $Dunya->deposit('BN', 'MOOV', ["phone" => 60565103, "amount" => 200, "bash" => "D004"]);
         
         // Togo *
-        // $deposit = $Dunya->deposit('TG', 'TMONEY', ["phone" => 90239415, "amount" => 200, "bash" => "DT021"]);    // disponible
+        $deposit = $Dunya->deposit('TG', 'TMONEY', ["phone" => 90239415, "amount" => 200, "bash" => "DT021"]);    // disponible
         
         // Cote d'ivoire
         // $deposit = $Dunya->deposit('CI', 'ORANGE', ["phone" => 57474578, "amount" => 200, "bash" => "D006", "otp" => 997419]);   // disponible
@@ -32,7 +32,19 @@
         // $deposit = $Dunya->deposit('SN', 'EXPRESSO', ["phone" => 60565103, "amount" => 200, "bash" => "D008"]);  // disponible
         // $deposit = $Dunya->deposit('SN', 'WAVE', ["phone" => 60565103, "amount" => 200, "bash" => "D008"]);      // disponible
 
-        // print_r($deposit ?? []);
+
+        // NON TESTER
+        // Senegal
+        // $deposit = $Dunya->deposit('SN', 'WIZALL', ["phone" => 60565103, "amount" => 200, "bash" => "D008"]);     
+        // Cote d'ivoire
+        // $deposit = $Dunya->deposit('CI', 'WAVE', ["phone" => 60565103, "amount" => 200, "bash" => "D008"]);
+        // Mali
+        // $deposit = $Dunya->deposit('ML', 'ORANGE', ["phone" => 57474578, "amount" => 200, "bash" => "D001", "otp" => 997419]);
+        // $deposit = $Dunya->deposit('ML', 'MOOV', ["phone" => 60565103, "amount" => 200, "bash" => "D002"]);
+        
+
+        // 
+        print_r($deposit ?? []);
 
         /**
          * 
