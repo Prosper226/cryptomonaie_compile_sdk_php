@@ -161,9 +161,9 @@ $bizao = new Bizao('MYAPP');
 
 
 
- /** CARD PAYMENT */
-$card = $bizao->card('BF', 100, 'C001');
-print_r($card ?? []);
+/** CARD PAYMENT */
+// $card = $bizao->card('BF', 100, 'C001');
+// print_r($card ?? []);
 
 //  /** CARD CHECKED */
 // $cardCheck = $bizao->cardCheck('CI', "order_id");
@@ -171,13 +171,36 @@ print_r($card ?? []);
 
 
 
-//  /** BULK TRANSFER */
+// /** BULK TRANSFER */
+// Dispoible pour CI, SN, CM uniquement pour le moment
 // $withdraw = $bizao->withdraw('BF', 'ORANGE', ["phone" => 22657474578, "amount" => 100, "bash" => "D006"]);
 // print_r($withdraw ?? []);
 
 //  /** BULK CHECKED */
 // $bulkCheck = $bizao->bulkCheck("batchNumber");
 // print_r($bulkCheck ?? []);
+/**
+ * Exemple de reponse demande check-bulk (transfert)
+ * Array
+(
+    [code] => 200
+    [data] => Array
+        (
+            [batchNumber] => W008
+            [order_id] => W008W008
+            [mno] => orange
+            [date] => 2023-08-29T15:10:39
+            [beneficiaryMobileNumber] => 2250779772659
+            [toCountry] => ci
+            [feesApplicable] => No
+            [amount] => 100
+            [fees] => 0
+            [status] => Pending
+        )
+
+)
+ */
+
 
 
 // /** BULK BALANCE */
@@ -253,3 +276,17 @@ print_r($card ?? []);
 
  */
 
+
+
+// {"input":{"meta":{"source":"bizao","merchantName":"Barkalab@carbon.super","type":"bulk","currency":"XOF","batchNumber":"W008","reference":"Barkalab","feesType":"HYBRID_FEE","lang":"fr","totalAmount":100,"totalFees":0,"senderFirstName":"Barka","senderLastName":"Change","senderAddress":"Burkina","senderMobileNumber":"22676615699","fromCountry":"bf","date":"2023-08-29T14:56:18"},"data":[{"id":"W008","order_id":"W008W008","mno":"orange","date":"2023-08-29T15:11:26","beneficiaryFirstName":"Bizao","beneficiaryLastName":"Hub","beneficiaryAddress":"Rue 29 angle 20, Dakar","beneficiaryMobileNumber":"2250779772659","toCountry":"ci","feesApplicable":"No","amount":100,"fees":0,"status":"Failed","statusDescription":"USSD transaction failed [cause-Err-00E0  pdu_cnt-6  pdu_seq-2","failedReason":"USSD transaction failed [cause-Err-00E0  pdu_cnt-6  pdu_seq-2","intTransaction-Id":"f3c9fc68-aede-4712-8113-f49543b58d23","extTransaction-Id":"","reason":null}]},"post":[],"get":{"r":"vere-234-43892-list-29349-erf3er-232-4d-666-d23-23-2323"}}
+
+/** MOBILES CALLBACK OPERATION STATUS BULK
+ * $jsonString  = file_get_contents("php://input");  // Data receive from Bizao server
+ * $dataArray   = json_decode($json, true);          // decode data
+ * - Retourne un array comportant les informations de la transaction
+ * - Retourne False si verification des donnees incorrects
+*/
+$jsonString = '{"meta":{"source":"bizao","merchantName":"Barkalab@carbon.super","type":"bulk","currency":"XOF","batchNumber":"W008","reference":"Barkalab","feesType":"HYBRID_FEE","lang":"fr","totalAmount":100,"totalFees":0,"senderFirstName":"Barka","senderLastName":"Change","senderAddress":"Burkina","senderMobileNumber":"22676615699","fromCountry":"bf","date":"2023-08-29T14:56:18"},"data":[{"id":"W008","order_id":"W008W008","mno":"orange","date":"2023-08-29T15:11:26","beneficiaryFirstName":"Bizao","beneficiaryLastName":"Hub","beneficiaryAddress":"Rue 29 angle 20, Dakar","beneficiaryMobileNumber":"2250779772659","toCountry":"ci","feesApplicable":"No","amount":100,"fees":0,"status":"Failed","statusDescription":"USSD transaction failed [cause-Err-00E0  pdu_cnt-6  pdu_seq-2","failedReason":"USSD transaction failed [cause-Err-00E0  pdu_cnt-6  pdu_seq-2","intTransaction-Id":"f3c9fc68-aede-4712-8113-f49543b58d23","extTransaction-Id":"","reason":null}]}';
+$dataArray = json_decode($jsonString, true);
+$status = $bizao->operationStatus($dataArray);
+print_r($status ?? []);

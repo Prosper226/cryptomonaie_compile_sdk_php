@@ -219,6 +219,8 @@ class Manager{
         try{
             // verifier le pays
             if(!isset($this->countries[$country])){throw new Exception('Unknow country');}
+            // verifier si le pays fait du Bulk
+            if(!isset($this->countries[$country]['bulk-transfer']) || !$this->countries[$country]['bulk-transfer']){throw new Exception('Bulk transfer not available in this country');}
             // verifier l'operateur
             $operator = strtolower($operator);
             if(!isset($this->countries[$country]['operators'][$operator])){throw new Exception('Unknow operator');}
@@ -256,7 +258,7 @@ class Manager{
                         "beneficiaryAddress"=> "Rue 29 angle 20, Dakar",
                         "beneficiaryMobileNumber"=> $data['phone'],
                         "amount"=> $data['amount'],
-                        "feesApplicable"=> "NO",
+                        "feesApplicable"=> "YES",
                         "mno"=> $operatorSave
                     ]
                 ]
