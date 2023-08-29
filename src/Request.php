@@ -488,10 +488,10 @@ class Request{
             ], $headers);
 
             // Changer de cle d'autorisation pour les retraits (bulk ttrnafer)
-            if(isset($header['type']) && $header['type'] == "bulk"){
+            if(isset($headers['type']) && $headers['type'] == "bulk"){
                 $headers['authorization'] = 'Bearer '. $this->apiAuth['bulk_auth'];
             }
-
+            
             $client = new Client([
                 'base_uri'  => $this->baseUrl,
                 'headers'   => $headers
