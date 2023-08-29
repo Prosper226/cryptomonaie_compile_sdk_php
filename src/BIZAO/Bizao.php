@@ -181,7 +181,6 @@ class Bizao{
                 'balance' => $res['accounts'][0]->balance
             );
             return ["code" => 200, "data" => $res]; 
-            return $res;
         }catch(Exception $e){
             return ["code" => 412, "error" => $e->getMessage()];
         }
