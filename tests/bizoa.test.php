@@ -180,8 +180,35 @@ $bizao = new Bizao('MYAPP');
 // print_r($bulkCheck ?? []);
 
 
-/** BULK BALANCE */
-$balance = $bizao->balance();
-print_r($balance ?? []);
+// /** BULK BALANCE */
+// $balance = $bizao->balance();
+// print_r($balance ?? []);
+
+// Array
+// (
+//     [meta] => stdClass Object
+//         (
+//             [source] => bizao
+//             [type] => bulk
+//         )
+
+//     [accounts] => Array
+//         (
+//             [0] => stdClass Object
+//                 (
+//                     [account_number] => Barkalab3001
+//                     [status] => Active
+//                     [currency] => XOF
+//                     [balance] => 0
+//                     [reserved_amount] => 0
+//                     [loan_balance] => 0
+//                     [advance_amount] => 0
+//                     [turnover_balance] => 0
+//                     [settlement_balance] => 0
+//                 )
+
+//         )
+
+// )
 
 

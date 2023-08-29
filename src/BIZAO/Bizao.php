@@ -174,9 +174,13 @@ class Bizao{
         try{
             $res = $this->manager->balance();
             $res = (array) $res;
-            // if(isset($res['requestError'])) throw new Exception('Bizoa execution failed exception.');
-            // unset($res['meta']);
-            // return ["code" => 200, "data" => $res]; 
+            if(isset($res['requestError'])) throw new Exception('Bizoa execution failed exception.');
+            $res = array(
+                'status' => $res['accounts'][0]->status,
+                'currency' => $res['accounts'][0]->currency,
+                'balance' => $res['accounts'][0]->balance
+            );
+            return ["code" => 200, "data" => $res]; 
             return $res;
         }catch(Exception $e){
             return ["code" => 412, "error" => $e->getMessage()];
