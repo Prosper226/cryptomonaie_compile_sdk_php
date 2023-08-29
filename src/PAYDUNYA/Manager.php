@@ -123,6 +123,9 @@ class Manager{
             // error_log(print_r($body, true));
             $url    =   url_recode($this->config['endpoint']['deposit'] , [ $mobile['deposit']] );
             $result =   $this->request->make('POST', $body, $url);
+
+            $result->token = $invoiceToken;
+            
             return $result;
         }catch(Exception $e) {
             throw new Exception ($e->getMessage());
