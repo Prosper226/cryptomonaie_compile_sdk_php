@@ -161,10 +161,20 @@ class Bizao{
             if(!isset($bash) || !$bash) throw new Exception('bash param is mandatory.');
             $res = $this->manager->bulkCheck($bash);
             $res = (array) $res;
-            // if(isset($res['requestError'])) throw new Exception('Bizoa execution failed exception.');
-            // unset($res['meta']);
-            // return ["code" => 200, "data" => $res]; 
-            return $res;
+            if(isset($res['requestError'])) throw new Exception('Bizoa execution failed exception.');
+            $res = array(
+                'batchNumber' => $res['meta']->batchNumber,
+                'order_id' => $res['data'][0]->order_id,
+                'mno' => $res['data'][0]->mno,
+                'date' => $res['data'][0]->date,
+                'beneficiaryMobileNumber' => $res['data'][0]->beneficiaryMobileNumber,
+                'toCountry' => $res['data'][0]->toCountry,
+                'feesApplicable' => $res['data'][0]->feesApplicable,
+                'amount' => $res['data'][0]->amount,
+                'fees' => $res['data'][0]->fees,
+                'status' => $res['data'][0]->status,
+            );
+            return ["code" => 200, "data" => $res]; 
         }catch(Exception $e){
             return ["code" => 412, "error" => $e->getMessage()];
         }

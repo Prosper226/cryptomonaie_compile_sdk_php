@@ -161,9 +161,9 @@ $bizao = new Bizao('MYAPP');
 
 
 
-//  /** CARD PAYMENT */
-// $card = $bizao->card('BF', 100, 'C001');
-// print_r($card ?? []);
+ /** CARD PAYMENT */
+$card = $bizao->card('BF', 100, 'C001');
+print_r($card ?? []);
 
 //  /** CARD CHECKED */
 // $cardCheck = $bizao->cardCheck('CI', "order_id");
@@ -183,32 +183,73 @@ $bizao = new Bizao('MYAPP');
 // /** BULK BALANCE */
 // $balance = $bizao->balance();
 // print_r($balance ?? []);
+/**
+ * Exemple de reponse demande balance pour transfert 
+ * Array
+(
+    [code] => 200
+    [data] => Array
+        (
+            [status] => Active
+            [currency] => XOF
+            [balance] => 0
+        )
 
-// Array
-// (
-//     [meta] => stdClass Object
-//         (
-//             [source] => bizao
-//             [type] => bulk
-//         )
+)
+ */
 
-//     [accounts] => Array
-//         (
-//             [0] => stdClass Object
-//                 (
-//                     [account_number] => Barkalab3001
-//                     [status] => Active
-//                     [currency] => XOF
-//                     [balance] => 0
-//                     [reserved_amount] => 0
-//                     [loan_balance] => 0
-//                     [advance_amount] => 0
-//                     [turnover_balance] => 0
-//                     [settlement_balance] => 0
-//                 )
 
-//         )
 
-// )
 
+/**
+ * Array
+(
+    [meta] => stdClass Object
+        (
+            [source] => bizao
+            [merchantName] => Barkalab@carbon.super
+            [type] => bulk
+            [currency] => XOF
+            [batchNumber] => W008
+            [reference] => Barkalab
+            [feesType] => HYBRID_FEE
+            [lang] => fr
+            [totalAmount] => 100
+            [totalFees] => 0
+            [senderFirstName] => Barka
+            [senderLastName] => Change
+            [senderAddress] => Burkina
+            [senderMobileNumber] => 22676615699
+            [fromCountry] => bf
+            [comment] => Bulk Process will take minimum  8.23 minutes, Bulk items size is 1
+        )
+
+    [data] => Array
+        (
+            [0] => stdClass Object
+                (
+                    [id] => W008
+                    [order_id] => W008W008
+                    [mno] => orange
+                    [date] => 2023-08-29T14:56:18.601
+                    [beneficiaryFirstName] => Bizao
+                    [beneficiaryLastName] => Hub
+                    [beneficiaryAddress] => Rue 29 angle 20, Dakar
+                    [beneficiaryMobileNumber] => 2250779772659
+                    [toCountry] => ci
+                    [feesApplicable] => No
+                    [amount] => 100
+                    [fees] => 0
+                    [status] => Pending
+                    [statusDescription] => 
+                    [intTransaction-Id] => f3c9fc68-aede-4712-8113-f49543b58d23
+                    [extTransaction-Id] => 
+                    [reason] => 
+                )
+
+        )
+
+)
+
+ */
 
