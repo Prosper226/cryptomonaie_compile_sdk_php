@@ -180,8 +180,8 @@ $bizao = new Bizao('MYAPP');
 // print_r($bulkCheck ?? []);
 
 
-// /** BULK BALANCE */
-// $balance = $bizao->balance();
-// print_r($balance ?? []);
+/** BULK BALANCE */
+$balance = $bizao->balance();
+print_r($balance ?? []);
 
 

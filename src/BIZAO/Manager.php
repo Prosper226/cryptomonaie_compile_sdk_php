@@ -296,7 +296,8 @@ class Manager{
             $headers = [
                 'type' => 'bulk'
             ];
-            $url  =   url_recode($this->config['endpoint']['bulk_balance']);
+            $account = $this->config['APP']['api']['account'];
+            $url  =   url_recode($this->config['endpoint']['bulk_balance'], [$account]);
             $res  =   $this->request->make('GET', [], $url, $headers);
             return $res;
         }catch(Exception $e) {
