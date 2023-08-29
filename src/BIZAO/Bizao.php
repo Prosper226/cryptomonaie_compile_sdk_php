@@ -29,7 +29,7 @@ class Bizao{
             unset($res['meta']);
             return ["code" => 200, "data" => $res]; 
         }catch(Exception $e){
-            return ["code" => 400, "message" => $e->getMessage()];
+            return ["code" => 412, "message" => $e->getMessage()];
         }
     }
 
@@ -105,6 +105,7 @@ class Bizao{
                 'amount' => $res['data'][0]->amount,
                 'fees' => $res['data'][0]->fees,
                 'status' => $res['data'][0]->status,
+                'currency' => $res['meta']->currency
             );
             return $res;
 
@@ -143,7 +144,7 @@ class Bizao{
             // return ["code" => 200, "data" => $res]; 
             return $res;
         }catch(Exception $e){
-            return ["code" => 400, "message" => $e->getMessage()];
+            return ["code" => 412, "message" => $e->getMessage()];
         }
     }
 
@@ -189,12 +190,25 @@ class Bizao{
         try{
             $res = $this->manager->withdraw($country, $operator, $data, $currency);
             $res = (array) $res;
-            // if(isset($res['requestError'])) throw new Exception('Bizoa execution failed exception.');
+            if(isset($res['requestError'])) throw new Exception('Bizoa execution failed exception.');
             // unset($res['meta']);
+            $res = array(
+                'batchNumber' => $res['meta']->batchNumber,
+                'order_id' => $res['meta']->batchNumber,   // $res['data'][0]->order_id,
+                'mno' => $res['data'][0]->mno,
+                'date' => $res['data'][0]->date,
+                'beneficiaryMobileNumber' => $res['data'][0]->beneficiaryMobileNumber,
+                'toCountry' => $res['data'][0]->toCountry,
+                'feesApplicable' => $res['data'][0]->feesApplicable,
+                'amount' => $res['data'][0]->amount,
+                'fees' => $res['data'][0]->fees,
+                'status' => $res['data'][0]->status,
+                'currency' => $res['meta']->currency
+            );
             // return ["code" => 200, "data" => $res]; 
             return $res;
         }catch(Exception $e){
-            return ["code" => 400, "message" => $e->getMessage()];
+            return ["code" => 412, "message" => $e->getMessage()];
         }
     }
 
@@ -215,6 +229,7 @@ class Bizao{
                 'amount' => $res['data'][0]->amount,
                 'fees' => $res['data'][0]->fees,
                 'status' => $res['data'][0]->status,
+                'currency' => $res['meta']->currency
             );
             return ["code" => 200, "data" => $res]; 
         }catch(Exception $e){
