@@ -8,7 +8,6 @@ class ComposerStaticInita843ecf4eb74d4c7513b3d4ce3f9d9c4
 {
     public static $files = array (
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
-        'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
     );
@@ -62,6 +61,7 @@ class ComposerStaticInita843ecf4eb74d4c7513b3d4ce3f9d9c4
         ),
         'B' => 
         array (
+            'Bizao\\' => 6,
             'Binance\\' => 8,
             'Bapi\\' => 5,
         ),
@@ -132,6 +132,10 @@ class ComposerStaticInita843ecf4eb74d4c7513b3d4ce3f9d9c4
         'CinetPay\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src/CINETPAY',
+        ),
+        'Bizao\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/BIZAO',
         ),
         'Binance\\' => 
         array (

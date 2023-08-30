@@ -477,6 +477,35 @@ class Request{
     }
     /* ------   fin Bloc MOOV CENTRAL ------- */
 
+  //////////////////////////////////////////////////////////////////////////////////////////////////////
+    /* ------   debut Bloc BIZAO------- */
+    private function makeBizao($method = 'GET', $body = [], $endpoint = "", $headers = null, $decode = true){
+        try{
+            $headers = array_merge([
+                // 'Accept' => 'application/js',
+                'Content-Type' => "application/json",
+                'authorization' => 'Bearer '. $this->apiAuth['authorization'],
+                'lang' => $this->apiAuth['lang']
+            ], $headers);
+
+            // Changer de cle d'autorisation pour les retraits (bulk ttrnafer)
+            if(isset($headers['type']) && $headers['type'] == "bulk"){
+                $headers['authorization'] = 'Bearer '. $this->apiAuth['bulk_auth'];
+            }
+
+            $client = new Client([
+                'base_uri'  => $this->baseUrl,
+                'headers'   => $headers
+            ]);
+            $body = ($body) ? ["json" => $body] : [];
+            $response = $client->request($method, $endpoint, $body);
+            return ($decode) ? json_decode($response->getBody()->getContents()) : $response->getBody()->getContents();
+        }catch(Exception $e){
+            throw new Exception($e->getMessage());
+        }
+    }
+    
+    /* ------   fin Bloc BIZAO ------- */
 
 }
 

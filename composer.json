@@ -14,7 +14,8 @@
             "Dunya\\": "src/PAYDUNYA",
             "CinetPay\\": "src/CINETPAY",
             "Intouch\\": "src/INTOUCH",
-            "MoovCentral\\": "src/MOOVCENTRAL"
+            "MoovCentral\\": "src/MOOVCENTRAL",
+            "Bizao\\": "src/BIZAO"
         }
     },
     "authors": [
