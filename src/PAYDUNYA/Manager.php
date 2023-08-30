@@ -125,7 +125,7 @@ class Manager{
             $result =   $this->request->make('POST', $body, $url);
 
             $result->token = $invoiceToken;
-            
+         
             return $result;
         }catch(Exception $e) {
             throw new Exception ($e->getMessage());

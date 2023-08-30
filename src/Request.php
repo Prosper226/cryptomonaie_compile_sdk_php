@@ -476,6 +476,7 @@ class Request{
         }
     }
     /* ------   fin Bloc MOOV CENTRAL ------- */
+
   //////////////////////////////////////////////////////////////////////////////////////////////////////
     /* ------   debut Bloc BIZAO------- */
     private function makeBizao($method = 'GET', $body = [], $endpoint = "", $headers = null, $decode = true){
