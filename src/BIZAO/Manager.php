@@ -26,6 +26,14 @@ class Manager{
         $this->countries =  $this->config['Countries'];
     }
 
+
+
+    /***
+     * 
+     *  PARTIE DE GESTION 
+     *  MOBILE MONEY PAYMENT ET TRANSFER BULK
+     */ 
+    /** DEBUT 1ERE PARTIE PAYMENT */
     public function deposit($country = null, $operator = null, $data = ["phone" => null, "amount" => null, "bash" => null, "otp" => null], $currency = null){
         try{
             // verifier le pays
@@ -159,62 +167,9 @@ class Manager{
         }
 
     }
+    /** FIN 1ERE PARTIE PAYMENT */
 
-
-
-    /***
-     *  PARTIE DE GESTION CARTE VISA/MASTERCARD
-     */
-    
-    public function card($country, $amount, $bash){
-        try{
-            // verifier le pays et les autres parametres
-            if(!isset($this->countries[$country])){throw new Exception('Unknow country');}
-            if(!isset($amount, $bash) || !$amount || !$bash) throw new Exception('Incomplete input data');
-            
-            // Affecter XOF a la currency
-            $currency =  "XOF";
-            $body =[
-                "order_id"      => $bash,
-                "reference"     => $this->config['APP']['api']['reference'],
-                "amount"        => $amount,
-                "currency"      => $currency,
-                "return_url"    => $this->config['APP']['callback']['return_url'],
-                "cancel_url"    => $this->config['APP']['callback']['cancel_url'],
-                "state"         => urlencode($bash.'|'.$amount),
-            ];
-
-            $headers = [
-                'country-code' => $this->countries[$country]['iso'],
-                'category' => 'BIZAO',
-            ];
-    
-            $url    =   url_recode($this->config['endpoint']['card_deposit']);
-            $result =   $this->request->make('POST', $body, $url, $headers);
-            return $result;
-        }catch(Exception $e) {
-            throw new Exception ($e->getMessage());
-        }
-    }
-
-    public function cardCheck($country = null, $bash = null){
-        try{
-            if(!isset($bash) || !$bash) throw new Exception('bash param is mandatory.');
-            // verifier le pays
-            if(!isset($this->countries[$country])){throw new Exception('Unknow country');}
-
-            $headers = [
-                'country-code' => $this->countries[$country]['iso']
-            ];
-            $url      =   url_recode($this->config['endpoint']['card_check'], [$bash]);
-            $res      =   $this->request->make('GET', [], $url, $headers);
-            return $res;
-        }catch(Exception $e) {
-            throw new Exception ($e->getMessage());
-        }
-    }
-
-
+    /** DEBUT 2EME PARTIE TRANSFER BULK */
     public function withdraw($country = null, $operator = null, $data = ["phone" => null, "amount" => null, "bash" => null], $currency = null){
         try{
             // verifier le pays
@@ -306,4 +261,58 @@ class Manager{
             throw new Exception ($e->getMessage());
         }
     }
+    /** FIN 2EME PARTIE TRANSFER BULK */
+
+
+
+
+    /***
+     *  PARTIE DE GESTION CARTE VISA/MASTERCARD
+     */
+    public function card($amount, $bash){
+        try{
+            // verifier les parametres
+            if(!isset($amount, $bash) || !$amount || !$bash) throw new Exception('Incomplete input data');
+            
+            // Affecter XOF a la currency
+            $currency =  "XOF";
+            $body =[
+                "order_id"      => $bash,
+                "reference"     => $this->config['APP']['api']['reference'],
+                "amount"        => $amount,
+                "currency"      => $currency,
+                "return_url"    => $this->config['APP']['callback']['return_url'],
+                "cancel_url"    => $this->config['APP']['callback']['cancel_url'],
+                "state"         => urlencode($bash.'|'.$amount),
+            ];
+
+            $headers = [
+                'country-code' => 'ci',     // Tous les pauys de l'afrique de l'ouest utilisent l'iso pays ci
+                'category' => 'BIZAO',
+            ];
+    
+            $url    =   url_recode($this->config['endpoint']['card_deposit']);
+            $result =   $this->request->make('POST', $body, $url, $headers);
+            return $result;
+        }catch(Exception $e) {
+            throw new Exception ($e->getMessage());
+        }
+    }
+
+    public function cardCheck($bash = null){
+        try{
+            if(!isset($bash) || !$bash) throw new Exception('bash param is mandatory.');
+            $headers = [
+                'country-code' => 'ci'
+            ];
+            $url      =   url_recode($this->config['endpoint']['card_check'], [$bash]);
+            $res      =   $this->request->make('GET', [], $url, $headers);
+            return $res;
+        }catch(Exception $e) {
+            throw new Exception ($e->getMessage());
+        }
+    }
+
+
+    
 }

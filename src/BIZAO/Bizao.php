@@ -19,8 +19,11 @@ class Bizao{
     }
 
     /***
-     *  PARTIE DE GESTION MOBILE MONEY (PAYMENT)
-     */
+     * 
+     *  PARTIE DE GESTION 
+     *  MOBILE MONEY PAYMENT ET TRANSFER BULK
+     */ 
+    /** DEBUT 1ERE PARTIE PAYMENT */
     public function deposit($country = null, $operator = null, $data = ["phone" => null, "amount" => null, "bash" => null, "otp" => null], $currency = null){
         try{
             $res = $this->manager->deposit($country, $operator, $data, $currency);
@@ -65,10 +68,9 @@ class Bizao{
             return ["code" => 412, "error" => $e->getMessage()];
         }
     }
+    /** FIN 1ERE PARTIE PAYMENT */
 
-    /***
-     *  PARTIE DE GESTION MOBILE MONEY (TRANSFERT)
-     */
+    /** DEBUT 2EME PARTIE TRANSFER BULK */
     public function withdraw($country = null, $operator = null, $data = ["phone" => null, "amount" => null, "bash" => null], $currency = null){
         try{
             $res = $this->manager->withdraw($country, $operator, $data, $currency);
@@ -134,8 +136,50 @@ class Bizao{
             return ["code" => 412, "error" => $e->getMessage()];
         }
     }
+    /** FIN 2EME PARTIE TRANSFER BULK */
 
-    /***  ANNALYSE STATUT CALLBACK MOBILE MONEY (PAYMENT, TRANSFERT) */
+
+
+
+    /***
+     * 
+     *  PARTIE DE GESTION 
+     *  CARTE VISA/MASTERCARD
+     *  
+     */
+    public function card($amount = null, $bash = null){
+        try{
+            $res = $this->manager->card($amount, $bash);
+            $res = (array) $res;
+            if(isset($res['requestError'])) throw new Exception('Bizoa execution failed exception.');
+            return ["code" => 200, "data" => $res];
+        }catch(Exception $e){
+            return ["code" => 412, "message" => $e->getMessage()];
+        }
+    }
+
+    public function cardCheck($bash = null){
+        try{
+            if(!isset($bash) || !$bash) throw new Exception('bash param is mandatory.');
+            $res = $this->manager->cardCheck($bash);
+            $res = (array) $res;
+            if(isset($res['requestError'])) throw new Exception('Bizoa execution failed exception.');
+            unset($res['meta']);
+            return ["code" => 200, "data" => $res]; 
+        }catch(Exception $e){
+            return ["code" => 412, "error" => $e->getMessage()];
+        }
+    }
+
+
+
+
+    /***  
+     * 
+     * ANNALYSE STATUT CALLBACK
+     * MOBILE MONEY (PAYMENT, TRANSFER, CARD) 
+     * 
+     */
     public function operationStatus($data = []){
         try{
 
@@ -144,12 +188,20 @@ class Bizao{
             count($data['meta']) &&
             $data['order-id']){ 
 
-                // Extraire les donnees importantes necessaires pour un check payment
+                // Extraire les donnees importantes necessaires pour un check payment ou card
                 $bash = $data['order-id'];
                 $meta = explode('_', $data['meta']['source']);
                 $country = strtoupper($meta[0]);
                 $operator = $meta[1];
-                $res = (array) $this->manager->check($country, $operator, $bash);
+
+                if($operator !== 'Visa'){
+                    // CAS MOBILE
+                    $res = (array) $this->manager->check($country, $operator, $bash);
+                }else{
+                    // CAS MOBILE CARD
+                    $res = (array) $this->manager->cardCheck($bash);
+                }
+
                 unset($res['meta']);
                 return $res;
 
@@ -181,60 +233,9 @@ class Bizao{
 
         }catch(Exception $e){
             // throw new Exception($e->getMessage());
-            // return $e->getMessage();
-            return false;
-        }
-    }
-
-    /***
-     *  PARTIE DE GESTION CARTE VISA/MASTERCARD
-     */
-    public function card($country = null, $amount = null, $bash = null){
-        try{
-            $res = $this->manager->card($country, $amount, $bash);
-            $res = (array) $res;
-            // if(isset($res['requestError'])) throw new Exception('Bizoa execution failed exception.');
-            // unset($res['meta']);
-            // return ["code" => 200, "data" => $res]; 
-            return $res;
-        }catch(Exception $e){
-            return ["code" => 412, "message" => $e->getMessage()];
-        }
-    }
-
-    public function cardCheck($country = null, $bash = null){
-        try{
-            if(!isset($bash) || !$bash) throw new Exception('bash param is mandatory.');
-            $res = $this->manager->cardCheck($country, $bash);
-            $res = (array) $res;
-            if(isset($res['requestError'])) throw new Exception('Bizoa execution failed exception.');
-            unset($res['meta']);
-            return ["code" => 200, "data" => $res]; 
-        }catch(Exception $e){
-            return ["code" => 412, "error" => $e->getMessage()];
-        }
-    }
-
-    public function cardOperationStatus($data = []){
-        try{
-            // Verifier l'existance des champs clés
-            if(!isset($data['meta'], $data['order-id']) || 
-            !count($data['meta']) ||
-            !$data['order-id']){ 
-                throw new Exception('invalid callback data receive');
-            }
-            // Extraire les donnees importantes necessaires pour un check
-            $bash = $data['order-id'];
-            $meta = explode('_', $data['meta']['source']);
-            $country = strtoupper($meta[0]);
-            $res = (array) $this->manager->cardCheck($country, $bash);
-            unset($res['meta']);
-            return $res;
-        }catch(Exception $e){
-            // throw new Exception($e->getMessage());
             return $e->getMessage();
             // return false;
         }
     }
-    
+
 }
