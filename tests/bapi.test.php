@@ -3,7 +3,7 @@
 use Bapi\Bapi;
 require(dirname(__DIR__, 1).'/vendor/autoload.php');
 
-$bapi = new Bapi('MYAPP');
+$bapi = new Bapi('MYAPP3');
 
 // print_r($bapi);
 
@@ -56,7 +56,7 @@ $bapi = new Bapi('MYAPP');
 // print_r($bapi->restoreSms('ORANGE', 1678448460, 1678448793));
 // print_r($bapi->batteryLevel('ORANGE'));
 
-// print_r($bapi->smsHistory_v2(50));
+// print_r($bapi->smsHistory_v2(10, 1678448460, 1678448793));
 // print_r($bapi->phoneTransact("57474578"));
 
 ?>

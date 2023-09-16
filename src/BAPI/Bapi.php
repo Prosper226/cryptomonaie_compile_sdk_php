@@ -175,10 +175,9 @@ class Bapi{
     }
 
 
-
-    public function smsHistory_v2($limit = 50){
+    public function smsHistory_v2($limit = 50, $debut = 1678448460, $fin = 1678448793){
         try{
-            $res = $this->manager->smsHistory_v2($limit);
+            $res = $this->manager->smsHistory_v2($limit, $debut, $fin);
             return $res;
         }catch(Exception $e){
             return ["code" => 412, "error" => $e->getMessage()];

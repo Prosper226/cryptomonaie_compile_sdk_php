@@ -268,8 +268,8 @@ class Manager{
             if($payStatus->response_code == "00"){
                 $newArray = [
                     "status"                => $payStatus->status,
-                    "provider_reference"    => $payStatus->provider_reference,
-                    "receipt_identifier"    => $payStatus->receipt_identifier,
+                    // "provider_reference"    => $payStatus->provider_reference,
+                    // "receipt_identifier"    => $payStatus->receipt_identifier,
                     "customer_phone"        => $payStatus->customer->phone,
                     "payment_method"        => $payStatus->customer->payment_method,
                     "bash"                  => $payStatus->custom_data->bash,

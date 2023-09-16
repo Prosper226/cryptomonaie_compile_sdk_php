@@ -109,6 +109,10 @@
 // <!-- composer install --ignore-platform-reqs -->
 // <!-- Avant d'initier un paiement il faut generer un token -->
 
+
+// $finding = $Dunya->findByToken('CzkWpr8TOhBb6C2cianT');
+// print_r($finding ?? []);
+
 ?>
 
 
