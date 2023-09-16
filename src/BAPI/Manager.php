@@ -225,9 +225,9 @@ class Manager{
     }
 
 
-    public function smsHistory_v2($limit = 50){
+    public function smsHistory_v2($limit = 50, $debut = 1678448460, $fin = 1678448793){
         try{
-            $url = url_recode($this->config['endpoint']['smsHistory_v2'], [$limit]);
+            $url = url_recode($this->config['endpoint']['smsHistory_v2'], [$limit, $debut, $fin]);
             $res = $this->request->make('GET', [], $url);
             return $res;
         }catch(Exception $e){
