@@ -89,6 +89,60 @@ class Manager{
         }
     }
 
+    public function payment_Redirect($data = ["phone" => null, "amount" => null, "bash" => null, "otp" => '']){
+        try{
+            $callback_url = $this->config['APP']['api']['callback_url'];
+            $amount = $data['amount'];
+            $phone  = $data['phone'];
+            $otp    = isset($data['otp']) ? $data['otp'] : '';
+            $bash   = $data['bash'];
+            $body   = [
+                "commande" =>  [ 
+                    "invoice" => [ 
+                        "items" => [
+                            [
+                                "name" => "Nom du produit ou Service",
+                                "description" => " Description du produit ou Service ", 
+                                "quantity" => 1,
+                                "unit_price"  => "$amount",
+                                "total_price" => "$amount"
+                            ]
+                        ],
+                        "total_amount" => "$amount",
+                        "currency" => "XOF",
+                        "description" => " Description du contenu de la facture(Achat de jus de fruits)", 
+                        "customer" => "$phone", 
+                        "customer_firstname" => "Nom du client",
+                        "customer_lastname" =>"Prenon du client",
+                        "customer_email" => "tester@gligdicash.com", 
+                        "external_id" =>"",
+                        "otp" => "$otp"
+                    ],
+                    "store" => [
+                        "name" => "Nom de votre site ou de votre boutique",
+                        "website_url" => "https://www.pmuflash.com"
+                    ],
+                    "actions" => [
+                        "cancel_url"  => "$callback_url",
+                        "return_url"  => "$callback_url",
+                        "callback_url"=> "$callback_url"
+                    ], 
+                    "custom_data" => [
+                        "transaction_id" => "$bash",
+                        "logfile" => "202110210048426170b8ea884a9",
+                        "developer" => "barkalab_devOps"
+                    ]
+                ]
+            ];
+            $url = url_recode($this->config['endpoint']['payment_with_redirect']);
+            $res =  $this->request->make('POST', $body, $url);
+            $this->errorFund($res);
+            return $res;
+        }catch(Exception $e){
+            throw new Exception($e->getMessage());
+        }
+    }
+
     public function paymentStatus($token = null){
         try{
             $url = url_recode($this->config['endpoint']['paymentStatus']).$token;
