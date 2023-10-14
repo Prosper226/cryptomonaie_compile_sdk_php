@@ -32,7 +32,8 @@
         // $deposit = $Dunya->deposit('SN', 'EXPRESSO', ["phone" => 60565103, "amount" => 200, "bash" => "D008"]);  // disponible
         // $deposit = $Dunya->deposit('SN', 'WAVE', ["phone" => 60565103, "amount" => 200, "bash" => "D008"]);      // disponible
 
-        // print_r($deposit ?? []);
+        $deposit = $Dunya->deposit('ML', 'ORANGE', ["phone" => 90900059, "amount" => 200, "bash" => "D0260923", "otp" => 997419]);
+        print_r($deposit ?? []);
 
         /**
          * 

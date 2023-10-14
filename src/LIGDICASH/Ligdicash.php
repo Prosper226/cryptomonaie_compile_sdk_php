@@ -33,6 +33,20 @@ class Ligdicash {
         }
     }
 
+    public function deposit_withRedirect($data = ['phone' => null, 'amount' => null, 'bash' => null, 'otp' => '']){
+        try{
+            $res = $this->manager->payment_Redirect($data);
+            $res = [
+                "token"             => $res->token,
+                "transaction_id"    => $res->custom_data->transaction_id,
+                "payment_link"      => $res->response_text
+            ];
+            return ["code" => 200, "data" => $res];
+        }catch(Exception $e){
+            return ["code" => 412, "error" => $e->getMessage()];
+        }
+    }
+
     private function depositStatus($token = null){
         try{
             if(!isset($token) || !$token) throw new Exception('token param is mandatory.');
