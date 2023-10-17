@@ -3,7 +3,7 @@
         'name' => 'user/crypto_compile_sdk_php',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '95f4550178133e83bdc98fad25d885ee9576a233',
+        'reference' => '8579ebbf48a6b2ac8dee6aa1e6a9dba4b681debc',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -103,7 +103,7 @@
         'user/crypto_compile_sdk_php' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '95f4550178133e83bdc98fad25d885ee9576a233',
+            'reference' => '8579ebbf48a6b2ac8dee6aa1e6a9dba4b681debc',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
