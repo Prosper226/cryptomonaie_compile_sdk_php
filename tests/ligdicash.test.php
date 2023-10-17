@@ -7,7 +7,7 @@ $ligdicash  = new Ligdicash('MYAPP_GN');
 // 224620542569
 // $payment = $ligdicash->deposit(['phone' => 22657474578, 'amount' => 500, 'bash' => '20230223I01922', 'otp' => 304141 ]);
 // $payment = $ligdicash->deposit(['phone' => 22660565103, 'amount' => 100, 'bash' => '20231010_002']);
-// $payment = $ligdicash->deposit_withRedirect(['phone' => 224620542569, 'amount' => 500, 'bash' => '20231010_006']);
+// $payment = $ligdicash->deposit_withRedirect(['phone' => 224620542569, 'amount' => 1000, 'bash' => '20231010_0089']);
 // print_r($payment);
 
 // $token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZF9pbnZvaWNlIjoiMTU0OTMzMjAiLCJzdGFydF9kYXRlIjoiMjAyMy0wMi0yNCAxMjo1NDo0NSIsImV4cGlyeV9kYXRlIjoxNjc3MzI2MDg1fQ.DHZ3CxIEOYvx9i-2NzoLL_MzepyfBnIHRy72tRcsqXs"; // completed
@@ -31,7 +31,7 @@ $ligdicash  = new Ligdicash('MYAPP_GN');
 // // $statusTransfert = $ligdicash->withdrawStatus($token);
 // print_r($statusTransfert); 
 
-
+// $token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZF9pbnZvaWNlIjoiMjgyMTk2NTgiLCJzdGFydF9kYXRlIjoiMjAyMy0xMC0xNCAxODozMjowMCIsImV4cGlyeV9kYXRlIjoxNjk3Mzg3NTIwfQ.HfyJkVbWWCSCuQWKuTqgX_mdbzMboZN3T7sCg1kXZec";
 // $token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZF9pbnZvaWNlIjoiMTU0OTMzMjAiLCJzdGFydF9kYXRlIjoiMjAyMy0wMi0yNCAxMjo1NDo0NSIsImV4cGlyeV9kYXRlIjoxNjc3MzI2MDg1fQ.DHZ3CxIEOYvx9i-2NzoLL_MzepyfBnIHRy72tRcsqXs";
 // $status = $ligdicash->operationStatus($token, 'deposit');
 // $token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZF9maW5hbmNlIjoiMjE3NDU4MjEiLCJzdGFydF9kYXRlIjoiMjAyMy0wMi0yNCAxNjowMjoxMCIsImV4cGlyeV9kYXRlIjoxNjc3MzM3MzMwfQ.hjk0d29NS6DVzq0COftntCEq3W823jkajACWf2d9QQg";
